@@ -3,6 +3,7 @@ import threading
 import tkinter as tk
 from tkinter import Toplevel
 from tkinter import PhotoImage
+import subprocess
 
 x0,y0 = 10,10
 W1,H1 = 50,200
@@ -11,6 +12,36 @@ running = False
 start_time = None
 timer = 0
 time_text = None
+
+
+class ToolTip(object):
+    def __init__(self, widget, text='Tooltip'):
+        self.widget = widget
+        self.text = text
+        self.widget.bind('<Enter>', self.enter)
+        self.widget.bind('<Leave>', self.leave)
+        self.tw = None
+
+    def enter(self, event=None):
+        x, y, cx, cy = self.widget.bbox("insert")
+        x += self.widget.winfo_rootx() + 50
+        y += self.widget.winfo_rooty()
+        # ایجاد پنجره تولتیپ
+        self.tw = tk.Toplevel(self.widget)
+        self.tw.wm_overrideredirect(True)
+        self.tw.wm_geometry("+%d+%d" % (x, y))
+        label = tk.Label(self.tw, text=self.text, background='grey', relief='solid', borderwidth=1,
+                         font=("arial", "8", "normal"))
+        label.pack(ipadx=1)
+
+    def leave(self, event=None):
+        if self.tw:
+            self.tw.destroy()
+            self.tw = None
+
+def cmd(command):
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    return result
 
 def start_move(event):
     global x, y
@@ -64,18 +95,32 @@ def open_new_window():
         X1,Y1= X+W,Y+(H//2)-(H1//2)
 
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
+
+    global icon
+
     cornometer = tk.Button(new_window, 
-                       text="cornometer",
+                       image=icon,
                        command=cornometerwindow,
-                       width=4,
-                       height=2,
                        relief='flat', 
                        highlightthickness=0, 
                        activebackground="lightgray", 
                        activeforeground="black",
                        bg="lightgray",
                        fg="black")
-    cornometer.pack(side=tk.BOTTOM, fill=tk.X)
+    cornometer.pack(side=tk.TOP, fill=tk.X)
+    ToolTip(cornometer,"cornometer")
+
+    startup = tk.Button(new_window, 
+                       text="startup",
+                       command=start_up,
+                       relief='flat', 
+                       highlightthickness=0, 
+                       activebackground="lightgray", 
+                       activeforeground="black",
+                       bg="lightgray",
+                       fg="black")
+    startup.pack(side=tk.TOP, fill=tk.X)
+    ToolTip(startup,"start up")
 
 
 def cornometerwindow():
@@ -148,11 +193,63 @@ def cornometerwindow():
     
     cornometer.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
+def start_up():
+
+    def retrieve_input():
+        input_value1 = entry1.get()
+        input_value2 = entry2.get()
+
+        result = cmd(f'{input_value1[0]}: && cd {input_value1} && dir')
+
+        if input_value2 in result.stdout:
+            print("YES")
+
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    startup = Toplevel(root)
+    #cornometer.overrideredirect(True)
+    #cornometer.resizable(True, True)
+    startup.wm_attributes("-toolwindow", "true")
+    Wc,Hc = 150,150
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > startup.winfo_screenheight():
+        Yc = startup.winfo_screenheight()-H1
+
+    if X >= startup.winfo_screenwidth()/2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+
+    # نمایش زمان
+    time_text = tk.Label(startup, text='لطفا مسیر رو بدید', font=('Helvetica', 10))
+    time_text.pack()
+
+    entry1 = tk.Entry(startup)
+    entry1.pack()
+
+    time_text = tk.Label(startup, text='لطفا اسم فایل رو بدید', font=('Helvetica', 10))
+    time_text.pack()
+
+    entry2 = tk.Entry(startup)
+    entry2.pack()
+
+    submit_button1 = tk.Button(startup, text='ثبت', command=retrieve_input)
+    submit_button1.pack()
+
+    startup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+
+
 root = tk.Tk()
 W,H,X,Y=20,78,100,100
 root.geometry(f"{W}x{H}+{X}+{Y}") #20x78
-root.overrideredirect(True)
+#root.overrideredirect(True)
 #root.resizable(False, False)
+icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\corno.png')
 root.title("^^")
 root.wm_attributes("-toolwindow", "true")
 if X >= (root.winfo_screenwidth()/2):

@@ -1,4 +1,4 @@
-"""import tkinter as tk
+import tkinter as tk
 
 class ToolTip(object):
     def __init__(self, widget, text='Tooltip'):
@@ -31,7 +31,7 @@ btn = tk.Button(root, text="نمونه دکمه")
 btn.pack(padx=10, pady=5)
 ToolTip(btn, 'این دکمه یک نمونه است')
 root.mainloop()
-"""
+
 
 """import threading
 import time
@@ -69,7 +69,7 @@ button.pack()
 # اجرای پنجره
 window.mainloop()"""
 
-import tkinter as tk
+"""import tkinter as tk
 from tkinter import PhotoImage
 
 # ایجاد پنجره اصلی
@@ -84,5 +84,39 @@ button = tk.Button(window, image=icon)
 button.pack()
 
 # اجرای پنجره
+window.mainloop()"""
+
+"""import tkinter as tk
+
+def retrieve_input():
+    # گرفتن متن وارد شده توسط کاربر
+    input_value = entry.get()
+    print(input_value)  # یا هر عملیات دیگری که می‌خواهید با متن انجام دهید
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('گرفتن استرینگ از کاربر')
+
+# ایجاد ویجت Entry
+entry = tk.Entry(window)
+entry.pack()
+
+# ایجاد دکمه برای ثبت اطلاعات
+submit_button = tk.Button(window, text='ثبت', command=retrieve_input)
+submit_button.pack()
+
+# اجرای پنجره
 window.mainloop()
+"""
+
+"""import subprocess
+
+# دستوری که می‌خواهیم اجرا کنیم
+command = 'cd C: && dir'
+
+# اجرای دستور و گرفتن خروجی
+result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+# چاپ خروجی دستور
+print(result.stdout)"""
 
