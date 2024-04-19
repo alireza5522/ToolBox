@@ -1,7 +1,8 @@
+import time
+import threading
 import tkinter as tk
 from tkinter import Toplevel
-import threading
-import time
+from tkinter import PhotoImage
 
 x0,y0 = 10,10
 W1,H1 = 50,200
@@ -58,23 +59,23 @@ def open_new_window():
         Y1 = new_window.winfo_screenheight()-H1
 
     if X >= new_window.winfo_screenwidth()/2:
-        X1,Y1= (X-W1),Y+(H//2)-(H1//2)
+        X1,Y1= (X-W1-W),Y+(H//2)-(H1//2)
     else:
         X1,Y1= X+W,Y+(H//2)-(H1//2)
 
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
-    openbutton = tk.Button(new_window, 
-                       text=txt, 
+    cornometer = tk.Button(new_window, 
+                       text="cornometer",
                        command=cornometerwindow,
-                       width=10,
-                       height=10,
+                       width=4,
+                       height=2,
                        relief='flat', 
                        highlightthickness=0, 
                        activebackground="lightgray", 
                        activeforeground="black",
                        bg="lightgray",
                        fg="black")
-    openbutton.pack(side=tk.BOTTOM, fill=tk.X)
+    cornometer.pack(side=tk.BOTTOM, fill=tk.X)
 
 
 def cornometerwindow():
@@ -125,9 +126,9 @@ def cornometerwindow():
         Yc = cornometer.winfo_screenheight()-H1
 
     if X >= cornometer.winfo_screenwidth()/2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
     else:
-        Xc,Yc= X+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
 
     global time_text
 

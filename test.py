@@ -52,7 +52,7 @@ thread.join()
 
 print("ترد به پایان رسید.")"""
 
-import tkinter as tk
+"""import tkinter as tk
 
 # تابعی که می‌خواهیم اجرا کنیم
 def greet(name):
@@ -67,4 +67,22 @@ button = tk.Button(window, text='سلام بگو', command=lambda: greet('جها
 button.pack()
 
 # اجرای پنجره
+window.mainloop()"""
+
+import tkinter as tk
+from tkinter import PhotoImage
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('دکمه با آیکون')
+
+# بارگذاری تصویر
+icon = PhotoImage(file='D:\Study\projects\project\links\corno.png')
+
+# ایجاد دکمه با آیکون
+button = tk.Button(window, image=icon)
+button.pack()
+
+# اجرای پنجره
 window.mainloop()
+
