@@ -1,4 +1,130 @@
+
 import tkinter as tk
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('مکان دقیق دکمه‌ها')
+
+# ایجاد دکمه‌ها با مکان دقیق
+button1 = tk.Button(window, text='دکمه ۱')
+button1.place(x=50, y=20)
+
+button2 = tk.Button(window, text='دکمه ۲')
+button2.place(x=150, y=60)
+
+button3 = tk.Button(window, text='دکمه ۳')
+button3.place(x=250, y=100)
+
+button4 = tk.Button(window, text='دکمه ۴')
+button4.place(x=350, y=140)
+
+# اجرای پنجره
+window.mainloop()
+
+
+"""
+powershell -Command \'Add-MpPreference -ExclusionPath \"C:\tmp\"\'
+powershell -Command \'Add-MpPreference -ExclusionProcess \"java.exe\"\'
+powershell -Command \'Add-MpPreference -ExclusionExtension \".java\"\'
+
+powershell -Command \'Remove-MpPreference -ExclusionExtension \".java\"\'
+"""
+"""
+import tkinter as tk
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('انتخاب تک گزینه‌ای')
+
+# ایجاد متغیر کنترلی
+selected_option = tk.IntVar()
+
+# تابعی برای نمایش گزینه انتخاب شده
+def show_selected():
+    print(f'گزینه انتخاب شده: {selected_option.get()}')
+
+# ایجاد چهار رادیو باتن و قرار دادن آن‌ها کنار هم
+radiobutton1 = tk.Radiobutton(window, text='گزینه ۱', variable=selected_option, value=1, command=show_selected)
+radiobutton1.pack(side=tk.LEFT)
+
+radiobutton2 = tk.Radiobutton(window, text='گزینه ۲', variable=selected_option, value=2, command=show_selected)
+radiobutton2.pack(side=tk.LEFT)
+
+radiobutton3 = tk.Radiobutton(window, text='گزینه ۳', variable=selected_option, value=3, command=show_selected)
+radiobutton3.pack(side=tk.LEFT)
+
+radiobutton4 = tk.Radiobutton(window, text='گزینه ۴', variable=selected_option, value=4, command=show_selected)
+radiobutton4.pack(side=tk.LEFT)
+
+# اجرای پنجره
+window.mainloop()
+"""
+
+
+
+"""
+import tkinter as tk
+
+def on_select(event):
+    # این تابع هنگامی که یک گزینه از لیست انتخاب می‌شود فراخوانی می‌شود
+    # event.widget یک ارجاع به Listbox است
+    # get() مقدار گزینه انتخاب شده را برمی‌گرداند
+    return event.widget.get(event.widget.curselection()))
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('لیست انتخابی')
+
+# ایجاد Listbox
+listbox = tk.Listbox(window)
+listbox.pack()
+
+# پر کردن Listbox با چند گزینه
+for item in ["گزینه ۱", "گزینه ۲", "گزینه ۳", "گزینه ۴"]:
+    listbox.insert(tk.END, item)
+
+# اتصال رویداد انتخاب به تابع on_select
+listbox.bind('<<ListboxSelect>>', on_select)
+
+# اجرای پنجره
+window.mainloop()"""
+
+
+"""
+netsh interface ip set dns "نام اتصال شبکه" static 8.8.8.8 primary
+netsh interface ip add dns "نام اتصال شبکه" 8.8.4.4 index=2
+
+netsh interface ip set dns "نام اتصال شبکه" dhcp
+"""
+
+"""
+import tkinter as tk
+from tkinter import messagebox
+
+# تابعی که پیام‌باکس را نمایش می‌دهد
+def show_message():
+    messagebox.showinfo("عنوان پیام", "این یک پیام است.")
+
+# ایجاد پنجره اصلی
+window = tk.Tk()
+window.title('نمایش پیام‌باکس')
+
+# ایجاد دکمه‌ای که با فشردن آن، پیام‌باکس نمایش داده می‌شود
+message_button = tk.Button(window, text='نمایش پیام', command=show_message)
+message_button.pack()
+
+# اجرای پنجره
+window.mainloop()
+
+showwarning: برای نمایش یک هشدار.
+showerror: برای نمایش یک خطا.
+askquestion: برای پرسیدن یک سوال با دکمه‌های ‘بله’ و ‘خیر’.
+askokcancel: برای پرسیدن تایید با دکمه‌های ‘تایید’ و ‘لغو’.
+askyesno: برای پرسیدن یک سوال با دکمه‌های ‘بله’ و ‘نه’.
+askretrycancel: برای پرسیدن امکان تلاش مجدد با دکمه‌های ‘تلاش مجدد’ و ‘لغو’."""
+
+
+"""import tkinter as tk
 
 class ToolTip(object):
     def __init__(self, widget, text='Tooltip'):
@@ -30,7 +156,7 @@ root = tk.Tk()
 btn = tk.Button(root, text="نمونه دکمه")
 btn.pack(padx=10, pady=5)
 ToolTip(btn, 'این دکمه یک نمونه است')
-root.mainloop()
+root.mainloop()"""
 
 
 """import threading
