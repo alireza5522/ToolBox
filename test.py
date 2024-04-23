@@ -1,6 +1,64 @@
 
 import tkinter as tk
 
+root = tk.Tk()
+
+# ایجاد دکمه بدون حاشیه سیاه و بدون برجستگی
+button = tk.Button(root, text="دکمه بدون حاشیه", bd=0)
+button.pack()
+
+root.mainloop()
+
+
+"""
+import tkinter as tk
+
+def callback(event, extra_param):
+    print("Event:", event)
+    print("Extra Parameter:", extra_param)
+
+root = tk.Tk()
+button = tk.Button(root, text="Click Me")
+
+# استفاده از lambda برای ارسال پارامتر اضافی به تابع callback
+button.bind("<Button-1>", lambda event, arg='مقدار_دلخواه': callback(event, arg))
+button.pack()
+
+root.mainloop()"""
+
+"""
+import tkinter as tk
+
+def move_window(event):
+    root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
+
+root = tk.Tk()
+root.overrideredirect(True)  # حذف تایتل بار پیش‌فرض
+root.geometry('400x100+200+200')  # تنظیم اندازه و مکان پنجره
+
+# ایجاد تایتل بار سفارشی
+title_bar = tk.Frame(root, bg='blue', relief='raised', bd=2)
+
+# ایجاد دکمه بستن در تایتل بار
+close_button = tk.Button(title_bar, text='X', command=root.destroy)
+
+# ایجاد محتوای اصلی پنجره
+window_content = tk.Canvas(root, bg='black')
+
+# قرار دادن ویجت‌ها
+title_bar.pack(expand=1, fill=tk.X)
+close_button.pack(side=tk.RIGHT)
+window_content.pack(expand=1, fill=tk.BOTH)
+
+# اتصال رویداد حرکت تایتل بار به تابع move_window
+title_bar.bind('<B1-Motion>', move_window)
+
+root.mainloop()
+"""
+
+"""
+import tkinter as tk
+
 # ایجاد پنجره اصلی
 window = tk.Tk()
 window.title('مکان دقیق دکمه‌ها')
@@ -19,7 +77,7 @@ button4 = tk.Button(window, text='دکمه ۴')
 button4.place(x=350, y=140)
 
 # اجرای پنجره
-window.mainloop()
+window.mainloop()"""
 
 
 """

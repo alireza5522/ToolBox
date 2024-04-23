@@ -18,10 +18,10 @@ time_text = None
 
 class coordinates:
     Main_Window_H,Main_Window_W = (50,250)
-    cornometer_button_x,cornometer_button_y = (0,0)
-    startup_button_x,startup_button_y = (0,64)
-    dns_button_x,dns_button_y = (0,128)
-    antivirus_button_x,antivirus_button_y = (0,192)
+    cornometer_button_x,cornometer_button_y = (0,25)
+    startup_button_x,startup_button_y = (0,75)
+    dns_button_x,dns_button_y = (0,125)
+    antivirus_button_x,antivirus_button_y = (0,175)
 
     cornometer_H,cornometer_W = (500,200)
     time_text_x,time_text_y = (100,10)
@@ -29,7 +29,37 @@ class coordinates:
     stop_button_x,stop_button_y = (100,125)
     reset_button_x,reset_button_y = (100,150)
 
+    startup_W,startup_H = (250,250)
+    startup_label1_x,startup_label1_y = (10,20)
+    startup_entry1_x,startup_entry1_y = (10,50)
+    startup_label2_x,startup_label2_y = (10,100)
+    startup_entry2_x,startup_entry2_y = (10,125)
+    startup_submit_x,startup_submit_y = (10,150)
+    
+    dns_W,dns_H = (250,250)
+    dns_label1_x,dns_label1_y = (10,20)
+    dns_entry1_x,dns_entry1_y = (10,50)
+    dns_label2_x,dns_label2_y = (10,100)
+    dns_entry2_x,dns_entry2_y = (10,125)
+    dns_label3_x,dns_label3_y = (10,100)
+    dns_entry3_x,dns_entry3_y = (10,125)
+    dns_submit1_x,dns_submit1_y = (10,150)
+    dns_submit2_x,dns_submit2_y = (10,175)
+
+    antivirus_W,antivirus_H = (250,250)
+    antivirus_label1_x,antivirus_label1_y = (10,20)
+    antivirus_entry1_x,antivirus_entry1_y = (10,50)
+    antivirus_label2_x,antivirus_label2_y = (10,100)
+    antivirus_entry2_x,antivirus_entry2_y = (10,125)
+    antivirus_button1_x,antivirus_button1_y = (10,150)
+    antivirus_button2_x,antivirus_button2_y = (50,150)
+    antivirus_button3_x,antivirus_button3_y = (100,150)
+    antivirus_submit_x,antivirus_submit_y = (10,175)
+
+
+
 class theme:
+    titlebar = "yellow"
     window_bg = "white"
     activebackground = "lightgray"
     activeforeground = "black"
@@ -38,7 +68,8 @@ class theme:
     entrybg = "white"
     cornometer_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\corno50.png')
     startup_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\startup.png')
-    def __init__(self,window_bg,
+    def __init__(self,titlebar,
+                 window_bg,
                  activebackground,
                  activeforeground,
                  bg,
@@ -46,6 +77,7 @@ class theme:
                  entrybg,
                  cornometer_icon,
                  startup_icon):
+       self.titlebar = titlebar
        self.window_bg = window_bg
        self.activebackground = activebackground
        self.activeforeground = activeforeground
@@ -55,26 +87,28 @@ class theme:
        self.cornometer_icon = cornometer_icon
        self.startup_icon = startup_icon
 dark=theme(
+    titlebar = "#363A36",
     window_bg = "#191B19",
-    activebackground = "lightgray",
-    activeforeground = "black",
-    bg = "lightgray",
-    fg = "black",
-    entrybg = "white",
+    activebackground = "#363A36",
+    activeforeground = "#C0C4C4",
+    bg = "#363A36",
+    fg = "#C0C4C4",
+    entrybg = "#363A36",
     cornometer_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\corno50.png'),
     startup_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\startup.png')
 )
 light=theme(
-    window_bg = "white",
-    activebackground = "lightgray",
-    activeforeground = "black",
-    bg = "lightgray",
-    fg = "black",
-    entrybg = "white",
+    titlebar = "#EEEEEE",
+    window_bg = "#E0E0E0",
+    activebackground = "lightgrey",
+    activeforeground = "#363A36",
+    bg = "lightgrey",
+    fg = "#363A36",
+    entrybg = "lightgrey",
     cornometer_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\corno50.png'),
     startup_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\startup.png')
 )
-main_theme = dark
+main_theme = light
 
 class languge:
     cornometer_text_start = "start"
@@ -172,12 +206,12 @@ def cmd(command):
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     return result
 
-def start_move(event):
+def start_move(event,root):
     global x, y
     x = event.x
     y = event.y
 
-def stop_move(event):
+def stop_move(event,root):
     global x, y
     global x0, y0
     global X, Y
@@ -194,7 +228,7 @@ def stop_move(event):
     x = None
     y = None
 
-def on_move(event):
+def on_move(event,root):
     global x, y
     global x0, y0
     deltax = event.x - x
@@ -223,6 +257,21 @@ def open_new_window():
     
     if (Y1+H1) > new_window.winfo_screenheight():
         Y1 = new_window.winfo_screenheight()-H1
+
+    move_button = tk.Button(new_window, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=new_window.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    closeall_button = tk.Button(move_button, text='close all', command=root.destroy,bg="red")
+    closeall_button.pack(side=tk.LEFT)
 
     new_window.configure(bg=main_theme.window_bg)
 
@@ -301,6 +350,18 @@ def cornometerwindow():
     cornometer = Toplevel(root)
     cornometer.configure(bg=main_theme.window_bg)
 
+    move_button = tk.Button(cornometer, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=cornometer.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
     #cornometer.overrideredirect(True)
     #cornometer.resizable(True, True)
     cornometer.wm_attributes("-toolwindow", "true")
@@ -321,7 +382,7 @@ def cornometerwindow():
     global time_text
 
     # نمایش زمان
-    time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48))
+    time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48),bg=main_theme.window_bg,fg=main_theme.fg)
     time_text.place(x=coordinates.time_text_x,y=coordinates.time_text_y)
 
     # دکمه‌های کنترل
@@ -361,10 +422,22 @@ def start_up():
     startup = Toplevel(root)
     startup.configure(bg=main_theme.window_bg)
 
+    move_button = tk.Button(startup, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=startup.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
     #cornometer.overrideredirect(True)
     #cornometer.resizable(True, True)
     startup.wm_attributes("-toolwindow", "true")
-    Wc,Hc = 150,150
+    Wc,Hc = coordinates.startup_W,coordinates.startup_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X >= startup.winfo_screenwidth()//2:
@@ -379,20 +452,20 @@ def start_up():
         Yc = startup.winfo_screenheight()-H1
 
     # نمایش زمان
-    label1 = tk.Label(startup, text=main_languge.address_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label1.pack()
+    label1 = tk.Label(startup, text=main_languge.address_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label1.place(x=coordinates.startup_label1_x,y=coordinates.startup_label1_y)
 
     entry1 = tk.Entry(startup,bg=main_theme.entrybg)
-    entry1.pack()
+    entry1.place(x=coordinates.startup_entry1_x,y=coordinates.startup_entry1_y)
 
-    label2 = tk.Label(startup, text=main_languge.filename_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label2.pack()
+    label2 = tk.Label(startup, text=main_languge.filename_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label2.place(x=coordinates.startup_label2_x,y=coordinates.startup_label2_y)
 
     entry2 = tk.Entry(startup,bg=main_theme.entrybg)
-    entry2.pack()
+    entry2.place(x=coordinates.startup_entry2_x,y=coordinates.startup_entry2_y)
 
-    submit_button1 = tk.Button(startup, text=main_languge.submit_text, command=retrieve_input,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
-    submit_button1.pack()
+    submit_button = tk.Button(startup, text=main_languge.submit_text, command=retrieve_input,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
+    submit_button.place(x=coordinates.startup_submit_x,y=coordinates.startup_submit_y)
 
     startup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -418,10 +491,22 @@ def DnsChange():
     dnschange = Toplevel(root)
     dnschange.configure(bg=main_theme.window_bg)
 
+    move_button = tk.Button(dnschange, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=dnschange.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
     #cornometer.overrideredirect(True)
     #cornometer.resizable(True, True)
     dnschange.wm_attributes("-toolwindow", "true")
-    Wc,Hc = 250,250
+    Wc,Hc = coordinates.dns_W,coordinates.dns_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X >= dnschange.winfo_screenwidth()//2:
@@ -436,28 +521,28 @@ def DnsChange():
         Yc = dnschange.winfo_screenheight()-H1
 
     # نمایش زمان
-    label1 = tk.Label(dnschange, text=main_languge.Dns_adaptor_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label1.pack()
+    label1 = tk.Label(dnschange, text=main_languge.Dns_adaptor_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label1.place(x=coordinates.dns_label1_x,y=coordinates.dns_label1_y)
 
     entry1 = tk.Entry(dnschange,bg=main_theme.entrybg)
-    entry1.pack()
+    entry1.place(x=coordinates.dns_entry1_x,y=coordinates.dns_entry1_y)
 
-    label1 = tk.Label(dnschange, text=main_languge.dns1_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label1.pack()
+    label2 = tk.Label(dnschange, text=main_languge.dns1_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label2.place(x=coordinates.dns_label2_x,y=coordinates.dns_label2_y)
 
     entry2 = tk.Entry(dnschange,bg=main_theme.entrybg)
-    entry2.pack()
+    entry2.place(x=coordinates.dns_entry2_x,y=coordinates.dns_entry2_y)
 
-    label2 = tk.Label(dnschange, text=main_languge.dns2_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label2.pack()
+    label3 = tk.Label(dnschange, text=main_languge.dns2_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label3.place(x=coordinates.dns_label3_x,y=coordinates.dns_label3_y)
 
     entry3 = tk.Entry(dnschange,bg=main_theme.entrybg)
-    entry3.pack()
+    entry3.place(x=coordinates.dns_entry3_x,y=coordinates.dns_entry3_y)
 
     submit_button1 = tk.Button(dnschange, text=main_languge.submit_text, command=retrieve_input,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
-    submit_button1.pack()
-    submit_button1 = tk.Button(dnschange, text=main_languge.Dns_desable, command=Desabling,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
-    submit_button1.pack()
+    submit_button1.place(x=coordinates.dns_submit1_x,y=coordinates.dns_submit1_y)
+    submit_button2 = tk.Button(dnschange, text=main_languge.Dns_desable, command=Desabling,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
+    submit_button2.place(x=coordinates.dns_submit2_x,y=coordinates.dns_submit2_y)
 
     dnschange.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -484,10 +569,22 @@ def SafeAntiVirus():
     global W1,H1,X1,Y1
     SafeAntiVirus = Toplevel(root)
     SafeAntiVirus.configure(bg=main_theme.window_bg)
+    move_button = tk.Button(SafeAntiVirus, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=SafeAntiVirus.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
     #cornometer.overrideredirect(True)
     #cornometer.resizable(True, True)
     SafeAntiVirus.wm_attributes("-toolwindow", "true")
-    Wc,Hc = 250,250
+    Wc,Hc = coordinates.antivirus_W,coordinates.antivirus_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X >= SafeAntiVirus.winfo_screenwidth()//2:
@@ -501,32 +598,32 @@ def SafeAntiVirus():
     if (Yc+H1) > SafeAntiVirus.winfo_screenheight():
         Yc = SafeAntiVirus.winfo_screenheight()-H1
     # نمایش زمان
-    label1 = tk.Label(SafeAntiVirus, text=main_languge.address_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label1.pack()
+    label1 = tk.Label(SafeAntiVirus, text=main_languge.address_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label1.place(x=coordinates.antivirus_label1_x,y=coordinates.antivirus_label1_y)
 
     entry1 = tk.Entry(SafeAntiVirus,bg=main_theme.entrybg)
-    entry1.pack()
+    entry1.place(x=coordinates.antivirus_entry1_x,y=coordinates.antivirus_entry1_y)
 
-    label2 = tk.Label(SafeAntiVirus, text=main_languge.filename_ask, font=('Helvetica', 10),fg=main_theme.fg)
-    label2.pack()
+    label2 = tk.Label(SafeAntiVirus, text=main_languge.filename_ask, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label2.place(x=coordinates.antivirus_label2_x,y=coordinates.antivirus_label2_y)
 
     entry2 = tk.Entry(SafeAntiVirus,bg=main_theme.entrybg)
-    entry2.pack()
+    entry2.place(x=coordinates.antivirus_entry2_x,y=coordinates.antivirus_entry2_y)
     
     # ایجاد متغیر کنترل
     selected_option = tk.IntVar()
         # ایجاد چهار رادیو باتن
-    radiobutton1 = tk.Radiobutton(SafeAntiVirus, text='File', variable=selected_option, value=1)
-    radiobutton1.pack(side=tk.LEFT)
+    button1 = tk.Radiobutton(SafeAntiVirus, text='File', variable=selected_option, value=1, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    button1.place(x=coordinates.antivirus_button1_x,y=coordinates.antivirus_button1_y)
 
-    radiobutton2 = tk.Radiobutton(SafeAntiVirus, text='Folder', variable=selected_option, value=2)
-    radiobutton2.pack(side=tk.LEFT)
+    button2 = tk.Radiobutton(SafeAntiVirus, text='Folder', variable=selected_option, value=2, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    button2.place(x=coordinates.antivirus_button2_x,y=coordinates.antivirus_button2_y)
 
-    radiobutton3 = tk.Radiobutton(SafeAntiVirus, text='process', variable=selected_option, value=3)
-    radiobutton3.pack(side=tk.LEFT)
+    button3 = tk.Radiobutton(SafeAntiVirus, text='process', variable=selected_option, value=3, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    button3.place(x=coordinates.antivirus_button3_x,y=coordinates.antivirus_button3_y)
 
     submit_button1 = tk.Button(SafeAntiVirus, text=main_languge.submit_text, command=retrieve_input,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
-    submit_button1.pack(side=tk.BOTTOM)
+    submit_button1.place(x=coordinates.antivirus_submit_x,y=coordinates.antivirus_submit_y)
 
     SafeAntiVirus.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -557,18 +654,13 @@ openbutton = tk.Button(root,
 openbutton.pack(side=tk.BOTTOM, fill=tk.X)
 
 move_button = tk.Button(root, 
-                        text="", 
-                        width=2, 
+                        text="",
                         height=1,
-                        relief='flat', 
-                        highlightthickness=0, 
-                        activebackground="white", 
-                        activeforeground="black", 
-                        bg="white", 
-                        fg="black")
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
 move_button.pack(side=tk.BOTTOM, fill=tk.X)
-move_button.bind('<ButtonPress-1>', start_move)
-move_button.bind('<ButtonRelease-1>', stop_move)
-move_button.bind('<B1-Motion>', on_move)
-
+move_button.bind('<ButtonPress-1>', lambda event,var=root: start_move(event,var))
+move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(event,var))
+move_button.bind('<B1-Motion>',lambda event,var=root: on_move(event,var))
 root.mainloop()
