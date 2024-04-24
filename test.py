@@ -1,4 +1,37 @@
 
+import json
+
+# مسیر فایل JSON
+file_path = 'path_to_settings.json'
+
+# باز کردن فایل JSON برای خواندن
+with open(file_path, 'r', encoding='utf-8') as file:
+    # بارگذاری محتوای فایل JSON به یک دیکشنری
+    data = json.load(file)
+
+# تغییر مقدار کلید 'language' به 'es'
+data['settings']['language'] = 'es'
+
+# باز کردن فایل JSON برای نوشتن
+with open(file_path, 'w', encoding='utf-8') as file:
+    # نوشتن داده‌های تغییر یافته به فایل
+    json.dump(data, file, indent=4, ensure_ascii=False)
+
+# تغییرات اعمال شده و فایل ذخیره شده است
+
+
+
+"""import json
+
+# باز کردن فایل JSON برای خواندن
+with open('settings.json', 'r', encoding='utf-8') as file:
+    # بارگذاری محتوای فایل JSON به یک دیکشنری
+    data = json.load(file)
+
+# حالا `data` یک دیکشنری است که شامل داده‌های JSON می‌باشد
+print(data["settings"]["X"])"""
+
+"""
 import tkinter as tk
 
 root = tk.Tk()
@@ -7,7 +40,7 @@ root = tk.Tk()
 button = tk.Button(root, text="دکمه بدون حاشیه", bd=0)
 button.pack()
 
-root.mainloop()
+root.mainloop()"""
 
 
 """
