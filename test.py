@@ -1,5 +1,17 @@
 
-import json
+
+"""import tkinter as tk
+
+root = tk.Tk()
+var = tk.IntVar()
+
+chk = tk.Checkbutton(root, text='گزینه 1', variable=var)
+chk.pack()
+
+root.mainloop()"""
+
+
+"""import json
 
 # مسیر فایل JSON
 file_path = 'path_to_settings.json'
@@ -17,7 +29,7 @@ with open(file_path, 'w', encoding='utf-8') as file:
     # نوشتن داده‌های تغییر یافته به فایل
     json.dump(data, file, indent=4, ensure_ascii=False)
 
-# تغییرات اعمال شده و فایل ذخیره شده است
+# تغییرات اعمال شده و فایل ذخیره شده است"""
 
 
 

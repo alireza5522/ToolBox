@@ -19,15 +19,17 @@ running = False
 start_time = None
 timer = 0
 time_text = None
+startup = False
 
 class coordinates:
-    Main_Window_H,Main_Window_W = (100,300)
+    Main_Window_H,Main_Window_W = (100,360)
     cornometer_button_x,cornometer_button_y = (0,60)
     startup_button_x,startup_button_y = (0,100)
     dns_button_x,dns_button_y = (0,140)
     antivirus_button_x,antivirus_button_y = (0,180)
     Religiustimes_button_x,Religiustimes_button_y = (0,220)
     date_button_x,date_button_y = (0,260)
+    setting_button_x,setting_button_y = (0,300)
 
     cornometer_H,cornometer_W = (250,250)
     time_text_x,time_text_y = (100,30)
@@ -71,6 +73,16 @@ class coordinates:
     date_W,date_H = (350,350)
     date_label1_x,date_label1_y = (-50,50)
 
+    setting_W,setting_H = (350,350)
+    settings_label1_x,settings_label1_y = (10,40)
+    settings_button1_x,settings_button1_y = (10,60)
+    settings_button2_x,settings_button2_y = (10,80)
+    settings_label2_x,settings_label2_y = (10,100)
+    settings_button3_x,settings_button3_y = (10,120)
+    settings_button4_x,settings_button4_y = (10,140)
+    settings_button5_x,settings_button5_y = (10,160)
+    settings_button6_x,settings_button6_y = (10,180)
+
 class theme:
     closebg = "#e04343"
     closefg = "white"
@@ -87,6 +99,7 @@ class theme:
     antivirus_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\anti.png')
     religius_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\religius.png')
     date_icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\date.png')
+    setting_icon = PhotoImage(file='.\\links\\setting.png')
     def __init__(self,
                  closebg,
                  closefg,
@@ -103,6 +116,7 @@ class theme:
                  antivirus_icon,
                  religius_icon,
                  date_icon,
+                 setting_icon,
                  ):
        self.closebg = closebg
        self.closefg = closefg
@@ -119,6 +133,7 @@ class theme:
        self.antivirus_icon = antivirus_icon
        self.religius_icon = religius_icon
        self.date_icon = date_icon
+       self.setting_icon = setting_icon
 dark=theme(
     closebg = "#e04343",
     closefg = "white",
@@ -135,6 +150,7 @@ dark=theme(
     antivirus_icon = PhotoImage(file='.\\links\\antidark.png'),
     religius_icon = PhotoImage(file='.\\links\\religiusdark.png'),
     date_icon = PhotoImage(file='.\\links\\datedark.png'),
+    setting_icon = PhotoImage(file='.\\links\\settingdark.png'),
 )
 light=theme(
     closebg = "#e04343",
@@ -152,6 +168,7 @@ light=theme(
     antivirus_icon = PhotoImage(file='.\\links\\anti.png'),
     religius_icon = PhotoImage(file='.\\links\\religius.png'),
     date_icon = PhotoImage(file='.\\links\\date.png'),
+    setting_icon = PhotoImage(file='.\\links\\setting.png'),
 )
 main_theme = dark
 
@@ -175,6 +192,15 @@ class languge:
     antitool = ""
     religiustool = ""
     datetool = ""
+    settingtool = ""
+    black = ""
+    white = ""
+    farsi = ""
+    english = ""
+    startup = ""
+    startup_ = ""
+    langlabel = ""
+    themelabel = ""
     def __init__(self,cornometer_text_start,
                  cornometer_text_stop,
                  cornometer_text_reset,
@@ -193,7 +219,16 @@ class languge:
                  dnstool,
                  antitool,
                  religiustool,
-                 datetool,):
+                 datetool,
+                 settingtool,
+                 black,
+                 white,
+                 farsi,
+                 english,
+                 startup,
+                 startup_,
+                 langlabel,
+                 themelabel,):
         self.cornometer_text_start = cornometer_text_start
         self.cornometer_text_stop = cornometer_text_stop
         self.cornometer_text_reset = cornometer_text_reset
@@ -213,6 +248,15 @@ class languge:
         self.antitool = antitool
         self.religiustool = religiustool
         self.datetool = datetool
+        self.settingtool = settingtool
+        self.black = black
+        self.white = white
+        self.farsi = farsi
+        self.english = english
+        self.startup = startup
+        self.startup_ = startup_
+        self.langlabel = langlabel
+        self.themelabel = themelabel
 en = languge(
     cornometer_text_start = "start",
     cornometer_text_stop = "stop",
@@ -233,6 +277,15 @@ en = languge(
     antitool = "add's a safe file/folder to anti virus",
     religiustool = "give a religius times",
     datetool = "date",
+    settingtool = "settings",
+    black = "darkmode",
+    white = "lightmode",
+    farsi = "persian",
+    english = "english",
+    startup = "add this program to startup",
+    startup_ = "do not add this program to startup",
+    langlabel = "choose a languge",
+    themelabel = "choose a theme",
 )
 fa = languge(
     cornometer_text_start = "شروع",
@@ -254,6 +307,15 @@ fa = languge(
     antitool = "انتی ویروس",
     religiustool = "اوقات شرعی",
     datetool = "تاریخ",
+    settingtool = "تنظیمات",
+    black = "مود دارک",
+    white = "مود لایت",
+    farsi = "فارسی",
+    english = "اینگلیسی",
+    startup = "این برنامه را به استارت اپ اضافه کن",
+    startup_ = "این برنامه را به استارت اپ اضافه نکن",
+    langlabel = "زبان برنامه را انتخاب کنید",
+    themelabel = "تم برنامه انتخاب کنید",
 )
 main_languge = en
 
@@ -419,6 +481,15 @@ def open_new_window():
                        bd=0,)
     date.place(x=coordinates.date_button_x,y=coordinates.date_button_y)
     ToolTip(date,main_languge.datetool)
+
+    setting = tk.Button(new_window, 
+                       image=main_theme.setting_icon,
+                       command=settings,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    setting.place(x=coordinates.setting_button_x,y=coordinates.setting_button_y)
+    ToolTip(setting,main_languge.settingtool)
     
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
@@ -721,16 +792,6 @@ def SafeAntiVirus():
     entry2.place(x=coordinates.antivirus_entry2_x,y=coordinates.antivirus_entry2_y)
     
     # ایجاد متغیر کنترل
-    selected_option = tk.IntVar()
-        # ایجاد چهار رادیو باتن
-    button1 = tk.Radiobutton(SafeAntiVirus, text='File', variable=selected_option, value=1, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
-    button1.place(x=coordinates.antivirus_button1_x,y=coordinates.antivirus_button1_y)
-
-    button2 = tk.Radiobutton(SafeAntiVirus, text='Folder', variable=selected_option, value=2, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
-    button2.place(x=coordinates.antivirus_button2_x,y=coordinates.antivirus_button2_y)
-
-    button3 = tk.Radiobutton(SafeAntiVirus, text='process', variable=selected_option, value=3, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
-    button3.place(x=coordinates.antivirus_button3_x,y=coordinates.antivirus_button3_y)
 
     submit_button1 = tk.Button(SafeAntiVirus, text=main_languge.submit_text, command=retrieve_input,bg=main_theme.bg,fg=main_theme.fg,activebackground=main_theme.activebackground,activeforeground=main_theme.activeforeground)
     submit_button1.place(x=coordinates.antivirus_submit_x,y=coordinates.antivirus_submit_y)
@@ -853,7 +914,9 @@ def date_time():
     URL = "https://api.keybit.ir/time"
 
     response = requests.get(URL)
+    print(response)
     data = json.loads(response.text)
+
 
     time = data["time24"]["full"]["en"]
     hour, minute, second = map(int, time.split(':'))
@@ -864,10 +927,13 @@ def date_time():
     year_name = data["date"]["year"]['name']
     year_animal = data["date"]["year"]["animal"]
     year_leapyear = data["date"]["year"]["leapyear"]
+    year_agone = data["date"]["year"]["agone"]["days"]["en"]
+    year_agone_percent = data["date"]["year"]["agone"]["percent"]["en"]
+    year_left = data["date"]["year"]["left"]["days"]["en"]
+    year_left_percent = data["date"]["year"]["left"]["percent"]["en"]
     month_name = data["date"]["month"]["name"]
     month_asterism =  data["date"]["month"]["asterism"]
-    day_event_local = data["date"]["day"]["events"]["local"]["text"]
-    day_event_holiday = data["date"]["day"]["events"]["local"]["holiday"]
+    day_event_holiday = data["date"]["day"]["events"]["local"]
     day_event_holy = data["date"]["day"]["events"]["holy"]
     day_event_global = data["date"]["day"]["events"]["global"]
 
@@ -879,18 +945,110 @@ def date_time():
     Year Name: {year_name}
     Year Animal: {year_animal}
     Is Leap Year: {year_leapyear}
+    Year Passed (Days): {year_agone}%
+    Year Passed (Percent): {year_agone_percent}%
+    Year Left (Days): {year_left}%
+    Year Left (Percent): {year_left_percent}%
     Month Name: {month_name}
     Month Asterism: {month_asterism}
-    Local Events: {day_event_local if day_event_local else 'no'}
-    Is Holiday: {day_event_holiday if day_event_holiday else 'no'}
-    Holy Events: {day_event_holy if day_event_holy else 'no'}
-    Global Events: {day_event_global if day_event_global else 'no'}
+    local event: {day_event_holiday if day_event_holiday else '-'}
+    Holy Events: {day_event_holy if day_event_holy else '-'}
+    Global Events: {day_event_global if day_event_global else '-'}
     """
 
     label1.configure(text=text)    
 
+def settings():
+    global startup
+    def theme_change():
+        if main_theme == dark:
+            writesettings("dark_mode",False,3)
+        else:
+            writesettings("dark_mode",True,3)
+        messagebox.showinfo(main_languge.Done_Massage, main_languge.Box_Massage)
+
+    def lang_change():
+        if main_languge == en:
+            writesettings("language","fa",4)
+        else:
+            writesettings("language","en",4)
+        messagebox.showinfo(main_languge.Done_Massage, main_languge.Box_Massage)
+
+    def startup_change():
+        global startup
+        if startup == True:
+            writesettings("startup",False,5)
+        else:
+            writesettings("startup",True,5)
+        messagebox.showinfo(main_languge.Done_Massage, main_languge.Box_Massage)
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    setting = Toplevel(root)
+    setting.configure(bg=main_theme.window_bg)
+    move_button = tk.Button(setting, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme.titlebar,
+                        bg=main_theme.titlebar)
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=setting.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    setting.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    setting.wm_attributes("-toolwindow", "true")
+    Wc,Hc = coordinates.setting_W,coordinates.setting_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= setting.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > setting.winfo_screenheight():
+        Yc = setting.winfo_screenheight()-H1
+    
+
+    label1 = tk.Label(setting, text=main_languge.themelabel, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+    label1.place(x=coordinates.settings_label1_x,y=coordinates.settings_label1_y)
+
+    themed = tk.Button(setting, text=main_languge.black,command=theme_change, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    if main_theme == dark:
+        themed.configure(text=main_languge.white)
+    else:
+        themed.configure(text=main_languge.black)
+    themed.place(x=coordinates.settings_button1_x,y=coordinates.settings_button1_y)
+
+    label2 = tk.Label(setting, text=main_languge.langlabel, font=('Helvetica', 10),bg=main_theme.window_bg,fg=main_theme.fg)
+
+    label2.place(x=coordinates.settings_label2_x,y=coordinates.settings_label2_y)
+
+    lang = tk.Button(setting, text=main_languge.english,command=lang_change, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    if main_languge == en:
+        lang.configure(text=main_languge.farsi)
+    else:
+        lang.configure(text=main_languge.english)
+    lang.place(x=coordinates.settings_button3_x,y=coordinates.settings_button3_y)
+
+    isstartup = tk.Button(setting, text=main_languge.startup,command=startup_change, bg=main_theme.window_bg,fg=main_theme.fg,activebackground=main_theme.window_bg,activeforeground=main_theme.activeforeground)
+    if startup == True:
+        isstartup.configure(text=main_languge.startup_)
+    else:
+        isstartup.configure(text=main_languge.startup)
+    isstartup.place(x=coordinates.settings_button5_x,y=coordinates.settings_button5_y)
+
+    setting.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+ 
+
 def readsettings():
-    global W,H,X,Y,main_languge,main_theme
+    global W,H,X,Y,main_languge,main_theme,startup
     with open('settings.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     X = data["settings"]["X"]
@@ -905,6 +1063,11 @@ def readsettings():
         main_languge = en
     else:
         main_languge = fa
+
+    if data["settings"]["startup"] == True:
+        startup = True
+    else:
+        startup = False
 
 def writesettings(key,val,index):
     file_path = 'settings.json'
