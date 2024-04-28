@@ -1,9 +1,9 @@
 {
-     "settings": {
-          "X": 1516,
-          "Y": 200,
-          "dark_mode": true,
-          "language": "en",
-          "startup": true
-     }
+   "settings": {
+      "X": 1516,
+      "Y": 310,
+      "dark_mode": true,
+      "language": "en",
+      "startup": true
+   }
 }

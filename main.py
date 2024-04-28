@@ -22,14 +22,14 @@ time_text = None
 startup = False
 
 class coordinates:
-    Main_Window_H,Main_Window_W = (100,360)
-    cornometer_button_x,cornometer_button_y = (0,60)
-    startup_button_x,startup_button_y = (0,100)
-    dns_button_x,dns_button_y = (0,140)
-    antivirus_button_x,antivirus_button_y = (0,180)
-    Religiustimes_button_x,Religiustimes_button_y = (0,220)
-    date_button_x,date_button_y = (0,260)
-    setting_button_x,setting_button_y = (0,300)
+    Main_Window_H,Main_Window_W = (210,465)
+    cornometer_button_x,cornometer_button_y = (15,45)
+    startup_button_x,startup_button_y = (15,125)
+    dns_button_x,dns_button_y = (15,165)
+    antivirus_button_x,antivirus_button_y = (15,205)
+    Religiustimes_button_x,Religiustimes_button_y = (80,45)
+    date_button_x,date_button_y = (80,85)
+    setting_button_x,setting_button_y = (15,420)
 
     cornometer_H,cornometer_W = (250,250)
     time_text_x,time_text_y = (100,30)
