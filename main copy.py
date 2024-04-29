@@ -36,8 +36,8 @@ class ToolTip(object):
 
     def enter(self, event=None):
         x, y, cx, cy = self.widget.bbox("insert")
-        x += self.widget.winfo_rootx() + 50
-        y += self.widget.winfo_rooty()
+        x += self.widget.winfo_rootx() + 55
+        y += self.widget.winfo_rooty() + (15/2)
         # ایجاد پنجره تولتیپ
         self.tw = tk.Toplevel(self.widget)
         self.tw.wm_overrideredirect(True)
