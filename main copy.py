@@ -197,7 +197,43 @@ def open_new_window():
                        bd=0,)
     setting.place(x=coordinates.setting_button_x,y=coordinates.setting_button_y)
     ToolTip(setting,main_languge["settingtool"])
+
+    btc = tk.Button(new_window, 
+                       image=main_theme["btc_icon"],
+                       command=btc_call,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    btc.place(x=coordinates.btc_button_x,y=coordinates.btc_button_y)
+    ToolTip(setting,main_languge["settingtool"])
     
+    translate = tk.Button(new_window, 
+                       image=main_theme["translate_icon"],
+                       command=Translate,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    translate.place(x=coordinates.translate_button_x,y=coordinates.translate_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
+    qrcode = tk.Button(new_window, 
+                       image=main_theme["qrcode_icon"],
+                       command=QRcode,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    qrcode.place(x=coordinates.qrcode_button_x,y=coordinates.qrcode_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
+    search = tk.Button(new_window, 
+                       image=main_theme["search_icon"],
+                       command=Search,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    search.place(x=coordinates.search_button_x,y=coordinates.search_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
 def cornometerwindow():
@@ -753,6 +789,15 @@ def settings():
 
     setting.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
  
+def btc_call():
+    ...
+def Translate():
+    ...
+def QRcode():
+    ...
+def Search():
+    ...
+
 
 def readsettings():
     global W,H,X,Y,main_languge,main_theme,startup

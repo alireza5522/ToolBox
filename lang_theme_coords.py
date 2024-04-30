@@ -8,6 +8,10 @@ class coordinates:
     setting_button_x,setting_button_y = (15,205)
     Religiustimes_button_x,Religiustimes_button_y = (80,45)
     date_button_x,date_button_y = (80,85)
+    btc_button_x,btc_button_y = (80,125)
+    translate_button_x,translate_button_y = (80,165)
+    qrcode_button_x,qrcode_button_y = (80,205)
+    search_button_x,search_button_y = (145,45)
 
     cornometer_H,cornometer_W = (250,250)
     time_text_x,time_text_y = (100,30)
@@ -76,7 +80,11 @@ dark = {
     "antivirus_icon": PhotoImage(file='.\\links\\antidark.png'),
     "religius_icon": PhotoImage(file='.\\links\\religiusdark.png'),
     "date_icon": PhotoImage(file='.\\links\\datedark.png'),
-    "setting_icon": PhotoImage(file='.\\links\\settingdark.png')
+    "setting_icon": PhotoImage(file='.\\links\\settingdark.png'),
+    "btc_icon": PhotoImage(file='.\\links\\btcdark.png'),
+    "translate_icon": PhotoImage(file='.\\links\\translatedark.png'),
+    "qrcode_icon": PhotoImage(file='.\\links\\qrcodedark.png'),
+    "search_icon": PhotoImage(file='.\\links\\searchdark.png')
 }
 light={
     "closebg": "#e04343",
@@ -94,7 +102,11 @@ light={
     "antivirus_icon": PhotoImage(file='.\\links\\anti.png'),
     "religius_icon": PhotoImage(file='.\\links\\religius.png'),
     "date_icon": PhotoImage(file='.\\links\\date.png'),
-    "setting_icon": PhotoImage(file='.\\links\\setting.png')
+    "setting_icon": PhotoImage(file='.\\links\\setting.png'),
+    "btc_icon": PhotoImage(file='.\\links\\btc.png'),
+    "translate_icon": PhotoImage(file='.\\links\\translate.png'),
+    "qrcode_icon": PhotoImage(file='.\\links\\qrcode.png'),
+    "search_icon": PhotoImage(file='.\\links\\search.png')
 }
 en = {
     "cornometer_text_start": "start",
