@@ -6,6 +6,16 @@ import subprocess
 from tkinter import messagebox
 import requests
 import json
+import sys
+import os
+
+try:
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    else:
+        application_path = os.path.dirname(os.path.abspath(__file__))
+except:
+    pass
 
 root = tk.Tk()
 
@@ -790,11 +800,226 @@ def settings():
     setting.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
  
 def btc_call():
-    ...
+
+    def get_symbol_data():
+        url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
+        symbol = entry1.get()
+        parameters = {
+            "symbol" : symbol
+        }
+
+        headers = {
+            'Accepts': 'application/json',
+            'X-CMC_PRO_API_KEY': "72ebba38-31de-43ec-8424-c9cc1ed173ee"
+        }
+
+        response = requests.get(url, headers=headers, params=parameters)
+        data = json.loads(response.text)
+
+        if 'data' not in data or symbol not in data['data']:
+            print("Invalid cryptocurrency symbol.")
+            return None
+        else:
+            symbol_data = symbol,data
+
+            if symbol_data is not None:
+                symbol, data = symbol_data
+
+                name = data['data'][symbol]['name']
+                symbol_name = data['data'][symbol]['symbol']
+                price = data['data'][symbol]['quote']['USD']['price']
+                hourly_change = data['data'][symbol]['quote']['USD']['percent_change_1h']
+                daily_change = data['data'][symbol]['quote']['USD']['percent_change_24h']
+                weekly_change = data['data'][symbol]['quote']['USD']['percent_change_7d']
+                volume = data['data'][symbol]['quote']['USD']['volume_24h']
+                market_cap = data['data'][symbol]['quote']['USD']['market_cap']
+                total_supply = data['data'][symbol]['total_supply']
+                max_supply = data['data'][symbol]['max_supply']
+
+                if max_supply is None:
+                    max_supply = "Ulimited"
+
+                txt = f"""{name} ({symbol_name})
+                        Price: ${price:,.3f} USD
+                        1hr Change: {hourly_change:.2f}%
+                        24hr Change: {daily_change:.2f}%
+                        7d Change: {weekly_change:.2f}%
+                        Volume: ${volume:,}")
+                        Market Cap: ${market_cap:,.2f}
+                        Total Supply: {total_supply:,}
+                        Max Supply: {max_supply:,}"""
+                
+                label2.configure(text=txt)
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    btc = Toplevel(root)
+    btc.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(btc, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=btc.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    btc.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    btc.wm_attributes("-toolwindow", "true")
+    Wc,Hc = coordinates.btc_W,coordinates.btc_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= btc.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > btc.winfo_screenheight():
+        Yc = btc.winfo_screenheight()-H1
+
+    label1 = tk.Label(btc, text=main_languge["btclabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.btc_label1_x,y=coordinates.btc_label1_y)
+    
+    entry1 = tk.Entry(btc,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.btc_entry1_x,y=coordinates.btc_entry1_y)
+    
+    submit_button1 = tk.Button(btc, text=main_languge["submit_text"], command=get_symbol_data,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.btc_submit_x,y=coordinates.btc_submit_y)
+
+    label2 = tk.Label(btc, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2.place(x=coordinates.btc_label2_x,y=coordinates.btc_label2_y)
+
+    btc.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+   
 def Translate():
-    ...
+
+    def EnglishToPersian():
+        text = entry1.get()
+
+        URL = "https://api.codebazan.ir/replace/index.php?lang=tofa&text=" + text
+
+        response = requests.get(URL)
+
+        
+        root.clipboard_append(response.text)
+        label2.configure(text=response.text)
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    translate = Toplevel(root)
+    translate.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(translate, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=translate.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    translate.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    translate.wm_attributes("-toolwindow", "true")
+    Wc,Hc = coordinates.translate_W,coordinates.translate_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= translate.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > translate.winfo_screenheight():
+        Yc = translate.winfo_screenheight()-H1
+
+    label1 = tk.Label(translate, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.translate_label1_x,y=coordinates.translate_label1_y)
+    
+    entry1 = tk.Entry(translate,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.translate_entry1_x,y=coordinates.translate_entry1_y)
+    
+    submit_button1 = tk.Button(translate, text=main_languge["submit_text"], command=EnglishToPersian,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.translate_submit_x,y=coordinates.translate_submit_y)
+
+    label2 = tk.Label(translate, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2.place(x=coordinates.translate_label2_x,y=coordinates.translate_label2_y)
+    
+    translate.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+
 def QRcode():
-    ...
+    
+    def download_image(image_url, save_path):
+        response = requests.get(image_url)
+        if response.status_code == 200:
+            with open(save_path, 'wb') as file:
+                file.write(response.content)
+            messagebox.showinfo(main_languge["Done_Massage"], main_languge["qrcodemassage"])
+        else:
+            messagebox.showinfo(main_languge["Done_Massage"], main_languge["qrcodemassageno"])
+
+    def getqrcode():
+        text = entry1.get()
+
+        URL = "https://qr-code.ir/api/qr-code/?d=" + text
+
+        download_image(URL,text+".png")
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    qrcode = Toplevel(root)
+    qrcode.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(qrcode, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=qrcode.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    qrcode.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    qrcode.wm_attributes("-toolwindow", "true")
+    Wc,Hc = coordinates.qrcode_W,coordinates.qrcode_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= qrcode.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > qrcode.winfo_screenheight():
+        Yc = qrcode.winfo_screenheight()-H1
+
+    label1 = tk.Label(qrcode, text=main_languge["qrcodelabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.qrcode_label1_x,y=coordinates.qrcode_label1_y)
+    
+    entry1 = tk.Entry(qrcode,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.qrcode_entry1_x,y=coordinates.qrcode_entry1_y)
+    
+    submit_button1 = tk.Button(qrcode, text=main_languge["submit_text"], command=getqrcode,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.qrcode_submit_x,y=coordinates.qrcode_submit_y)
+
+    qrcode.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+
 def Search():
     ...
 

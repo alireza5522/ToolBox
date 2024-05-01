@@ -1,3 +1,193 @@
+import json
+
+def find_value(obj, key, value):
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k == key and v == value:
+                print(json.dumps(obj, indent=4, ensure_ascii=False))
+            elif isinstance(v, (dict, list)):
+                find_value(v, key, value)
+    elif isinstance(obj, list):
+        for item in obj:
+            find_value(item, key, value)
+
+# فرض کنید `data` محتوای فایل JSON شما است
+data = {
+"type": "folder",
+"name": "project",
+"path": "D:\\Study\\projects\\project",
+"childno": 1,
+"subchilds": 5,
+"children": [
+{
+    "type": "folder",
+    "name": "build",
+    "path": "D:\\Study\\projects\\project\\build\\build",
+    "childno": 5,
+    "subchilds": 4,
+    "children": [
+    {
+    "type": "folder",
+    "name": "app.exe",
+    "path": "D:\\Study\\projects\\project\\build\\app.exe\\app.exe",
+    "childno": 4,
+    "subchilds": 1,
+    "children": [
+    {
+        "type": "folder",
+        "name": "localpycs",
+        "path": "D:\\Study\\projects\\project\\build\\app.exe\\localpycs\\localpycs",
+        "childno": 1,
+        "subchilds": 0
+    }
+    ]
+    },
+    {
+    "type": "folder",
+    "name": "main",
+    "path": "D:\\Study\\projects\\project\\build\\main\\main",
+    "childno": 3,
+    "subchilds": 1,
+    "children": [
+    {
+        "type": "folder",
+        "name": "localpycs",
+        "path": "D:\\Study\\projects\\project\\build\\main\\localpycs\\localpycs",
+        "childno": 1,
+        "subchilds": 0
+    }
+    ]
+    },
+    {
+    "type": "folder",
+    "name": "myapp",
+    "path": "D:\\Study\\projects\\project\\build\\myapp\\myapp",
+    "childno": 2,
+    "subchilds": 1,
+    "children": [
+    {
+        "type": "folder",
+        "name": "localpycs",
+        "path": "D:\\Study\\projects\\project\\build\\myapp\\localpycs\\localpycs",
+        "childno": 1,
+        "subchilds": 0
+    }
+    ]
+    },
+    {
+    "type": "folder",
+    "name": "oconsole",
+    "path": "D:\\Study\\projects\\project\\build\\oconsole\\oconsole",
+    "childno": 1,
+    "subchilds": 1,
+    "children": [
+    {
+        "type": "folder",
+        "name": "localpycs",
+        "path": "D:\\Study\\projects\\project\\build\\oconsole\\localpycs\\localpycs",
+        "childno": 1,
+        "subchilds": 0
+    }
+    ]
+    }
+    ]
+},
+{
+    "type": "folder",
+    "name": "dist",
+    "path": "D:\\Study\\projects\\project\\dist\\dist",
+    "childno": 4,
+    "subchilds": 0
+},
+{
+    "type": "folder",
+    "name": "links",
+    "path": "D:\\Study\\projects\\project\\links\\links",
+    "childno": 3,
+    "subchilds": 0
+},
+{
+    "type": "folder",
+    "name": "ToolBox Features",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\ToolBox Features",
+    "childno": 2,
+    "subchilds": 7,
+    "children": [
+    {
+    "type": "folder",
+    "name": "Compress&Extract",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\Compress&Extract\\Compress&Extract",
+    "childno": 7,
+    "subchilds": 0
+    },
+    {
+    "type": "folder",
+    "name": "Crypto",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\Crypto\\Crypto",
+    "childno": 6,
+    "subchilds": 1,
+    "children": [
+    {
+        "type": "folder",
+        "name": "__pycache__",
+        "path": "D:\\Study\\projects\\project\\ToolBox Features\\Crypto\\__pycache__\\__pycache__",
+        "childno": 1,
+        "subchilds": 0
+    }
+    ]
+    },
+    {
+    "type": "folder",
+    "name": "Date & Time",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\Date & Time\\Date & Time",
+    "childno": 5,
+    "subchilds": 0
+    },
+    {
+    "type": "folder",
+    "name": "EnglishToPersian",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\EnglishToPersian\\EnglishToPersian",
+    "childno": 4,
+    "subchilds": 0
+    },
+    {
+    "type": "folder",
+    "name": "File&DirOperations",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\File&DirOperations\\File&DirOperations",
+    "childno": 3,
+    "subchilds": 0
+    },
+    {
+    "type": "folder",
+    "name": "ReligiousTimes",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\ReligiousTimes\\ReligiousTimes",
+    "childno": 2,
+    "subchilds": 0
+    },
+    {
+    "type": "folder",
+    "name": "Search",
+    "path": "D:\\Study\\projects\\project\\ToolBox Features\\Search\\Search",
+    "childno": 1,
+    "subchilds": 0
+    }
+    ]
+},
+{
+    "type": "folder",
+    "name": "__pycache__",
+    "path": "D:\\Study\\projects\\project\\__pycache__\\__pycache__",
+    "childno": 1,
+    "subchilds": 0
+}
+]
+}
+
+
+
+# جستجو برای مقدار 'مقدار مورد نظر' در کلید 'کلید مورد نظر'
+find_value(data, 'output.json', 'links')
+
 
 
 """import tkinter as tk
@@ -126,11 +316,11 @@ window.mainloop()"""
 
 
 """
-powershell -Command \'Add-MpPreference -ExclusionPath \"C:\tmp\"\'
-powershell -Command \'Add-MpPreference -ExclusionProcess \"java.exe\"\'
-powershell -Command \'Add-MpPreference -ExclusionExtension \".java\"\'
+powershell -Command \\'Add-MpPreference -ExclusionPath \\"C:\\tmp\\"\\'
+powershell -Command \\'Add-MpPreference -ExclusionProcess \\"java.exe\\"\\'
+powershell -Command \\'Add-MpPreference -ExclusionExtension \\".java\\"\\'
 
-powershell -Command \'Remove-MpPreference -ExclusionExtension \".java\"\'
+powershell -Command \\'Remove-MpPreference -ExclusionExtension \\".java\\"\\'
 """
 """
 import tkinter as tk
@@ -306,7 +496,7 @@ window = tk.Tk()
 window.title('دکمه با آیکون')
 
 # بارگذاری تصویر
-icon = PhotoImage(file='D:\Study\projects\project\links\corno.png')
+icon = PhotoImage(file='D:\\Study\\projects\\project\\links\\corno.png')
 
 # ایجاد دکمه با آیکون
 button = tk.Button(window, image=icon)

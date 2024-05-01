@@ -5,7 +5,7 @@ class coordinates:
     startup_button_x,startup_button_y = (15,85)
     dns_button_x,dns_button_y = (15,125)
     antivirus_button_x,antivirus_button_y = (15,165)
-    setting_button_x,setting_button_y = (15,205)
+    setting_button_x,setting_button_y = (145,205)
     Religiustimes_button_x,Religiustimes_button_y = (80,45)
     date_button_x,date_button_y = (80,85)
     btc_button_x,btc_button_y = (80,125)
@@ -64,6 +64,26 @@ class coordinates:
     settings_button4_x,settings_button4_y = (10,140)
     settings_button5_x,settings_button5_y = (10,160)
     settings_button6_x,settings_button6_y = (10,180)
+
+    btc_W,btc_H = (250,250)
+    btc_label1_x,btc_label1_y = (10,40)
+    btc_entry1_x,btc_entry1_y = (10,70)
+    btc_submit_x,btc_submit_y = (10,100)
+    btc_label2_x,btc_label2_y = (10,130)
+    
+    translate_W,translate_H = (250,250)
+    translate_label1_x,translate_label1_y = (10,40)
+    translate_entry1_x,translate_entry1_y = (10,70)
+    translate_submit_x,translate_submit_y = (10,100)
+    translate_label2_x,translate_label2_y = (10,130)
+
+    qrcode_W,qrcode_H = (250,250)
+    qrcode_label1_x,qrcode_label1_y = (10,40)
+    qrcode_entry1_x,qrcode_entry1_y = (10,70)
+    qrcode_submit_x,qrcode_submit_y = (10,100)
+
+
+
 dark = {
     "closebg": "#e04343",
     "closefg": "white",
@@ -136,7 +156,11 @@ en = {
     "startup": "add this program to startup",
     "startup_": "do not add this program to startup",
     "langlabel": "choose a languge",
-    "themelabel": "choose a theme"
+    "themelabel": "choose a theme",
+    "btclabel": "add symbol",
+    "qrcodelabel": "add text",
+    "qrcodemassageno": "not secse",
+    "qrcodemassage": "seces",
 }
 fa = {
     "cornometer_text_start": "شروع",
@@ -166,5 +190,9 @@ fa = {
     "startup": "این برنامه را به استارت اپ اضافه کن",
     "startup_": "این برنامه را به استارت اپ اضافه نکن",
     "langlabel": "زبان برنامه را انتخاب کنید",
-    "themelabel": "تم برنامه انتخاب کنید"
+    "themelabel": "تم برنامه انتخاب کنید",
+    "btclabel": "یک نماد از نرخ ارز را وارد کنید",
+    "qrcodelabel": "کد اضافه کنید",
+    "qrcodemassageno": "عکس شما با موفقیت دانلود نشد",
+    "qrcodemassage": "عکس شما با موفقیت دانلود شد",
 }
