@@ -1089,8 +1089,8 @@ def Search():
         if searchpath[0].lower() == drive.lower():
             command = f"cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
         else:
-            command = f"{searchpath[0]}: && cd {searchpath}:// && {application_path}\\tree2json.bat => {application_path}\\output.json"
-
+            command = f"{searchpath[0]}: && cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
+        print(command)
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         with open(path, 'r', encoding='utf-8') as file:

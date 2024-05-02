@@ -1,179 +1,94 @@
   {
    "type": "folder",
-   "name": "projects",
-   "path": "D:\\Study\\projects",
+   "name": "Google",
+   "path": "C:\\Program Files (x86)\\Google",
    "childno": 1,
-   "subchilds": 1,
+   "subchilds": 5,
    "children": [
     {
      "type": "folder",
-     "name": "project",
-     "path": "D:\\Study\\projects\\project\\project",
-     "childno": 1,
-     "subchilds": 5,
+     "name": "Chrome Remote Desktop",
+     "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\Chrome Remote Desktop",
+     "childno": 5,
+     "subchilds": 2,
      "children": [
       {
        "type": "folder",
-       "name": "build",
-       "path": "D:\\Study\\projects\\project\\build\\build",
-       "childno": 5,
-       "subchilds": 4,
-       "children": [
-        {
-         "type": "folder",
-         "name": "app.exe",
-         "path": "D:\\Study\\projects\\project\\build\\app.exe\\app.exe",
-         "childno": 4,
-         "subchilds": 1,
-         "children": [
-          {
-           "type": "folder",
-           "name": "localpycs",
-           "path": "D:\\Study\\projects\\project\\build\\app.exe\\localpycs\\localpycs",
-           "childno": 1,
-           "subchilds": 0
-          }
-         ]
-        },
-        {
-         "type": "folder",
-         "name": "main",
-         "path": "D:\\Study\\projects\\project\\build\\main\\main",
-         "childno": 3,
-         "subchilds": 1,
-         "children": [
-          {
-           "type": "folder",
-           "name": "localpycs",
-           "path": "D:\\Study\\projects\\project\\build\\main\\localpycs\\localpycs",
-           "childno": 1,
-           "subchilds": 0
-          }
-         ]
-        },
-        {
-         "type": "folder",
-         "name": "myapp",
-         "path": "D:\\Study\\projects\\project\\build\\myapp\\myapp",
-         "childno": 2,
-         "subchilds": 1,
-         "children": [
-          {
-           "type": "folder",
-           "name": "localpycs",
-           "path": "D:\\Study\\projects\\project\\build\\myapp\\localpycs\\localpycs",
-           "childno": 1,
-           "subchilds": 0
-          }
-         ]
-        },
-        {
-         "type": "folder",
-         "name": "oconsole",
-         "path": "D:\\Study\\projects\\project\\build\\oconsole\\oconsole",
-         "childno": 1,
-         "subchilds": 1,
-         "children": [
-          {
-           "type": "folder",
-           "name": "localpycs",
-           "path": "D:\\Study\\projects\\project\\build\\oconsole\\localpycs\\localpycs",
-           "childno": 1,
-           "subchilds": 0
-          }
-         ]
-        }
-       ]
-      },
-      {
-       "type": "folder",
-       "name": "dist",
-       "path": "D:\\Study\\projects\\project\\dist\\dist",
-       "childno": 4,
-       "subchilds": 0
-      },
-      {
-       "type": "folder",
-       "name": "links",
-       "path": "D:\\Study\\projects\\project\\links\\links",
-       "childno": 3,
-       "subchilds": 0
-      },
-      {
-       "type": "folder",
-       "name": "ToolBox Features",
-       "path": "D:\\Study\\projects\\project\\ToolBox Features\\ToolBox Features",
+       "name": "125.0.6422.6",
+       "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\125.0.6422.6\\125.0.6422.6",
        "childno": 2,
-       "subchilds": 7,
-       "children": [
-        {
-         "type": "folder",
-         "name": "Compress&Extract",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\Compress&Extract\\Compress&Extract",
-         "childno": 7,
-         "subchilds": 0
-        },
-        {
-         "type": "folder",
-         "name": "Crypto",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\Crypto\\Crypto",
-         "childno": 6,
-         "subchilds": 1,
-         "children": [
-          {
-           "type": "folder",
-           "name": "__pycache__",
-           "path": "D:\\Study\\projects\\project\\ToolBox Features\\Crypto\\__pycache__\\__pycache__",
-           "childno": 1,
-           "subchilds": 0
-          }
-         ]
-        },
-        {
-         "type": "folder",
-         "name": "Date & Time",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\Date & Time\\Date & Time",
-         "childno": 5,
-         "subchilds": 0
-        },
-        {
-         "type": "folder",
-         "name": "EnglishToPersian",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\EnglishToPersian\\EnglishToPersian",
-         "childno": 4,
-         "subchilds": 0
-        },
-        {
-         "type": "folder",
-         "name": "File&DirOperations",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\File&DirOperations\\File&DirOperations",
-         "childno": 3,
-         "subchilds": 0
-        },
-        {
-         "type": "folder",
-         "name": "ReligiousTimes",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\ReligiousTimes\\ReligiousTimes",
-         "childno": 2,
-         "subchilds": 0
-        },
-        {
-         "type": "folder",
-         "name": "Search",
-         "path": "D:\\Study\\projects\\project\\ToolBox Features\\Search\\Search",
-         "childno": 1,
-         "subchilds": 0
-        }
-       ]
+       "subchilds": 0
       },
       {
        "type": "folder",
-       "name": "__pycache__",
-       "path": "D:\\Study\\projects\\project\\__pycache__\\__pycache__",
+       "name": "CurrentVersion",
+       "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\CurrentVersion\\CurrentVersion",
        "childno": 1,
        "subchilds": 0
       }
      ]
+    },
+    {
+     "type": "folder",
+     "name": "CrashReports",
+     "path": "C:\\Program Files (x86)\\Google\\CrashReports\\CrashReports",
+     "childno": 4,
+     "subchilds": 0
+    },
+    {
+     "type": "folder",
+     "name": "GoogleUpdater",
+     "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\GoogleUpdater",
+     "childno": 3,
+     "subchilds": 1,
+     "children": [
+      {
+       "type": "folder",
+       "name": "126.0.6441.0",
+       "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\126.0.6441.0",
+       "childno": 1,
+       "subchilds": 1,
+       "children": [
+        {
+         "type": "folder",
+         "name": "Crashpad",
+         "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\Crashpad",
+         "childno": 1,
+         "subchilds": 2,
+         "children": [
+          {
+           "type": "folder",
+           "name": "attachments",
+           "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\attachments\\attachments",
+           "childno": 2,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "reports",
+           "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\reports\\reports",
+           "childno": 1,
+           "subchilds": 0
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "folder",
+     "name": "Temp",
+     "path": "C:\\Program Files (x86)\\Google\\Temp\\Temp",
+     "childno": 2,
+     "subchilds": 0
+    },
+    {
+     "type": "folder",
+     "name": "Update",
+     "path": "C:\\Program Files (x86)\\Google\\Update\\Update",
+     "childno": 1,
+     "subchilds": 0
     }
    ]
   }
