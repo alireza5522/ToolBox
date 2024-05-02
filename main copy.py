@@ -112,6 +112,7 @@ def open_new_window():
     new_window.overrideredirect(defult_title)
     #new_window.resizable(True, True)
     new_window.wm_attributes("-toolwindow", "true")
+    new_window.attributes('-topmost', True)
     W1,H1 = coordinates.Main_Window_H,coordinates.Main_Window_W
     X1,Y1= X+W,Y+(H//2)-(H1//2)
 
@@ -244,6 +245,42 @@ def open_new_window():
     search.place(x=coordinates.search_button_x,y=coordinates.search_button_y)
     ToolTip(setting,main_languge["settingtool"])
 
+    wether = tk.Button(new_window, 
+                       image=main_theme["wether_icon"],
+                       command=Wether,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    wether.place(x=coordinates.wether_button_x,y=coordinates.wether_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
+    todolist = tk.Button(new_window, 
+                       image=main_theme["todolist_icon"],
+                       command=Todolist,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    todolist.place(x=coordinates.todolist_button_x,y=coordinates.todolist_button_y)
+    ToolTip(todolist,main_languge["todolisttool"])
+
+    password = tk.Button(new_window, 
+                       image=main_theme["pass_icon"],
+                       command=Password,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    password.place(x=coordinates.password_button_x,y=coordinates.password_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
+    backup = tk.Button(new_window, 
+                       image=main_theme["backup_icon"],
+                       command=Backup,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    backup.place(x=coordinates.backup_button_x,y=coordinates.backup_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
 def cornometerwindow():
@@ -299,6 +336,7 @@ def cornometerwindow():
     cornometer.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     cornometer.wm_attributes("-toolwindow", "true")
+    cornometer.attributes('-topmost', True)
     Wc,Hc = coordinates.cornometer_H,coordinates.cornometer_W
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -371,6 +409,7 @@ def start_up():
     startup.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     startup.wm_attributes("-toolwindow", "true")
+    startup.attributes('-topmost', True)
     Wc,Hc = coordinates.startup_W,coordinates.startup_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -440,6 +479,7 @@ def DnsChange():
     dnschange.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     dnschange.wm_attributes("-toolwindow", "true")
+    dnschange.attributes('-topmost', True)
     Wc,Hc = coordinates.dns_W,coordinates.dns_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -518,6 +558,7 @@ def SafeAntiVirus():
     SafeAntiVirus.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     SafeAntiVirus.wm_attributes("-toolwindow", "true")
+    SafeAntiVirus.attributes('-topmost', True)
     Wc,Hc = coordinates.antivirus_W,coordinates.antivirus_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -594,6 +635,7 @@ def Religius_times():
     Religiustimes.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     Religiustimes.wm_attributes("-toolwindow", "true")
+    Religiustimes.attributes('-topmost', True)
     Wc,Hc = coordinates.religius_W,coordinates.religius_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -645,6 +687,7 @@ def date_time():
     date.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     date.wm_attributes("-toolwindow", "true")
+    date.attributes('-topmost', True)
     Wc,Hc = coordinates.date_W,coordinates.date_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -754,6 +797,7 @@ def settings():
     setting.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     setting.wm_attributes("-toolwindow", "true")
+    setting.attributes('-topmost', True)
     Wc,Hc = coordinates.setting_W,coordinates.setting_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -870,6 +914,7 @@ def btc_call():
     btc.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     btc.wm_attributes("-toolwindow", "true")
+    btc.attributes('-topmost', True)
     Wc,Hc = coordinates.btc_W,coordinates.btc_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -930,6 +975,7 @@ def Translate():
     translate.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     translate.wm_attributes("-toolwindow", "true")
+    translate.attributes('-topmost', True)
     Wc,Hc = coordinates.translate_W,coordinates.translate_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -995,6 +1041,7 @@ def QRcode():
     qrcode.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
     qrcode.wm_attributes("-toolwindow", "true")
+    qrcode.attributes('-topmost', True)
     Wc,Hc = coordinates.qrcode_W,coordinates.qrcode_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
@@ -1023,6 +1070,100 @@ def QRcode():
 def Search():
     ...
 
+def Wether():
+    ...
+
+def Todolist():
+
+    def readfile():
+        lines = []
+        with open('file.txt', 'r', encoding='utf-8') as file:
+            for line in file:
+                lines.append(line.strip())
+        for task in lines:
+            tasks_listbox.insert(tk.END, task)
+
+    def add_task():
+        task = entry1.get()
+        with open('file.txt', 'a', encoding='utf-8') as file:
+            file.write(task + '\n')
+        if task != "":
+            tasks_listbox.insert(tk.END, task)
+            entry1.delete(0, tk.END)
+    
+    def remove_line_by_number(filename, line_number):
+        # خواندن تمام خط‌ها و ذخیره آن‌ها به جز خطی که می‌خواهیم حذف کنیم
+        with open(filename, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        with open(filename, 'w', encoding='utf-8') as file:
+            for i, line in enumerate(lines):
+                if i != line_number - 1:  # شماره خط‌ها از 0 شروع می‌شود
+                    file.write(line)
+
+
+    def delete_task():
+        try:
+            selected_task_index = tasks_listbox.curselection()[0]
+            remove_line_by_number('file.txt', selected_task_index+1)
+            tasks_listbox.delete(selected_task_index)
+        except:
+            pass
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    todolist = Toplevel(root)
+    todolist.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(todolist, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=todolist.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    todolist.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    todolist.wm_attributes("-toolwindow", "true")
+    todolist.attributes('-topmost', True)
+    Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= todolist.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > todolist.winfo_screenheight():
+        Yc = todolist.winfo_screenheight()-H1
+     
+
+    entry1 = tk.Entry(todolist, width=50,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.todolist_entry1_x,y=coordinates.todolist_entry1_y)
+
+    add_task_button = tk.Button(todolist, text="اضافه کردن وظیفه", command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y)
+
+    tasks_listbox = tk.Listbox(todolist, width=50, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    tasks_listbox.place(x=coordinates.todolist_list_x,y=coordinates.todolist_list_y)
+    readfile()
+
+    delete_task_button = tk.Button(todolist, text="حذف وظیفه", command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    delete_task_button.place(x=coordinates.todolist_button2_x,y=coordinates.todolist_button2_y)
+    
+    todolist.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+
+def Password():
+    ...
+
+def Backup():
+    ...
 
 def readsettings():
     global W,H,X,Y,main_languge,main_theme,startup

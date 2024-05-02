@@ -12,6 +12,10 @@ class coordinates:
     translate_button_x,translate_button_y = (80,165)
     qrcode_button_x,qrcode_button_y = (80,205)
     search_button_x,search_button_y = (145,45)
+    wether_button_x,wether_button_y = (145,85)
+    todolist_button_x,todolist_button_y = (15,205)
+    password_button_x,password_button_y = (145,125)
+    backup_button_x,backup_button_y = (145,165)
 
     cornometer_H,cornometer_W = (250,250)
     time_text_x,time_text_y = (100,30)
@@ -82,6 +86,13 @@ class coordinates:
     qrcode_entry1_x,qrcode_entry1_y = (10,70)
     qrcode_submit_x,qrcode_submit_y = (10,100)
 
+    todolist_W,todolist_H = (400,400)
+    todolist_entry1_x,todolist_entry1_y = (10,70)
+    todolist_button1_x,todolist_button1_y = (10,100)
+    todolist_list_x,todolist_list_y = (10,130)
+    todolist_button2_x,todolist_button2_y = (10,350)
+
+
 
 
 dark = {
@@ -104,7 +115,11 @@ dark = {
     "btc_icon": PhotoImage(file='.\\links\\btcdark.png'),
     "translate_icon": PhotoImage(file='.\\links\\translatedark.png'),
     "qrcode_icon": PhotoImage(file='.\\links\\qrcodedark.png'),
-    "search_icon": PhotoImage(file='.\\links\\searchdark.png')
+    "search_icon": PhotoImage(file='.\\links\\searchdark.png'),
+    "wether_icon": PhotoImage(file='.\\links\\wetherdark.png'),
+    "todolist_icon": PhotoImage(file='.\\links\\todolistdark.png'),
+    "pass_icon": PhotoImage(file='.\\links\\passdark.png'),
+    "backup_icon": PhotoImage(file='.\\links\\backupdark.png'),
 }
 light={
     "closebg": "#e04343",
@@ -126,7 +141,11 @@ light={
     "btc_icon": PhotoImage(file='.\\links\\btc.png'),
     "translate_icon": PhotoImage(file='.\\links\\translate.png'),
     "qrcode_icon": PhotoImage(file='.\\links\\qrcode.png'),
-    "search_icon": PhotoImage(file='.\\links\\search.png')
+    "search_icon": PhotoImage(file='.\\links\\search.png'),
+    "wether_icon": PhotoImage(file='.\\links\\wether.png'),
+    "todolist_icon": PhotoImage(file='.\\links\\todolist.png'),
+    "pass_icon": PhotoImage(file='.\\links\\pass.png'),
+    "backup_icon": PhotoImage(file='.\\links\\backup.png'),
 }
 en = {
     "cornometer_text_start": "start",
@@ -161,6 +180,7 @@ en = {
     "qrcodelabel": "add text",
     "qrcodemassageno": "not secse",
     "qrcodemassage": "seces",
+    "todolisttool": "todolist",
 }
 fa = {
     "cornometer_text_start": "شروع",
@@ -195,4 +215,5 @@ fa = {
     "qrcodelabel": "کد اضافه کنید",
     "qrcodemassageno": "عکس شما با موفقیت دانلود نشد",
     "qrcodemassage": "عکس شما با موفقیت دانلود شد",
+    "todolisttool": "لیست کارها",
 }
