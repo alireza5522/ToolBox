@@ -16,6 +16,7 @@ class coordinates:
     todolist_button_x,todolist_button_y = (15,205)
     password_button_x,password_button_y = (145,125)
     backup_button_x,backup_button_y = (145,165)
+    dollar_button_x,dollar_button_y = (145,205)
 
     cornometer_H,cornometer_W = (250,250)
     time_text_x,time_text_y = (100,30)
@@ -120,6 +121,7 @@ dark = {
     "todolist_icon": PhotoImage(file='.\\links\\todolistdark.png'),
     "pass_icon": PhotoImage(file='.\\links\\passdark.png'),
     "backup_icon": PhotoImage(file='.\\links\\backupdark.png'),
+    "dollar_icon": PhotoImage(file='.\\links\\dollardark.png'),
 }
 light={
     "closebg": "#e04343",
@@ -146,6 +148,7 @@ light={
     "todolist_icon": PhotoImage(file='.\\links\\todolist.png'),
     "pass_icon": PhotoImage(file='.\\links\\pass.png'),
     "backup_icon": PhotoImage(file='.\\links\\backup.png'),
+    "dollar_icon": PhotoImage(file='.\\links\\dollar.png'),
 }
 en = {
     "cornometer_text_start": "start",
@@ -181,6 +184,8 @@ en = {
     "qrcodemassageno": "not secse",
     "qrcodemassage": "seces",
     "todolisttool": "todolist",
+    "dollarghymat": "dollar price to rial is: ",
+    "sorce": "sorce: ",
 }
 fa = {
     "cornometer_text_start": "شروع",
@@ -216,4 +221,6 @@ fa = {
     "qrcodemassageno": "عکس شما با موفقیت دانلود نشد",
     "qrcodemassage": "عکس شما با موفقیت دانلود شد",
     "todolisttool": "لیست کارها",
+    "dollarghymat": "قیمت دلار به ریال: ",
+    "sorce": "منبع: ",
 }

@@ -1,16 +1,15 @@
-def remove_line_by_number(filename, line_number):
-    # خواندن تمام خط‌ها و ذخیره آن‌ها به جز خطی که می‌خواهیم حذف کنیم
-    with open(filename, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-    with open(filename, 'w', encoding='utf-8') as file:
-        for i, line in enumerate(lines):
-            if i != line_number - 1:  # شماره خط‌ها از 0 شروع می‌شود
-                file.write(line)
+import requests
 
-# استفاده از تابع
-remove_line_by_number('file.txt', 1)  # مثلاً برای حذف خط سوم
+def EnglishToPersian():
+    URL = "https://www.tgju.org/profile/price_dollar_rl"
 
+    response = requests.get(URL)
+    txt = response.text
+    key = '<span class="price" data-col="info.last_trade.PDrCotVal">'
+    position = (txt.find(key))+len(key)
+    print(txt[position:position+7])
 
+EnglishToPersian()
 
 
 """import tkinter as tk

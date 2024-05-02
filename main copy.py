@@ -284,6 +284,15 @@ def open_new_window():
     backup.place(x=coordinates.backup_button_x,y=coordinates.backup_button_y)
     ToolTip(setting,main_languge["settingtool"])
 
+    dollar = tk.Button(new_window, 
+                       image=main_theme["dollar_icon"],
+                       command=Dollar,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,)
+    dollar.place(x=coordinates.dollar_button_x,y=coordinates.dollar_button_y)
+    ToolTip(setting,main_languge["settingtool"])
+
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
 def cornometerwindow():
@@ -1200,6 +1209,22 @@ def writesettings(key,val,index):
 
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=index, ensure_ascii=False)
+
+def Dollar():
+    
+    def dollar_request():
+        URL = "https://www.tgju.org/profile/price_dollar_rl"
+
+        response = requests.get(URL)
+        txt = response.text
+        key = '<span class="price" data-col="info.last_trade.PDrCotVal">'
+        position = (txt.find(key))+len(key)
+        return(txt[position:position+7])
+
+    txt = dollar_request()
+
+    messagebox.showinfo(main_languge["Done_Massage"], f"{main_languge["dollarghymat"]}{txt}\n\n{main_languge["sorce"]}www.tgju.org")
+
 
 
 W,H,X,Y=20,78,100,100
