@@ -1,4 +1,19 @@
-import requests
+
+main_string = 'این متن یک متن نمونه است که دو بار کلمه متن در آن آمده است.'
+substring = 'متن'
+
+# پیدا کردن تمام نمونه‌های زیررشته
+start = 0
+while start < len(main_string):
+    position = main_string.find(substring, start)
+    if position != -1:
+        print(f"زیررشته '{substring}' در مکان {position} یافت شد.")
+        start = position + 1
+    else:
+        break
+
+
+"""import requests
 
 def EnglishToPersian():
     URL = "https://www.tgju.org/profile/price_dollar_rl"
@@ -9,7 +24,7 @@ def EnglishToPersian():
     position = (txt.find(key))+len(key)
     print(txt[position:position+7])
 
-EnglishToPersian()
+EnglishToPersian()"""
 
 
 """import tkinter as tk

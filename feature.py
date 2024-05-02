@@ -34,27 +34,47 @@ except:
 
 drive = application_path[0]
 
+filename = "localpycs"
+searchpath = "D:\\Study\\projects"
 path = application_path+"\\output.json"
 
-command = f"cd d:// && {application_path}\\tree2json.bat => {application_path}\\output.json"
+if searchpath[0].lower() == drive.lower():
+    command = f"cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
+else:
+    command = f"{searchpath[0]}: && cd {searchpath}:// && {application_path}\\tree2json.bat => {application_path}\\output.json"
+
 result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-print(command)
+
 with open(path, 'r', encoding='utf-8') as file:
         data = json.load(file)
 
 main_string = str(data)
-search_string = "OneDrive"
+search_string = filename
 
-position = main_string.find(search_string)
-position += len(search_string)+4
+start = 0
+poslist = []
+while start < len(main_string):
+    position = main_string.find(filename, start)
+    if position != -1:
+        poslist.append(position)
+        start = position + 1
+    else:
+        break
 
-end_pos = main_string[position:position+1024]
-endposition = end_pos.find(",")
+# position = main_string.find(search_string)
+# position += len(search_string)+4
 
-print(main_string[position:position+endposition])
+endpos_list = []
+for i in poslist:
+    i += len(filename)+4
+    end_pos = main_string[i:i+512]
+    endposition = end_pos.find(",")
+    if main_string[i:i+endposition].find("path") != -1:
+        print(main_string[i:i+endposition])
+    
 
 
-
+# print(main_string[position:position+endposition])
              
 
 

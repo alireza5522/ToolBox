@@ -93,6 +93,16 @@ class coordinates:
     todolist_list_x,todolist_list_y = (10,130)
     todolist_button2_x,todolist_button2_y = (10,350)
 
+    search_W,search_H = (300,300)
+    search_label1_x,search_label1_y = (10,40)
+    search_entry1_x,search_entry1_y = (10,70)
+    search_label2_x,search_label2_y = (10,100)
+    search_entry2_x,search_entry2_y = (10,130)
+    search_submit_x,search_submit_y = (10,160)
+    search_label3_x,search_label3_y = (10,190)
+    
+
+
 
 
 
@@ -186,6 +196,8 @@ en = {
     "todolisttool": "todolist",
     "dollarghymat": "dollar price to rial is: ",
     "sorce": "sorce: ",
+    "searchdir": "dir to search",
+    "search": "search",
 }
 fa = {
     "cornometer_text_start": "شروع",
@@ -223,4 +235,6 @@ fa = {
     "todolisttool": "لیست کارها",
     "dollarghymat": "قیمت دلار به ریال: ",
     "sorce": "منبع: ",
+    "searchdir": "مسیر جستجو",
+    "search": "جستجو",
 }

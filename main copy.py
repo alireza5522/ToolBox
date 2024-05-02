@@ -16,6 +16,7 @@ try:
         application_path = os.path.dirname(os.path.abspath(__file__))
 except:
     pass
+drive = application_path[0]
 
 root = tk.Tk()
 
@@ -1080,7 +1081,100 @@ def QRcode():
     qrcode.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Search():
-    ...
+    def Serch():
+        filename = entry1.get()
+        searchpath = entry2.get()
+        path = application_path+"\\output.json"
+
+        if searchpath[0].lower() == drive.lower():
+            command = f"cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
+        else:
+            command = f"{searchpath[0]}: && cd {searchpath}:// && {application_path}\\tree2json.bat => {application_path}\\output.json"
+
+        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+        with open(path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+
+        main_string = str(data)
+
+        start = 0
+        poslist = []
+        while start < len(main_string):
+            position = main_string.find(filename, start)
+            if position != -1:
+                poslist.append(position)
+                start = position + 1
+            else:
+                break
+            
+        finded = ""
+        for i in poslist:
+            i += len(filename)+4
+            end_pos = main_string[i:i+512]
+            endposition = end_pos.find(",")
+            if main_string[i:i+endposition].find("path") != -1:
+                # print(main_string[i:i+endposition])
+                finded += main_string[i:i+endposition]
+                finded += "\n"
+        print(finded)
+
+        messagebox.showinfo(main_languge["Done_Massage"],finded)
+
+    global W,H,X,Y,application_path,drive
+    global W1,H1,X1,Y1
+    search = Toplevel(root)
+    search.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(search, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=search.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    search.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    search.wm_attributes("-toolwindow", "true")
+    search.attributes('-topmost', True)
+    Wc,Hc = coordinates.search_W,coordinates.search_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= search.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > search.winfo_screenheight():
+        Yc = search.winfo_screenheight()-H1
+
+    label1 = tk.Label(search, text=main_languge["filename_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.search_label1_x,y=coordinates.search_label1_y)
+    
+    entry1 = tk.Entry(search,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.search_entry1_x,y=coordinates.search_entry1_y)
+    
+    label2 = tk.Label(search, text=main_languge["searchdir"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2.place(x=coordinates.search_label2_x,y=coordinates.search_label2_y)
+    
+    entry2 = tk.Entry(search,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry2.place(x=coordinates.search_entry2_x,y=coordinates.search_entry2_y)
+    
+    submit_button1 = tk.Button(search, text=main_languge["search"], command=Serch,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.search_submit_x,y=coordinates.search_submit_y)
+
+    label3 = tk.Label(search, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label3.place(x=coordinates.search_label3_x,y=coordinates.search_label3_y)
+
+
+    search.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Wether():
     ...
@@ -1177,6 +1271,21 @@ def Password():
 def Backup():
     ...
 
+def Dollar():
+    
+    def dollar_request():
+        URL = "https://www.tgju.org/profile/price_dollar_rl"
+
+        response = requests.get(URL)
+        txt = response.text
+        key = '<span class="price" data-col="info.last_trade.PDrCotVal">'
+        position = (txt.find(key))+len(key)
+        return(txt[position:position+7])
+
+    txt = dollar_request()
+
+    messagebox.showinfo(main_languge["Done_Massage"], f"{main_languge["dollarghymat"]}{txt}\n\n{main_languge["sorce"]}www.tgju.org")
+
 def readsettings():
     global W,H,X,Y,main_languge,main_theme,startup
     with open('settings.json', 'r', encoding='utf-8') as file:
@@ -1209,22 +1318,6 @@ def writesettings(key,val,index):
 
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=index, ensure_ascii=False)
-
-def Dollar():
-    
-    def dollar_request():
-        URL = "https://www.tgju.org/profile/price_dollar_rl"
-
-        response = requests.get(URL)
-        txt = response.text
-        key = '<span class="price" data-col="info.last_trade.PDrCotVal">'
-        position = (txt.find(key))+len(key)
-        return(txt[position:position+7])
-
-    txt = dollar_request()
-
-    messagebox.showinfo(main_languge["Done_Massage"], f"{main_languge["dollarghymat"]}{txt}\n\n{main_languge["sorce"]}www.tgju.org")
-
 
 
 W,H,X,Y=20,78,100,100
