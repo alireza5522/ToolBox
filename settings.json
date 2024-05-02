@@ -2,7 +2,7 @@
    "settings": {
       "X": 0,
       "Y": 231,
-      "dark_mode": false,
+      "dark_mode": true,
       "language": "en",
       "startup": true
    }

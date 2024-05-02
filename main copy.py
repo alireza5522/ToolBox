@@ -50,6 +50,7 @@ class ToolTip(object):
         y += self.widget.winfo_rooty() + (15/2)
         # ایجاد پنجره تولتیپ
         self.tw = tk.Toplevel(self.widget)
+        self.tw.attributes('-topmost', True)
         self.tw.wm_overrideredirect(True)
         self.tw.wm_geometry("+%d+%d" % (x, y))
         label = tk.Label(self.tw, text=self.text, background='grey', relief='solid', borderwidth=1,
@@ -141,6 +142,17 @@ def open_new_window():
     close_button.pack(side=tk.RIGHT)
     closeall_button = tk.Button(move_button, text='close all', command=root.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"])
     closeall_button.pack(side=tk.LEFT)
+    setting = tk.Button(move_button, 
+                       image=main_theme["setting_icon"],
+                       command=settings,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,
+                       bg=main_theme["titlebar"],
+                       fg=main_theme["titlebar"],
+                       activebackground=main_theme["titlebar"],
+                       activeforeground=main_theme["titlebar"])
+    setting.pack(side=tk.LEFT)
 
     new_window.configure(bg=main_theme["window_bg"])
 
@@ -199,15 +211,6 @@ def open_new_window():
                        bd=0,)
     date.place(x=coordinates.date_button_x,y=coordinates.date_button_y)
     ToolTip(date,main_languge["datetool"])
-
-    setting = tk.Button(new_window, 
-                       image=main_theme["setting_icon"],
-                       command=settings,
-                       relief='flat', 
-                       highlightthickness=0,
-                       bd=0,)
-    setting.place(x=coordinates.setting_button_x,y=coordinates.setting_button_y)
-    ToolTip(setting,main_languge["settingtool"])
 
     btc = tk.Button(new_window, 
                        image=main_theme["btc_icon"],
