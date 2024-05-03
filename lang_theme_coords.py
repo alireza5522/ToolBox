@@ -101,10 +101,11 @@ class coordinates:
     search_submit_x,search_submit_y = (10,160)
     search_label3_x,search_label3_y = (10,190)
     
-
-
-
-
+    wether_W,wether_H = (300,300)
+    wether_label1_x,wether_label1_y = (10,40)
+    wether_entry1_x,wether_entry1_y = (10,70)
+    wether_submit_x,wether_submit_y = (10,100)
+    wether_label2_x,wether_label2_y = (10,130)
 
 dark = {
     "closebg": "#e04343",

@@ -8,6 +8,7 @@ import requests
 import json
 import sys
 import os
+from tkinter import simpledialog
 
 try:
     if getattr(sys, 'frozen', False):
@@ -21,7 +22,7 @@ drive = application_path[0]
 root = tk.Tk()
 
 defult_title = True
-
+password = "hi"
 x0,y0 = 10,10
 W1,H1 = 50,200
 X1,Y1= 10,10
@@ -36,6 +37,18 @@ from lang_theme_coords import dark,light
 main_theme = dark
 from lang_theme_coords import en,fa
 main_languge = en
+
+def encrypt(text):
+    output = ""
+    for c in text:
+        output = output +(chr(ord(c)+4))
+    return output
+
+def decrypt(text):
+    output = ""
+    for c in text:
+        output = output +(chr(ord(c)-4))
+    return output
 
 class ToolTip(object):
     def __init__(self, widget, text='Tooltip'):
@@ -1170,14 +1183,80 @@ def Search():
     submit_button1 = tk.Button(search, text=main_languge["search"], command=Serch,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
     submit_button1.place(x=coordinates.search_submit_x,y=coordinates.search_submit_y)
 
-    label3 = tk.Label(search, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label3.place(x=coordinates.search_label3_x,y=coordinates.search_label3_y)
-
-
     search.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Wether():
-    ...
+    def getwether():
+        city = entry1.get()
+
+        URL = 'https://api.codebazan.ir/weather/?city=' + city
+
+        response = requests.get(URL)
+        data = json.loads(response.text)
+
+        item = data['list'][0]
+
+        temp = item['main']['temp']
+        temp_min = item['main']['temp_min']
+        temp_max = item['main']['temp_max']
+        pressure = item['main']['pressure']
+        humidity = item['main']['humidity']
+        wind_speed = item['wind']['speed']
+        wind_direction = item['wind']['deg']
+        clouds = item['clouds']['all']
+        pop = item['pop']
+        weather_description = item['weather'][0]['description']
+
+        label2.configure(text=f'Temperature: {temp}\nMin Temperature: {temp_min}\nMax Temperature: {temp_max}\nPressure: {pressure}\nHumidity: {humidity}%\nWind Speed: {wind_speed}\nWind Direction: {wind_direction}\nClouds: {clouds}\nPop: {pop}\nWeather Description: {weather_description}')
+
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    wether = Toplevel(root)
+    wether.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(wether, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=wether.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    wether.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    wether.wm_attributes("-toolwindow", "true")
+    wether.attributes('-topmost', True)
+    Wc,Hc = coordinates.wether_W,coordinates.wether_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= wether.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > wether.winfo_screenheight():
+        Yc = wether.winfo_screenheight()-H1
+
+    label1 = tk.Label(wether, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.wether_label1_x,y=coordinates.wether_label1_y)
+    
+    entry1 = tk.Entry(wether,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.wether_entry1_x,y=coordinates.wether_entry1_y)
+    
+    submit_button1 = tk.Button(wether, text=main_languge["submit_text"], command=getwether,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.wether_submit_x,y=coordinates.wether_submit_y)
+
+    label2 = tk.Label(wether, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2.place(x=coordinates.wether_label2_x,y=coordinates.wether_label2_y)
+
+    wether.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Todolist():
 
@@ -1265,8 +1344,142 @@ def Todolist():
     
     todolist.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
+def askpassword():
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    password = Toplevel(root)
+    password.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(password, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=password: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=password: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=password: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=password.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    password.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    password.wm_attributes("-toolwindow", "true")
+    password.attributes('-topmost', True)
+    Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= password.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > password.winfo_screenheight():
+        Yc = password.winfo_screenheight()-H1
+     
+    label1 = tk.Label(wether, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.wether_label1_x,y=coordinates.wether_label1_y)
+    
+    entry1 = tk.Entry(wether,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.wether_entry1_x,y=coordinates.wether_entry1_y)
+    
+    submit_button1 = tk.Button(wether, text=main_languge["submit_text"], command=getwether,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.wether_submit_x,y=coordinates.wether_submit_y)
+    
+    password.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
+
 def Password():
-    ...
+    
+    global password
+    result = simpledialog.askstring("ورودی کاربر", "لطفا یک رشته وارد کنید:")
+    if result != password:
+        return
+
+    def readfile():
+        lines = []
+        with open('data.sav', 'r', encoding='utf-8') as file:
+            for line in file:
+                lines.append(decrypt(line.strip()))
+        for task in lines:
+            tasks_listbox.insert(tk.END, task)
+
+    def add_task():
+        task = entry1.get()
+        with open('data.sav', 'a', encoding='utf-8') as file:
+            file.write(encrypt(task) + '\n')
+        if task != "":
+            tasks_listbox.insert(tk.END, task)
+            entry1.delete(0, tk.END)
+    
+    def remove_line_by_number(filename, line_number):
+        # خواندن تمام خط‌ها و ذخیره آن‌ها به جز خطی که می‌خواهیم حذف کنیم
+        with open(filename, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        with open(filename, 'w', encoding='utf-8') as file:
+            for i, line in enumerate(lines):
+                if i != line_number - 1:  # شماره خط‌ها از 0 شروع می‌شود
+                    file.write(line)
+
+
+    def delete_task():
+        try:
+            selected_task_index = tasks_listbox.curselection()[0]
+            remove_line_by_number('data.sav', selected_task_index+1)
+            tasks_listbox.delete(selected_task_index)
+        except:
+            pass
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    password = Toplevel(root)
+    password.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(password, 
+                        text="", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=password: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=password: stop_move(event,var))
+    move_button.bind('<B1-Motion>',lambda event,var=password: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=password.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    password.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    password.wm_attributes("-toolwindow", "true")
+    password.attributes('-topmost', True)
+    Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X >= password.winfo_screenwidth()//2:
+        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
+    else:
+        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > password.winfo_screenheight():
+        Yc = password.winfo_screenheight()-H1
+     
+
+    entry1 = tk.Entry(password, width=50,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.todolist_entry1_x,y=coordinates.todolist_entry1_y)
+
+    add_task_button = tk.Button(password, text="اضافه کردن وظیفه", command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y)
+
+    tasks_listbox = tk.Listbox(password, width=50, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    tasks_listbox.place(x=coordinates.todolist_list_x,y=coordinates.todolist_list_y)
+    readfile()
+
+    delete_task_button = tk.Button(password, text="حذف وظیفه", command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    delete_task_button.place(x=coordinates.todolist_button2_x,y=coordinates.todolist_button2_y)
+    
+    password.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Backup():
     ...
@@ -1287,7 +1500,7 @@ def Dollar():
     messagebox.showinfo(main_languge["Done_Massage"], f"{main_languge["dollarghymat"]}{txt}\n\n{main_languge["sorce"]}www.tgju.org")
 
 def readsettings():
-    global W,H,X,Y,main_languge,main_theme,startup
+    global W,H,X,Y,main_languge,main_theme,startup,password
     with open('settings.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     X = data["settings"]["X"]
@@ -1307,6 +1520,9 @@ def readsettings():
         startup = True
     else:
         startup = False
+
+    password = decrypt(data["settings"]["password"])
+
 
 def writesettings(key,val,index):
     file_path = 'settings.json'
