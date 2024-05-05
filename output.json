@@ -1,72 +1,105 @@
   {
    "type": "folder",
-   "name": "Google",
-   "path": "C:\\Program Files (x86)\\Google",
+   "name": "Downloads",
+   "path": "D:\\Downloads",
    "childno": 1,
-   "subchilds": 5,
+   "subchilds": 7,
    "children": [
     {
      "type": "folder",
-     "name": "Chrome Remote Desktop",
-     "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\Chrome Remote Desktop",
-     "childno": 5,
-     "subchilds": 2,
-     "children": [
-      {
-       "type": "folder",
-       "name": "125.0.6422.6",
-       "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\125.0.6422.6\\125.0.6422.6",
-       "childno": 2,
-       "subchilds": 0
-      },
-      {
-       "type": "folder",
-       "name": "CurrentVersion",
-       "path": "C:\\Program Files (x86)\\Google\\Chrome Remote Desktop\\CurrentVersion\\CurrentVersion",
-       "childno": 1,
-       "subchilds": 0
-      }
-     ]
-    },
-    {
-     "type": "folder",
-     "name": "CrashReports",
-     "path": "C:\\Program Files (x86)\\Google\\CrashReports\\CrashReports",
-     "childno": 4,
+     "name": "Compressed",
+     "path": "D:\\Downloads\\Compressed\\Compressed",
+     "childno": 7,
      "subchilds": 0
     },
     {
      "type": "folder",
-     "name": "GoogleUpdater",
-     "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\GoogleUpdater",
-     "childno": 3,
+     "name": "Documents",
+     "path": "D:\\Downloads\\Documents\\Documents",
+     "childno": 6,
+     "subchilds": 0
+    },
+    {
+     "type": "folder",
+     "name": "Hajims",
+     "path": "D:\\Downloads\\Hajims\\Hajims",
+     "childno": 5,
      "subchilds": 1,
      "children": [
       {
        "type": "folder",
-       "name": "126.0.6441.0",
-       "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\126.0.6441.0",
+       "name": "DwnlData",
+       "path": "D:\\Downloads\\Hajims\\DwnlData\\DwnlData",
        "childno": 1,
        "subchilds": 1,
        "children": [
         {
          "type": "folder",
-         "name": "Crashpad",
-         "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\Crashpad",
+         "name": "sepanta",
+         "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\sepanta",
          "childno": 1,
-         "subchilds": 2,
+         "subchilds": 9,
          "children": [
           {
            "type": "folder",
-           "name": "attachments",
-           "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\attachments\\attachments",
+           "name": "Assassins-Creed-Unit_776",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_776\\Assassins-Creed-Unit_776",
+           "childno": 9,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_777",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_777\\Assassins-Creed-Unit_777",
+           "childno": 8,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_778",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_778\\Assassins-Creed-Unit_778",
+           "childno": 7,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_779",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_779\\Assassins-Creed-Unit_779",
+           "childno": 6,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_780",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_780\\Assassins-Creed-Unit_780",
+           "childno": 5,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_781",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_781\\Assassins-Creed-Unit_781",
+           "childno": 4,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_782",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_782\\Assassins-Creed-Unit_782",
+           "childno": 3,
+           "subchilds": 0
+          },
+          {
+           "type": "folder",
+           "name": "Assassins-Creed-Unit_783",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_783\\Assassins-Creed-Unit_783",
            "childno": 2,
            "subchilds": 0
           },
           {
            "type": "folder",
-           "name": "reports",
-           "path": "C:\\Program Files (x86)\\Google\\GoogleUpdater\\126.0.6441.0\\Crashpad\\reports\\reports",
+           "name": "Assassins-Creed-Unit_784",
+           "path": "D:\\Downloads\\Hajims\\DwnlData\\sepanta\\Assassins-Creed-Unit_784\\Assassins-Creed-Unit_784",
            "childno": 1,
            "subchilds": 0
           }
@@ -78,15 +111,29 @@
     },
     {
      "type": "folder",
-     "name": "Temp",
-     "path": "C:\\Program Files (x86)\\Google\\Temp\\Temp",
+     "name": "Music",
+     "path": "D:\\Downloads\\Music\\Music",
+     "childno": 4,
+     "subchilds": 0
+    },
+    {
+     "type": "folder",
+     "name": "Programs",
+     "path": "D:\\Downloads\\Programs\\Programs",
+     "childno": 3,
+     "subchilds": 0
+    },
+    {
+     "type": "folder",
+     "name": "Telegram Desktop",
+     "path": "D:\\Downloads\\Telegram Desktop\\Telegram Desktop",
      "childno": 2,
      "subchilds": 0
     },
     {
      "type": "folder",
-     "name": "Update",
-     "path": "C:\\Program Files (x86)\\Google\\Update\\Update",
+     "name": "Video",
+     "path": "D:\\Downloads\\Video\\Video",
      "childno": 1,
      "subchilds": 0
     }

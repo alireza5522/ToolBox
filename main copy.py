@@ -149,9 +149,9 @@ def open_new_window():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=new_window.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"], height=1,width=2)
     close_button.pack(side=tk.RIGHT)
     closeall_button = tk.Button(move_button, text='close all', command=root.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"])
@@ -315,14 +315,10 @@ def cornometerwindow():
         if running:
             global timer
             global time_text
-            # محاسبه زمان گذشته
             timer = time.time() - start_time
-            # نمایش زمان
             time_text.configure(text=f'{timer:.2f}')
-            # به‌روزرسانی هر 10 میلی‌ثانیه
             cornometer.after(10, update_time)
 
-    # تابع شروع کرنومتر
     def start():
         global running, start_time
         if not running:
@@ -330,12 +326,10 @@ def cornometerwindow():
             start_time = time.time()
             update_time()
 
-    # تابع توقف کرنومتر
     def stop():
         global running
         running = False
 
-    # تابع ریست کرنومتر
     def reset():
         global timer
         global time_text
@@ -354,9 +348,9 @@ def cornometerwindow():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=cornometer.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     cornometer.overrideredirect(defult_title)
@@ -379,19 +373,18 @@ def cornometerwindow():
 
     global time_text
 
-    # نمایش زمان
-    time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    time_text.place(x=coordinates.time_text_x,y=coordinates.time_text_y)
 
-    # دکمه‌های کنترل
+    time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    time_text.place(x=coordinates.time_text_x,y=coordinates.time_text_y,anchor="center")
+
     start_button = tk.Button(cornometer, text=main_languge["cornometer_text_start"],command=start,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    start_button.place(x=coordinates.start_button_x,y=coordinates.start_button_y)
+    start_button.place(x=coordinates.start_button_x,y=coordinates.start_button_y,width=150)
 
     stop_button = tk.Button(cornometer, text=main_languge["cornometer_text_stop"],command=stop,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    stop_button.place(x=coordinates.stop_button_x,y=coordinates.stop_button_y)
+    stop_button.place(x=coordinates.stop_button_x,y=coordinates.stop_button_y,width=150)
 
     reset_button = tk.Button(cornometer, text=main_languge["cornometer_text_reset"],command=reset,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    reset_button.place(x=coordinates.reset_button_x,y=coordinates.reset_button_y)
+    reset_button.place(x=coordinates.reset_button_x,y=coordinates.reset_button_y,width=150)
     
     cornometer.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -414,6 +407,10 @@ def start_up():
         result = cmd(f'reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v {input_value2} /t REG_SZ /d \"{path}\"')
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
+    def delete_inp():
+        input_value2 = entry2.get()
+        result = cmd(f'REG DELETE "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "{input_value2}" /f')
+        messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -427,9 +424,9 @@ def start_up():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=startup.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     startup.overrideredirect(defult_title)
@@ -450,21 +447,24 @@ def start_up():
     if (Yc+H1) > startup.winfo_screenheight():
         Yc = startup.winfo_screenheight()-H1
 
-    # نمایش زمان
     label1 = tk.Label(startup, text=main_languge["address_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.startup_label1_x,y=coordinates.startup_label1_y)
+    label1.place(x=coordinates.startup_label1_x,y=coordinates.startup_label1_y,anchor="center")
 
     entry1 = tk.Entry(startup,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.startup_entry1_x,y=coordinates.startup_entry1_y)
+    entry1.place(x=coordinates.startup_entry1_x,y=coordinates.startup_entry1_y,width=150)
 
     label2 = tk.Label(startup, text=main_languge["filename_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.startup_label2_x,y=coordinates.startup_label2_y)
+    label2.place(x=coordinates.startup_label2_x,y=coordinates.startup_label2_y,anchor="center")
 
     entry2 = tk.Entry(startup,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry2.place(x=coordinates.startup_entry2_x,y=coordinates.startup_entry2_y)
+    entry2.place(x=coordinates.startup_entry2_x,y=coordinates.startup_entry2_y,width=150)
 
     submit_button = tk.Button(startup, text=main_languge["submit_text"], command=retrieve_input,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button.place(x=coordinates.startup_submit_x,y=coordinates.startup_submit_y)
+    submit_button.place(x=coordinates.startup_submit_x,y=coordinates.startup_submit_y,anchor="center")
+    
+    delete_button = tk.Button(startup, text=main_languge["delete_text"], command=delete_inp,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    delete_button.place(x=coordinates.startup_delete_x,y=coordinates.startup_delete_y,anchor="center")
+
 
     startup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -497,9 +497,9 @@ def DnsChange():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=dnschange.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     dnschange.overrideredirect(defult_title)
@@ -522,27 +522,27 @@ def DnsChange():
 
     # نمایش زمان
     label1 = tk.Label(dnschange, text=main_languge["Dns_adaptor_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.dns_label1_x,y=coordinates.dns_label1_y)
+    label1.place(x=coordinates.dns_label1_x,y=coordinates.dns_label1_y,anchor="center")
 
     entry1 = tk.Entry(dnschange,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.dns_entry1_x,y=coordinates.dns_entry1_y)
+    entry1.place(x=coordinates.dns_entry1_x,y=coordinates.dns_entry1_y,anchor="center")
 
     label2 = tk.Label(dnschange, text=main_languge["dns1_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.dns_label2_x,y=coordinates.dns_label2_y)
+    label2.place(x=coordinates.dns_label2_x,y=coordinates.dns_label2_y,anchor="center")
 
     entry2 = tk.Entry(dnschange,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry2.place(x=coordinates.dns_entry2_x,y=coordinates.dns_entry2_y)
+    entry2.place(x=coordinates.dns_entry2_x,y=coordinates.dns_entry2_y,anchor="center")
 
     label3 = tk.Label(dnschange, text=main_languge["dns2_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label3.place(x=coordinates.dns_label3_x,y=coordinates.dns_label3_y)
+    label3.place(x=coordinates.dns_label3_x,y=coordinates.dns_label3_y,anchor="center")
 
     entry3 = tk.Entry(dnschange,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry3.place(x=coordinates.dns_entry3_x,y=coordinates.dns_entry3_y)
+    entry3.place(x=coordinates.dns_entry3_x,y=coordinates.dns_entry3_y,anchor="center")
 
-    submit_button1 = tk.Button(dnschange, text=main_languge["submit_text"], command=retrieve_input,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.dns_submit1_x,y=coordinates.dns_submit1_y)
-    submit_button2 = tk.Button(dnschange, text=main_languge["Dns_desable"], command=Desabling,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button2.place(x=coordinates.dns_submit2_x,y=coordinates.dns_submit2_y)
+    submit_button1 = tk.Button(dnschange, text=main_languge["submit_dns"], command=retrieve_input,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.dns_submit1_x,y=coordinates.dns_submit1_y,anchor="center")
+    delete_button2 = tk.Button(dnschange, text=main_languge["Dns_desable"], command=Desabling,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    delete_button2.place(x=coordinates.dns_submit2_x,y=coordinates.dns_submit2_y,anchor="center")
 
     dnschange.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -551,7 +551,6 @@ def SafeAntiVirus():
     def retrieve_input():
         spliit = []
         input_value1 = entry1.get()
-        input_value2 = entry2.get()
         if "/" in input_value1:
             spliit = input_value1.split("/")
         else:
@@ -560,9 +559,8 @@ def SafeAntiVirus():
         path = ""
         for i in spliit:
             path += "".join(i)+"\\"
-        path += input_value2
 
-        result = cmd(f'reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v {input_value2} /t REG_SZ /d \"{path}\"')
+        result = cmd(f'powershell -inputformat none -outputformat none -NonInteractive -Command \"Add-MpPreference -ExclusionPath \'{input_value1}\'\"')
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
     global W,H,X,Y
@@ -576,9 +574,9 @@ def SafeAntiVirus():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=SafeAntiVirus.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     SafeAntiVirus.overrideredirect(defult_title)
@@ -598,23 +596,15 @@ def SafeAntiVirus():
 
     if (Yc+H1) > SafeAntiVirus.winfo_screenheight():
         Yc = SafeAntiVirus.winfo_screenheight()-H1
-    # نمایش زمان
+
     label1 = tk.Label(SafeAntiVirus, text=main_languge["address_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.antivirus_label1_x,y=coordinates.antivirus_label1_y)
+    label1.place(x=coordinates.antivirus_label1_x,y=coordinates.antivirus_label1_y,anchor="center")
 
     entry1 = tk.Entry(SafeAntiVirus,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.antivirus_entry1_x,y=coordinates.antivirus_entry1_y)
+    entry1.place(x=coordinates.antivirus_entry1_x,y=coordinates.antivirus_entry1_y,anchor="center")
 
-    label2 = tk.Label(SafeAntiVirus, text=main_languge["filename_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.antivirus_label2_x,y=coordinates.antivirus_label2_y)
-
-    entry2 = tk.Entry(SafeAntiVirus,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry2.place(x=coordinates.antivirus_entry2_x,y=coordinates.antivirus_entry2_y)
-    
-    # ایجاد متغیر کنترل
-
-    submit_button1 = tk.Button(SafeAntiVirus, text=main_languge["submit_text"], command=retrieve_input,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.antivirus_submit_x,y=coordinates.antivirus_submit_y)
+    submit_button1 = tk.Button(SafeAntiVirus, text=main_languge["submit_dns"], command=retrieve_input,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.antivirus_button1_x,y=coordinates.antivirus_button1_y,anchor="center")
 
     SafeAntiVirus.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -653,9 +643,9 @@ def Religius_times():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=Religiustimes.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     Religiustimes.overrideredirect(defult_title)
@@ -677,16 +667,16 @@ def Religius_times():
         Yc = Religiustimes.winfo_screenheight()-H1
 
     label1 = tk.Label(Religiustimes, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.Religiustimes_label1_x,y=coordinates.Religiustimes_label1_y)
+    label1.place(x=coordinates.Religiustimes_label1_x,y=coordinates.Religiustimes_label1_y,anchor="center")
     
     entry1 = tk.Entry(Religiustimes,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.Religiustimes_entry1_x,y=coordinates.Religiustimes_entry1_y)
+    entry1.place(x=coordinates.Religiustimes_entry1_x,y=coordinates.Religiustimes_entry1_y,anchor="center")
     
-    submit_button1 = tk.Button(Religiustimes, text=main_languge["submit_text"], command=giveinfo,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.Religiustimes_submit_x,y=coordinates.Religiustimes_submit_y)
+    submit_button1 = tk.Button(Religiustimes, text=main_languge["submit_dns"], command=giveinfo,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.Religiustimes_submit_x,y=coordinates.Religiustimes_submit_y,anchor="center")
 
     label2 = tk.Label(Religiustimes, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.Religiustimes_label2_x,y=coordinates.Religiustimes_label2_y)
+    label2.place(x=coordinates.Religiustimes_label2_x,y=coordinates.Religiustimes_label2_y,anchor="center")
 
 
     
@@ -705,9 +695,9 @@ def date_time():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=date: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=date: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=date: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=date: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=date: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=date: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=date.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     date.overrideredirect(defult_title)
@@ -729,14 +719,13 @@ def date_time():
         Yc = date.winfo_screenheight()-H1
 
     label1 = tk.Label(date, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.date_label1_x,y=coordinates.date_label1_y)
+    label1.place(x=coordinates.date_label1_x,y=coordinates.date_label1_y,anchor="center")
     
     date.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
     URL = "https://api.keybit.ir/time"
 
     response = requests.get(URL)
-    print(response)
     data = json.loads(response.text)
 
 
@@ -749,15 +738,11 @@ def date_time():
     year_name = data["date"]["year"]['name']
     year_animal = data["date"]["year"]["animal"]
     year_leapyear = data["date"]["year"]["leapyear"]
-    year_agone = data["date"]["year"]["agone"]["days"]["en"]
-    year_agone_percent = data["date"]["year"]["agone"]["percent"]["en"]
-    year_left = data["date"]["year"]["left"]["days"]["en"]
-    year_left_percent = data["date"]["year"]["left"]["percent"]["en"]
     month_name = data["date"]["month"]["name"]
     month_asterism =  data["date"]["month"]["asterism"]
     day_event_holiday = data["date"]["day"]["events"]["local"]
     day_event_holy = data["date"]["day"]["events"]["holy"]
-    day_event_global = data["date"]["day"]["events"]["global"]
+    day_event_global = data["date"]["day"]["events"]["global"]["text"]
 
     text = f"""
     Time: {hour}:{minute}:{second}
@@ -767,10 +752,6 @@ def date_time():
     Year Name: {year_name}
     Year Animal: {year_animal}
     Is Leap Year: {year_leapyear}
-    Year Passed (Days): {year_agone}%
-    Year Passed (Percent): {year_agone_percent}%
-    Year Left (Days): {year_left}%
-    Year Left (Percent): {year_left_percent}%
     Month Name: {month_name}
     Month Asterism: {month_asterism}
     local event: {day_event_holiday if day_event_holiday else '-'}
@@ -804,7 +785,16 @@ def settings():
             writesettings("startup",True,5)
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
-    global W,H,X,Y
+    def passchange():
+        global password
+        print(password)
+        result = simpledialog.askstring("ورودی کاربر", "لطفا یک رشته وارد کنید:")
+        if result == password:
+            newpass = simpledialog.askstring("ورودی کاربر", "لطفا یک رشته وارد کنید:")
+            password = newpass
+            writesettings("password",encrypt(newpass),6)
+
+    global W,H,X,Y,password
     global W1,H1,X1,Y1
     setting = Toplevel(root)
     setting.configure(bg=main_theme["window_bg"])
@@ -815,9 +805,9 @@ def settings():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=setting.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     setting.overrideredirect(defult_title)
@@ -837,6 +827,7 @@ def settings():
 
     if (Yc+H1) > setting.winfo_screenheight():
         Yc = setting.winfo_screenheight()-H1
+    
     
 
     label1 = tk.Label(setting, text=main_languge["themelabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
@@ -867,6 +858,9 @@ def settings():
         isstartup.configure(text=main_languge["startup"])
     isstartup.place(x=coordinates.settings_button5_x,y=coordinates.settings_button5_y)
 
+    passw = tk.Button(setting, text=main_languge["changepass"],command=passchange, bg=main_theme["window_bg"],fg=main_theme["fg"],activebackground=main_theme["window_bg"],activeforeground=main_theme["activeforeground"])
+    passw.place(x=coordinates.settings_button2_x,y=coordinates.settings_button2_y)
+    
     setting.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
  
 def btc_call():
@@ -909,15 +903,16 @@ def btc_call():
                 if max_supply is None:
                     max_supply = "Ulimited"
 
-                txt = f"""{name} ({symbol_name})
-                        Price: ${price:,.3f} USD
-                        1hr Change: {hourly_change:.2f}%
-                        24hr Change: {daily_change:.2f}%
-                        7d Change: {weekly_change:.2f}%
-                        Volume: ${volume:,}")
-                        Market Cap: ${market_cap:,.2f}
-                        Total Supply: {total_supply:,}
-                        Max Supply: {max_supply:,}"""
+                txt = f"""
+                {name} ({symbol_name})
+                Price: ${price:,.3f} USD
+                1hr Change: {hourly_change:.2f}%
+                24hr Change: {daily_change:.2f}%
+                7d Change: {weekly_change:.2f}%
+                Volume: ${volume:,}")
+                Market Cap: ${market_cap:,.2f}
+                Total Supply: {total_supply:,}
+                Max Supply: {max_supply:,}"""
                 
                 label2.configure(text=txt)
 
@@ -932,9 +927,9 @@ def btc_call():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=btc.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     btc.overrideredirect(defult_title)
@@ -956,31 +951,38 @@ def btc_call():
         Yc = btc.winfo_screenheight()-H1
 
     label1 = tk.Label(btc, text=main_languge["btclabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.btc_label1_x,y=coordinates.btc_label1_y)
+    label1.place(x=coordinates.btc_label1_x,y=coordinates.btc_label1_y,anchor="center")
     
     entry1 = tk.Entry(btc,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.btc_entry1_x,y=coordinates.btc_entry1_y)
+    entry1.place(x=coordinates.btc_entry1_x,y=coordinates.btc_entry1_y,anchor="center")
     
     submit_button1 = tk.Button(btc, text=main_languge["submit_text"], command=get_symbol_data,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.btc_submit_x,y=coordinates.btc_submit_y)
+    submit_button1.place(x=coordinates.btc_submit_x,y=coordinates.btc_submit_y,anchor="center")
 
     label2 = tk.Label(btc, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.btc_label2_x,y=coordinates.btc_label2_y)
+    label2.place(x=coordinates.btc_label2_x,y=coordinates.btc_label2_y,anchor="center")
 
     btc.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
    
 def Translate():
 
     def EnglishToPersian():
-        text = entry1.get()
 
+        def copy():
+            root.clipboard_clear()
+            root.clipboard_append(response.text)
+
+        text = entry1.get()
         URL = "https://api.codebazan.ir/replace/index.php?lang=tofa&text=" + text
 
         response = requests.get(URL)
 
-        
-        root.clipboard_append(response.text)
         label2.configure(text=response.text)
+        copy_button1 = tk.Button(translate, text=main_languge["copy"], command=copy,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+        copy_button1.place(x=coordinates.translate_submit2_x,y=coordinates.translate_submit2_y,anchor="center")
+
+    
+        
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -993,9 +995,9 @@ def Translate():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=translate.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     translate.overrideredirect(defult_title)
@@ -1016,17 +1018,19 @@ def Translate():
     if (Yc+H1) > translate.winfo_screenheight():
         Yc = translate.winfo_screenheight()-H1
 
-    label1 = tk.Label(translate, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.translate_label1_x,y=coordinates.translate_label1_y)
+    label1 = tk.Label(translate, text=main_languge["sen"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.translate_label1_x,y=coordinates.translate_label1_y,anchor="center")
     
     entry1 = tk.Entry(translate,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.translate_entry1_x,y=coordinates.translate_entry1_y)
+    entry1.place(x=coordinates.translate_entry1_x,y=coordinates.translate_entry1_y,anchor="center")
     
-    submit_button1 = tk.Button(translate, text=main_languge["submit_text"], command=EnglishToPersian,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.translate_submit_x,y=coordinates.translate_submit_y)
+    submit_button1 = tk.Button(translate, text=main_languge["submit_dns"], command=EnglishToPersian,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.translate_submit_x,y=coordinates.translate_submit_y,anchor="center")
 
     label2 = tk.Label(translate, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.translate_label2_x,y=coordinates.translate_label2_y)
+    label2.place(x=coordinates.translate_label2_x,y=coordinates.translate_label2_y,anchor="center")
+    
+    
     
     translate.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -1059,9 +1063,9 @@ def QRcode():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=qrcode.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     qrcode.overrideredirect(defult_title)
@@ -1083,13 +1087,13 @@ def QRcode():
         Yc = qrcode.winfo_screenheight()-H1
 
     label1 = tk.Label(qrcode, text=main_languge["qrcodelabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.qrcode_label1_x,y=coordinates.qrcode_label1_y)
+    label1.place(x=coordinates.qrcode_label1_x,y=coordinates.qrcode_label1_y,anchor="center")
     
     entry1 = tk.Entry(qrcode,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.qrcode_entry1_x,y=coordinates.qrcode_entry1_y)
+    entry1.place(x=coordinates.qrcode_entry1_x,y=coordinates.qrcode_entry1_y,anchor="center")
     
-    submit_button1 = tk.Button(qrcode, text=main_languge["submit_text"], command=getqrcode,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.qrcode_submit_x,y=coordinates.qrcode_submit_y)
+    submit_button1 = tk.Button(qrcode, text=main_languge["submit_dns"], command=getqrcode,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.qrcode_submit_x,y=coordinates.qrcode_submit_y,anchor="center")
 
     qrcode.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -1145,9 +1149,9 @@ def Search():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=search.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     search.overrideredirect(defult_title)
@@ -1168,20 +1172,20 @@ def Search():
     if (Yc+H1) > search.winfo_screenheight():
         Yc = search.winfo_screenheight()-H1
 
-    label1 = tk.Label(search, text=main_languge["filename_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.search_label1_x,y=coordinates.search_label1_y)
+    label1 = tk.Label(search, text=main_languge["address_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.search_label1_x,y=coordinates.search_label1_y,anchor="center")
     
     entry1 = tk.Entry(search,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.search_entry1_x,y=coordinates.search_entry1_y)
+    entry1.place(x=coordinates.search_entry1_x,y=coordinates.search_entry1_y,anchor="center")
     
     label2 = tk.Label(search, text=main_languge["searchdir"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.search_label2_x,y=coordinates.search_label2_y)
+    label2.place(x=coordinates.search_label2_x,y=coordinates.search_label2_y,anchor="center")
     
     entry2 = tk.Entry(search,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry2.place(x=coordinates.search_entry2_x,y=coordinates.search_entry2_y)
+    entry2.place(x=coordinates.search_entry2_x,y=coordinates.search_entry2_y,anchor="center")
     
     submit_button1 = tk.Button(search, text=main_languge["search"], command=Serch,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.search_submit_x,y=coordinates.search_submit_y)
+    submit_button1.place(x=coordinates.search_submit_x,y=coordinates.search_submit_y,anchor="center")
 
     search.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -1221,9 +1225,9 @@ def Wether():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=wether.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     wether.overrideredirect(defult_title)
@@ -1244,17 +1248,17 @@ def Wether():
     if (Yc+H1) > wether.winfo_screenheight():
         Yc = wether.winfo_screenheight()-H1
 
-    label1 = tk.Label(wether, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.wether_label1_x,y=coordinates.wether_label1_y)
+    label1 = tk.Label(wether, text=main_languge["askfin"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.wether_label1_x,y=coordinates.wether_label1_y,anchor="center")
     
     entry1 = tk.Entry(wether,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.wether_entry1_x,y=coordinates.wether_entry1_y)
+    entry1.place(x=coordinates.wether_entry1_x,y=coordinates.wether_entry1_y,anchor="center")
     
-    submit_button1 = tk.Button(wether, text=main_languge["submit_text"], command=getwether,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.wether_submit_x,y=coordinates.wether_submit_y)
+    submit_button1 = tk.Button(wether, text=main_languge["submit_dns"], command=getwether,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.wether_submit_x,y=coordinates.wether_submit_y,anchor="center")
 
     label2 = tk.Label(wether, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label2.place(x=coordinates.wether_label2_x,y=coordinates.wether_label2_y)
+    label2.place(x=coordinates.wether_label2_x,y=coordinates.wether_label2_y,anchor="center")
 
     wether.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -1305,9 +1309,9 @@ def Todolist():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=todolist.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     todolist.overrideredirect(defult_title)
@@ -1330,65 +1334,19 @@ def Todolist():
      
 
     entry1 = tk.Entry(todolist, width=50,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.todolist_entry1_x,y=coordinates.todolist_entry1_y)
+    entry1.place(x=coordinates.todolist_entry1_x,y=coordinates.todolist_entry1_y,anchor="center")
 
-    add_task_button = tk.Button(todolist, text="اضافه کردن وظیفه", command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y)
+    add_task_button = tk.Button(todolist, text=main_languge["addtask"], command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y,anchor="center")
 
     tasks_listbox = tk.Listbox(todolist, width=50, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    tasks_listbox.place(x=coordinates.todolist_list_x,y=coordinates.todolist_list_y)
+    tasks_listbox.place(x=coordinates.todolist_list_x,y=coordinates.todolist_list_y,anchor="center")
     readfile()
 
-    delete_task_button = tk.Button(todolist, text="حذف وظیفه", command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    delete_task_button.place(x=coordinates.todolist_button2_x,y=coordinates.todolist_button2_y)
+    delete_task_button = tk.Button(todolist, text=main_languge["deltask"], command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    delete_task_button.place(x=coordinates.todolist_button2_x,y=coordinates.todolist_button2_y,anchor="center")
     
     todolist.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
-
-def askpassword():
-    global W,H,X,Y
-    global W1,H1,X1,Y1
-    password = Toplevel(root)
-    password.configure(bg=main_theme["window_bg"])
-    move_button = tk.Button(password, 
-                        text="", 
-                        height=1,
-                        bd=0,
-                        activebackground=main_theme["titlebar"],
-                        bg=main_theme["titlebar"])
-    move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=password: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=password: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=password: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=password.destroy,bg="#D1698B")
-    close_button.pack(side=tk.RIGHT)
-    password.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
-    password.wm_attributes("-toolwindow", "true")
-    password.attributes('-topmost', True)
-    Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
-    Xc,Yc= X+W,Y+(H//2)-(H1//2)
-
-    if X >= password.winfo_screenwidth()//2:
-        Xc,Yc= (X-W-W1-Wc),Y+(H//2)-(Hc//2)
-    else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
-
-    if Yc < 0:
-        Yc = 0
-
-    if (Yc+H1) > password.winfo_screenheight():
-        Yc = password.winfo_screenheight()-H1
-     
-    label1 = tk.Label(wether, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
-    label1.place(x=coordinates.wether_label1_x,y=coordinates.wether_label1_y)
-    
-    entry1 = tk.Entry(wether,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.wether_entry1_x,y=coordinates.wether_entry1_y)
-    
-    submit_button1 = tk.Button(wether, text=main_languge["submit_text"], command=getwether,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    submit_button1.place(x=coordinates.wether_submit_x,y=coordinates.wether_submit_y)
-    
-    password.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Password():
     
@@ -1442,9 +1400,9 @@ def Password():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=password: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=password: stop_move(event,var))
-    move_button.bind('<B1-Motion>',lambda event,var=password: on_move(event,var))
+    # move_button.bind('<ButtonPress-1>', lambda event,var=password: start_move(event,var))
+    # move_button.bind('<ButtonRelease-1>',lambda event,var=password: stop_move(event,var))
+    # move_button.bind('<B1-Motion>',lambda event,var=password: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=password.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     password.overrideredirect(defult_title)
@@ -1522,7 +1480,6 @@ def readsettings():
         startup = False
 
     password = decrypt(data["settings"]["password"])
-
 
 def writesettings(key,val,index):
     file_path = 'settings.json'
