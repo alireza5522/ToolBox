@@ -18,11 +18,11 @@ class AS:
     backup_button_x,backup_button_y = (145,165)
     dollar_button_x,dollar_button_y = (145,205)
 
-    cornometer_H,cornometer_W = (210,255)
-    time_text_x,time_text_y = (110,90)
-    start_button_x,start_button_y = (30,140)
-    stop_button_x,stop_button_y = (30,170)
-    reset_button_x,reset_button_y = (30,200)
+    cornometer_H,cornometer_W = (300,255)
+    time_text_x,time_text_y = (150,90)
+    start_button_x,start_button_y = (150,140)
+    stop_button_x,stop_button_y = (150,170)
+    reset_button_x,reset_button_y = (150,200)
 
     startup_W,startup_H = (210,255)
     startup_label1_x,startup_label1_y = (105,60)
@@ -58,15 +58,13 @@ class AS:
     date_W,date_H = (300,300)
     date_label1_x,date_label1_y = (150,150)
 
-    setting_W,setting_H = (255,255)
-    settings_label1_x,settings_label1_y = (10,40)
-    settings_button1_x,settings_button1_y = (10,60)
-    settings_button2_x,settings_button2_y = (10,80)
-    settings_label2_x,settings_label2_y = (10,100)
-    settings_button3_x,settings_button3_y = (10,120)
-    settings_button4_x,settings_button4_y = (10,140)
-    settings_button5_x,settings_button5_y = (10,160)
-    settings_button6_x,settings_button6_y = (10,180)
+    setting_W,setting_H = (250,255)
+    settings_label1_x,settings_label1_y = (125,40)
+    settings_button1_x,settings_button1_y = (125,65)
+    settings_button2_x,settings_button2_y = (125,220)
+    settings_label2_x,settings_label2_y = (125,100)
+    settings_button3_x,settings_button3_y = (125,125)
+    settings_button5_x,settings_button5_y = (125,175)
 
     btc_W,btc_H = (350,350)
     btc_label1_x,btc_label1_y = (175,40)
@@ -105,6 +103,13 @@ class AS:
     wether_entry1_x,wether_entry1_y = (125,70)
     wether_submit_x,wether_submit_y = (125,105)
     wether_label2_x,wether_label2_y = (125,210)
+    
+    backup_W,backup_H = (250,320)
+    backup_label1_x,backup_label1_y = (125,45)
+    backup_entry1_x,backup_entry1_y = (125,70)
+    backup_label2_x,backup_label2_y = (125,100)
+    backup_entry2_x,backup_entry2_y = (125,130)
+    backup_submit_x,backup_submit_y = (125,200)
 
 coordinates = AS()
 
@@ -163,6 +168,13 @@ light={
     "dollar_icon": PhotoImage(file='.\\links\\dollar.png'),
 }
 en = {
+    "Cornometer": "Cronometer",
+    "Startup": "Startup",
+    "DNS": "DNS",
+    "anti": "Antivirus",
+    "Todo": "Todo list",
+    "reli": "religious times",
+    "Curr": "Currencies",
     "cornometer_text_start": "start",
     "cornometer_text_stop": "stop",
     "cornometer_text_reset": "reset",
@@ -176,16 +188,16 @@ en = {
     "dns2_ask": "DNS 2:",
     "Dns_desable": "Desable DNS",
     "ask_City_pr": "please add a city name in persian",
-    "cornometertool": "Cornometer",
+    "cornometertool": "Cronometer",
     "startuptool": "startup:add a specific app to the startup",
-    "dnstool": "dns:changes systems dns",
-    "antitool": "this adds a safe folder to antivirus",
+    "dnstool": "DNS:changes your adaptors DNS",
+    "antitool": "adds a safe folder to antivirus",
     "religiustool": "gives religious times",
     "datetool": "date: gives date and events",
     "settingtool": "settings",
     "black": "Dark mode",
     "white": "Light mode",
-    "farsi": "فارسی",
+    "farsi": "Persian",
     "english": "English",
     "startup": "add this program to startup",
     "startup_": "do not add this program to startup",
@@ -195,7 +207,7 @@ en = {
     "qrcodelabel": "add a text to convert into qr code",
     "qrcodemassageno": "failed to make the qr code",
     "qrcodemassage": "qr code has been made in the app folder",
-    "todolisttool": "Todo List: you can add you list of tasks here",
+    "todolisttool": "Todo List: you can add your list of tasks here",
     "dollarghymat": "The dollar price is: ",
     "sorce": "source: ",
     "searchdir": "choose a folder/drive to search",
@@ -208,8 +220,23 @@ en = {
     "sen": "enter the sentence",
     "copy": "Copy",
     "askfin": "add a city name to finglish",
+    "askpass": "please enter your password",
+    "addpass": "add password",
+    "delpass": "delete password",
+    "btctool": "Gives information about a currency",
+    "tr": "translate",
+    "trtool": "Gives a wrong english sentence in persian",
+    "qr": "Qrcode",
+    "qrtool": "makes a Qrcode for you",
 }
 fa = {
+    "Cornometer": "کرنومتر",
+    "Startup": "استارت آپ",
+    "DNS": "تغییر دی ان اس",
+    "anti": "انتی ویروس",
+    "Todo": "لیست کارها",
+    "reli": "اوقات شرعی",
+    "Curr": "رمز ارز ها",
     "cornometer_text_start": "شروع",
     "cornometer_text_stop": "پایان",
     "cornometer_text_reset": "دوباره",
@@ -219,14 +246,14 @@ fa = {
     "filename_ask": "لطفا اسم برنامه را وارد کنید",
     "submit_text": "این برنامه را به استارت اپ اضافه کن",
     "Dns_adaptor_ask": "اسم اداپتور را اضافه کنید",
-    "dns1_ask": "دنس یک را وارد کنید",
-    "dns2_ask": "دنس دو را وارد کنید",
+    "dns1_ask": "دی ان اس یک را وارد کنید",
+    "dns2_ask": "دی ان اس دو را وارد کنید",
     "Dns_desable": "خاموش کردن دنس",
     "ask_City_pr": "نام یک شهر را به فارسی وارد کنید",
     "cornometertool": "کرنومتر",
-    "startuptool": "استارت اپ",
-    "dnstool": "دی ان اس",
-    "antitool": "انتی ویروس",
+    "startuptool": "استارت‌آپ: یک برنامه را همزمان\nبا اجرا شدن ویندوز اجرا میکند",
+    "dnstool": "دی ان اس اداپتور شما را تغییر میدهد",
+    "antitool": "یک پوشه امن را به انتی ویروس اضافه میکند",
     "religiustool": "اوقات شرعی",
     "datetool": "تاریخ",
     "settingtool": "تنظیمات",
@@ -250,9 +277,17 @@ fa = {
     "changepass": "تغییر رمز",
     "delete_text": "این برنامه را از استارت اپ حذف کن",
     "submit_dns": "ثبت",
-    "addtask": "اضافه کردن وضیفه",
+    "addtask": "اضافه کردن وظیفه",
     "deltask": "حذف وظیفه",
     "sen": "جمله را وارد کنید",
     "copy": "کپی",
     "askfin": "نام شهر را به فینگلیش وارد کنید",
+    "askpass": "لطفا رمز خود را وارد کنید",
+    "addpass": "اضافه کردن رمز",
+    "delpass": "حذف رمز",
+    "btctool": "اطلاعات درمورد رمز ارز مورد نظر",
+    "tr": "ترجمه",
+    "trtool": "جمله اشتباه اینگلیسی را به\nفارسی برمیگرداند",
+    "qr": "کد کیو آر",
+    "qrtool": "کد کیو آر میسازد",
 }
