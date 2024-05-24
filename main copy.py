@@ -1361,15 +1361,35 @@ def Password():
             for line in file:
                 lines.append(decrypt(line.strip()))
         for task in lines:
-            tasks_listbox.insert(tk.END, task)
+            x = task.split(",")
+            if len(x) < 2:
+                x.insert(0,"-")
+            elif len(x) > 2:
+                y = ""
+                for i in x[1:len(x)]:
+                    y += i
+                x[1] = y
+
+            tasks_listbox.insert(tk.END, x[0])
+            tasks_listbox1.insert(tk.END, x[1])
 
     def add_task():
         task = entry1.get()
-        
+
         with open('data.sav', 'a', encoding='utf-8') as file:
             file.write(encrypt(task) + '\n')
+        x = task.split(",")
+        if len(x) < 2:
+            x.insert(0,"-")
+        elif len(x) > 2:
+            y = ""
+            for i in x[1:len(x)]:
+                y += i
+            x[1] = y
+
         if task != "":
-            tasks_listbox.insert(tk.END, task)
+            tasks_listbox.insert(tk.END, x[0])
+            tasks_listbox1.insert(tk.END, x[1])
             entry1.delete(0, tk.END)
     
     def remove_line_by_number(filename, line_number):
@@ -1383,12 +1403,21 @@ def Password():
 
 
     def delete_task():
-        try:
+        if len(tasks_listbox.curselection()) != 0:
             selected_task_index = tasks_listbox.curselection()[0]
-            remove_line_by_number('data.sav', selected_task_index+1)
-            tasks_listbox.delete(selected_task_index)
-        except:
-            pass
+        else:
+            selected_task_index = 0
+        
+        if len(tasks_listbox1.curselection()) != 0:
+            selected_task_index1 = tasks_listbox1.curselection()[0]
+        else:
+            selected_task_index1 = 0
+        
+        print(selected_task_index,selected_task_index1)
+        remove_line_by_number('data.sav', selected_task_index+selected_task_index1+1)
+        tasks_listbox.delete(selected_task_index+selected_task_index1)
+        tasks_listbox1.delete(selected_task_index+selected_task_index1)
+
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -1410,7 +1439,7 @@ def Password():
     #cornometer.resizable(True, True)
     passwords.wm_attributes("-toolwindow", "true")
     passwords.attributes('-topmost', True)
-    Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
+    Wc,Hc = coordinates.pass_W,coordinates.pass_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X >= passwords.winfo_screenwidth()//2:
@@ -1425,20 +1454,21 @@ def Password():
         Yc = passwords.winfo_screenheight()-H1
      
 
-    entry1 = tk.Entry(passwords, width=50,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    entry1.place(x=coordinates.todolist_entry1_x,y=coordinates.todolist_entry1_y,anchor="center")
+    entry1 = tk.Entry(passwords, width=53,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1.place(x=coordinates.pass_entry1_x,y=coordinates.pass_entry1_y,anchor="center")
 
     add_task_button = tk.Button(passwords, text=main_languge["addpass"], command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y,anchor="center")
+    add_task_button.place(x=coordinates.pass_button1_x,y=coordinates.pass_button1_y,anchor="center")
 
     tasks_listbox = tk.Listbox(passwords, width=25, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    tasks_listbox.place(x=90,y=210,anchor="center")
-    tasks_listbox = tk.Listbox(passwords, width=25, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    tasks_listbox.place(x=270,y=210,anchor="center")
+    tasks_listbox.place(x=coordinates.pass_list_x,y=coordinates.pass_list_y,anchor="center")
+
+    tasks_listbox1 = tk.Listbox(passwords, width=25, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    tasks_listbox1.place(x=coordinates.pass_list1_x,y=coordinates.pass_list1_y,anchor="center")
     readfile()
 
     delete_task_button = tk.Button(passwords, text=main_languge["delpass"], command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
-    delete_task_button.place(x=coordinates.todolist_button2_x,y=coordinates.todolist_button2_y,anchor="center")
+    delete_task_button.place(x=coordinates.pass_button2_x,y=coordinates.pass_button2_y,anchor="center")
     
     passwords.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
