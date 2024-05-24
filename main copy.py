@@ -1361,7 +1361,7 @@ def Password():
             for line in file:
                 lines.append(decrypt(line.strip()))
         for task in lines:
-            x = task.split(",")
+            x = task.split(":")
             if len(x) < 2:
                 x.insert(0,"-")
             elif len(x) > 2:
@@ -1378,7 +1378,7 @@ def Password():
 
         with open('data.sav', 'a', encoding='utf-8') as file:
             file.write(encrypt(task) + '\n')
-        x = task.split(",")
+        x = task.split(":")
         if len(x) < 2:
             x.insert(0,"-")
         elif len(x) > 2:
@@ -1413,7 +1413,6 @@ def Password():
         else:
             selected_task_index1 = 0
         
-        print(selected_task_index,selected_task_index1)
         remove_line_by_number('data.sav', selected_task_index+selected_task_index1+1)
         tasks_listbox.delete(selected_task_index+selected_task_index1)
         tasks_listbox1.delete(selected_task_index+selected_task_index1)
@@ -1453,6 +1452,8 @@ def Password():
     if (Yc+H1) > passwords.winfo_screenheight():
         Yc = passwords.winfo_screenheight()-H1
      
+    label1 = tk.Label(passwords, text=main_languge["srinfo"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.pass_label1_x,y=coordinates.pass_label1_y,anchor="center")
 
     entry1 = tk.Entry(passwords, width=53,bg=main_theme["entrybg"],fg=main_theme["fg"])
     entry1.place(x=coordinates.pass_entry1_x,y=coordinates.pass_entry1_y,anchor="center")

@@ -91,11 +91,12 @@ class AS:
     todolist_button2_x,todolist_button2_y = (175,320)
     
     pass_W,pass_H = (360,350)
-    pass_entry1_x,pass_entry1_y = (180,70)
-    pass_button1_x,pass_button1_y = (180,105)
-    pass_list_x,pass_list_y = (95,210)
-    pass_list1_x,pass_list1_y = (265,210)
-    pass_button2_x,pass_button2_y = (180,320)
+    pass_label1_x,pass_label1_y = (180,45)
+    pass_entry1_x,pass_entry1_y = (180,75)
+    pass_button1_x,pass_button1_y = (180,110)
+    pass_list_x,pass_list_y = (95,215)
+    pass_list1_x,pass_list1_y = (265,215)
+    pass_button2_x,pass_button2_y = (180,325)
 
     search_W,search_H = (250,255)
     search_label1_x,search_label1_y = (125,50)
@@ -238,6 +239,7 @@ en = {
     "sr": "Search",
     "srtool": "searchs a folder",
     "searchlabel": "enter a folder name to search",
+    "srinfo": "sepratee your username and password with \':\'",
 }
 fa = {
     "Cornometer": "کرنومتر",
@@ -303,4 +305,5 @@ fa = {
     "sr": "جستجو",
     "srtool": "دنبال پوشه مورد نظر میگردد",
     "searchlabel": "اسم یک پوشه را انتخاب کنید",
+    "srinfo": "نام و رمزتان را با : از هم جدا کنید",
 }
