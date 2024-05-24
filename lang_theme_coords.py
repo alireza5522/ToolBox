@@ -228,6 +228,9 @@ en = {
     "trtool": "Gives a wrong english sentence in persian",
     "qr": "Qrcode",
     "qrtool": "makes a Qrcode for you",
+    "sr": "Search",
+    "srtool": "searchs a folder",
+    "searchlabel": "enter a folder name to search",
 }
 fa = {
     "Cornometer": "کرنومتر",
@@ -290,4 +293,7 @@ fa = {
     "trtool": "جمله اشتباه اینگلیسی را به\nفارسی برمیگرداند",
     "qr": "کد کیو آر",
     "qrtool": "کد کیو آر میسازد",
+    "sr": "جستجو",
+    "srtool": "دنبال پوشه مورد نظر میگردد",
+    "searchlabel": "اسم یک پوشه را انتخاب کنید",
 }

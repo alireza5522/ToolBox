@@ -280,7 +280,7 @@ def open_new_window():
                        highlightthickness=0,
                        bd=0,)
     search.place(x=coordinates.search_button_x,y=coordinates.search_button_y)
-    ToolTip(search,main_languge["settingtool"])
+    ToolTip(search,main_languge["srtool"])
 
     wether = tk.Button(new_window, 
                        image=main_theme["wether_icon"],
@@ -1141,7 +1141,8 @@ def Search():
     search = Toplevel(root)
     search.configure(bg=main_theme["window_bg"])
     move_button = tk.Button(search, 
-                        text="", 
+                        text=main_languge["sr"],
+                        anchor="w", 
                         height=1,
                         bd=0,
                         activebackground=main_theme["titlebar"],
@@ -1170,7 +1171,7 @@ def Search():
     if (Yc+H1) > search.winfo_screenheight():
         Yc = search.winfo_screenheight()-H1
 
-    label1 = tk.Label(search, text=main_languge["address_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1 = tk.Label(search, text=main_languge["searchlabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label1.place(x=coordinates.search_label1_x,y=coordinates.search_label1_y,anchor="center")
     
     entry1 = tk.Entry(search,bg=main_theme["entrybg"],fg=main_theme["fg"])
@@ -1364,6 +1365,7 @@ def Password():
 
     def add_task():
         task = entry1.get()
+        
         with open('data.sav', 'a', encoding='utf-8') as file:
             file.write(encrypt(task) + '\n')
         if task != "":
@@ -1429,8 +1431,10 @@ def Password():
     add_task_button = tk.Button(passwords, text=main_languge["addpass"], command=add_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
     add_task_button.place(x=coordinates.todolist_button1_x,y=coordinates.todolist_button1_y,anchor="center")
 
-    tasks_listbox = tk.Listbox(passwords, width=50, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
-    tasks_listbox.place(x=coordinates.todolist_list_x,y=coordinates.todolist_list_y,anchor="center")
+    tasks_listbox = tk.Listbox(passwords, width=25, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    tasks_listbox.place(x=90,y=210,anchor="center")
+    tasks_listbox = tk.Listbox(passwords, width=25, height=10,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    tasks_listbox.place(x=270,y=210,anchor="center")
     readfile()
 
     delete_task_button = tk.Button(passwords, text=main_languge["delpass"], command=delete_task,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
