@@ -21,7 +21,7 @@ except:
 drive = application_path[0]
 
 root = tk.Tk()
-
+askpass = True
 defult_title = True
 password = "hi"
 x0,y0 = 10,10
@@ -141,6 +141,23 @@ def on_move(event,root):
 
 def open_new_window():
 
+
+    global password,askpass
+    if askpass == True:
+        result = simpledialog.askstring("", main_languge["askpass"])
+        if result != password:
+            return
+        askpass = False
+
+    def lock():
+        global askpass
+        askpass = not askpass
+        if askpass:
+            lockbutton.configure(image=main_theme["lock_icon"])
+        else:
+            lockbutton.configure(image=main_theme["unlock_icon"])
+
+
     global W,H,X,Y
     global W1,H1,X1,Y1
     new_window = Toplevel(root)
@@ -187,6 +204,17 @@ def open_new_window():
                        activebackground=main_theme["titlebar"],
                        activeforeground=main_theme["titlebar"])
     setting.pack(side=tk.LEFT)
+    lockbutton = tk.Button(move_button, 
+                       image=main_theme["lock_icon"] if askpass else main_theme["unlock_icon"],
+                       command=lock,
+                       relief='flat', 
+                       highlightthickness=0,
+                       bd=0,
+                       bg=main_theme["titlebar"],
+                       fg=main_theme["titlebar"],
+                       activebackground=main_theme["titlebar"],
+                       activeforeground=main_theme["titlebar"])
+    lockbutton.pack(side=tk.LEFT)
 
     new_window.configure(bg=main_theme["window_bg"])
 
@@ -300,14 +328,14 @@ def open_new_window():
     todolist.place(x=coordinates.todolist_button_x,y=coordinates.todolist_button_y)
     ToolTip(todolist,main_languge["todolisttool"])
 
-    password = tk.Button(new_window, 
+    password1 = tk.Button(new_window, 
                        image=main_theme["pass_icon"],
                        command=Password,
                        relief='flat', 
                        highlightthickness=0,
                        bd=0,)
-    password.place(x=coordinates.password_button_x,y=coordinates.password_button_y)
-    ToolTip(password,main_languge["settingtool"])
+    password1.place(x=coordinates.password_button_x,y=coordinates.password_button_y)
+    ToolTip(password1,main_languge["settingtool"])
 
     backup = tk.Button(new_window, 
                        image=main_theme["backup_icon"],

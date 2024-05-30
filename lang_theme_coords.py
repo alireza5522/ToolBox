@@ -147,6 +147,8 @@ dark = {
     "pass_icon": PhotoImage(file='.\\links\\passdark.png'),
     "backup_icon": PhotoImage(file='.\\links\\backupdark.png'),
     "dollar_icon": PhotoImage(file='.\\links\\dollardark.png'),
+    "lock_icon": PhotoImage(file='.\\links\\lockdark.png'),
+    "unlock_icon": PhotoImage(file='.\\links\\unlockdark.png'),
 }
 light={
     "closebg": "#e04343",
@@ -174,6 +176,8 @@ light={
     "pass_icon": PhotoImage(file='.\\links\\pass.png'),
     "backup_icon": PhotoImage(file='.\\links\\backup.png'),
     "dollar_icon": PhotoImage(file='.\\links\\dollar.png'),
+    "lock_icon": PhotoImage(file='.\\links\\lock.png'),
+    "unlock_icon": PhotoImage(file='.\\links\\unlock.png'),
 }
 en = {
     "Cornometer": "Cronometer",
