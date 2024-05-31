@@ -59,12 +59,12 @@ class AS:
     date_label1_x,date_label1_y = (150,150)
 
     setting_W,setting_H = (250,255)
-    settings_label1_x,settings_label1_y = (125,40)
-    settings_button1_x,settings_button1_y = (125,65)
-    settings_button2_x,settings_button2_y = (125,220)
-    settings_label2_x,settings_label2_y = (125,100)
-    settings_button3_x,settings_button3_y = (125,125)
-    settings_button5_x,settings_button5_y = (125,175)
+    settings_label1_x,settings_label1_y = (125,45)
+    settings_button1_x,settings_button1_y = (125,70)
+    settings_button2_x,settings_button2_y = (125,225)
+    settings_label2_x,settings_label2_y = (125,105)
+    settings_button3_x,settings_button3_y = (125,130)
+    settings_button5_x,settings_button5_y = (125,180)
 
     btc_W,btc_H = (350,350)
     btc_label1_x,btc_label1_y = (175,40)
@@ -131,24 +131,24 @@ dark = {
     "bg": "#363A36",
     "fg": "#C0C4C4",
     "entrybg": "#363A36",
-    "cornometer_icon": PhotoImage(file='.\\links\\cornometerdark.png'),
-    "startup_icon": PhotoImage(file='.\\links\\start_updark.png'),
-    "dns_icon": PhotoImage(file='.\\links\\dnsdark.png'),
-    "antivirus_icon": PhotoImage(file='.\\links\\antidark.png'),
-    "religius_icon": PhotoImage(file='.\\links\\religiusdark.png'),
-    "date_icon": PhotoImage(file='.\\links\\datedark.png'),
-    "setting_icon": PhotoImage(file='.\\links\\ssd.png'),
-    "btc_icon": PhotoImage(file='.\\links\\btcdark.png'),
-    "translate_icon": PhotoImage(file='.\\links\\translatedark.png'),
-    "qrcode_icon": PhotoImage(file='.\\links\\qrcodedark.png'),
-    "search_icon": PhotoImage(file='.\\links\\searchdark.png'),
-    "wether_icon": PhotoImage(file='.\\links\\wetherdark.png'),
-    "todolist_icon": PhotoImage(file='.\\links\\todolistdark.png'),
-    "pass_icon": PhotoImage(file='.\\links\\passdark.png'),
-    "backup_icon": PhotoImage(file='.\\links\\backupdark.png'),
-    "dollar_icon": PhotoImage(file='.\\links\\dollardark.png'),
-    "lock_icon": PhotoImage(file='.\\links\\lockdark.png'),
-    "unlock_icon": PhotoImage(file='.\\links\\unlockdark.png'),
+    "cornometer_icon": PhotoImage(file='.\\icons\\cornometerdark.png'),
+    "startup_icon": PhotoImage(file='.\\icons\\start_updark.png'),
+    "dns_icon": PhotoImage(file='.\\icons\\dnsdark.png'),
+    "antivirus_icon": PhotoImage(file='.\\icons\\antidark.png'),
+    "religius_icon": PhotoImage(file='.\\icons\\religiusdark.png'),
+    "date_icon": PhotoImage(file='.\\icons\\datedark.png'),
+    "setting_icon": PhotoImage(file='.\\icons\\ssd.png'),
+    "btc_icon": PhotoImage(file='.\\icons\\btcdark.png'),
+    "translate_icon": PhotoImage(file='.\\icons\\translatedark.png'),
+    "qrcode_icon": PhotoImage(file='.\\icons\\qrcodedark.png'),
+    "search_icon": PhotoImage(file='.\\icons\\searchdark.png'),
+    "wether_icon": PhotoImage(file='.\\icons\\wetherdark.png'),
+    "todolist_icon": PhotoImage(file='.\\icons\\todolistdark.png'),
+    "pass_icon": PhotoImage(file='.\\icons\\passdark.png'),
+    "backup_icon": PhotoImage(file='.\\icons\\backupdark.png'),
+    "dollar_icon": PhotoImage(file='.\\icons\\dollardark.png'),
+    "lock_icon": PhotoImage(file='.\\icons\\lockdark.png'),
+    "unlock_icon": PhotoImage(file='.\\icons\\unlockdark.png'),
 }
 light={
     "closebg": "#e04343",
@@ -160,24 +160,24 @@ light={
     "bg": "lightgrey",
     "fg": "#363A36",
     "entrybg": "lightgrey",
-    "cornometer_icon": PhotoImage(file='.\\links\\cornometer.png'),
-    "startup_icon": PhotoImage(file='.\\links\\start_up.png'),
-    "dns_icon": PhotoImage(file='.\\links\\dns.png'),
-    "antivirus_icon": PhotoImage(file='.\\links\\anti.png'),
-    "religius_icon": PhotoImage(file='.\\links\\religius.png'),
-    "date_icon": PhotoImage(file='.\\links\\date.png'),
-    "setting_icon": PhotoImage(file='.\\links\\ss.png'),
-    "btc_icon": PhotoImage(file='.\\links\\btc.png'),
-    "translate_icon": PhotoImage(file='.\\links\\translate.png'),
-    "qrcode_icon": PhotoImage(file='.\\links\\qrcode.png'),
-    "search_icon": PhotoImage(file='.\\links\\search.png'),
-    "wether_icon": PhotoImage(file='.\\links\\wether.png'),
-    "todolist_icon": PhotoImage(file='.\\links\\todolist.png'),
-    "pass_icon": PhotoImage(file='.\\links\\pass.png'),
-    "backup_icon": PhotoImage(file='.\\links\\backup.png'),
-    "dollar_icon": PhotoImage(file='.\\links\\dollar.png'),
-    "lock_icon": PhotoImage(file='.\\links\\lock.png'),
-    "unlock_icon": PhotoImage(file='.\\links\\unlock.png'),
+    "cornometer_icon": PhotoImage(file='.\\icons\\cornometer.png'),
+    "startup_icon": PhotoImage(file='.\\icons\\start_up.png'),
+    "dns_icon": PhotoImage(file='.\\icons\\dns.png'),
+    "antivirus_icon": PhotoImage(file='.\\icons\\anti.png'),
+    "religius_icon": PhotoImage(file='.\\icons\\religius.png'),
+    "date_icon": PhotoImage(file='.\\icons\\date.png'),
+    "setting_icon": PhotoImage(file='.\\icons\\ss.png'),
+    "btc_icon": PhotoImage(file='.\\icons\\btc.png'),
+    "translate_icon": PhotoImage(file='.\\icons\\translate.png'),
+    "qrcode_icon": PhotoImage(file='.\\icons\\qrcode.png'),
+    "search_icon": PhotoImage(file='.\\icons\\search.png'),
+    "wether_icon": PhotoImage(file='.\\icons\\wether.png'),
+    "todolist_icon": PhotoImage(file='.\\icons\\todolist.png'),
+    "pass_icon": PhotoImage(file='.\\icons\\pass.png'),
+    "backup_icon": PhotoImage(file='.\\icons\\backup.png'),
+    "dollar_icon": PhotoImage(file='.\\icons\\dollar.png'),
+    "lock_icon": PhotoImage(file='.\\icons\\lock.png'),
+    "unlock_icon": PhotoImage(file='.\\icons\\unlock.png'),
 }
 en = {
     "Cornometer": "Cronometer",
@@ -244,6 +244,16 @@ en = {
     "srtool": "searchs a folder",
     "searchlabel": "enter a folder name to search",
     "srinfo": "sepratee your username and password with \':\'",
+    "wethertool": "weather condition",
+    "passtool": "Password Manager",
+    "backuptool": "Backup tool",
+    "dollartool": "currency prices",
+    "bul1": "add the path of the folder for backup",
+    "bul2": "output goes to:",
+    "askpass2": "add your new password",
+    "askpass3": "repeat your new password",
+    "donepass": "your password has been changed",
+    "notdonepass": "failed to change the password",
 }
 fa = {
     "Cornometer": "کرنومتر",
@@ -277,8 +287,8 @@ fa = {
     "white": "مود لایت",
     "farsi": "فارسی",
     "english": "اینگلیسی",
-    "startup": "این برنامه را به استارت اپ اضافه کن",
-    "startup_": "این برنامه را به استارت اپ اضافه نکن",
+    "startup": "همزمان با اجرای ویندوز اجرا شو",
+    "startup_": "همزمان با اجرای ویندوز اجرا نشو",
     "langlabel": "زبان برنامه را انتخاب کنید",
     "themelabel": "تم برنامه انتخاب کنید",
     "btclabel": "یک نماد از نرخ ارز را وارد کنید",
@@ -310,4 +320,14 @@ fa = {
     "srtool": "دنبال پوشه مورد نظر میگردد",
     "searchlabel": "اسم یک پوشه را انتخاب کنید",
     "srinfo": "نام و رمزتان را با : از هم جدا کنید",
+    "wethertool": "وضعیت آب و هوا",
+    "passtool": "مدیریت پسوردها",
+    "backuptool": "بک اپ گیری از فایل ها",
+    "dollartool": "قیمت ارزها",
+    "bul1": "مسیر پوشه‌ی بک آپ گیری را اضافه کنید",
+    "bul2": ":فایل بک آپ ساخته میشود در",
+    "askpass2": "رمز جدید خود را وارد کنید",
+    "askpass3": "رمز خود را دوباره وارد کنید",
+    "donepass": "رمز با موفقیت تغییر کرد",
+    "notdonepass": "عملیات تغییر رمز با خطا مواجه شد",
 }

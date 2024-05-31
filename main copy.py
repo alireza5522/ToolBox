@@ -10,6 +10,7 @@ import sys
 import os
 from tkinter import simpledialog
 from zipfile import ZipFile
+from tkinter import ttk
 
 try:
     if getattr(sys, 'frozen', False):
@@ -23,7 +24,7 @@ drive = application_path[0]
 root = tk.Tk()
 askpass = True
 defult_title = True
-password = "hi"
+password = ""
 x0,y0 = 10,10
 W1,H1 = 50,200
 X1,Y1= 10,10
@@ -317,7 +318,7 @@ def open_new_window():
                        highlightthickness=0,
                        bd=0,)
     wether.place(x=coordinates.wether_button_x,y=coordinates.wether_button_y)
-    ToolTip(wether,main_languge["settingtool"])
+    ToolTip(wether,main_languge["wethertool"])
 
     todolist = tk.Button(new_window, 
                        image=main_theme["todolist_icon"],
@@ -335,7 +336,7 @@ def open_new_window():
                        highlightthickness=0,
                        bd=0,)
     password1.place(x=coordinates.password_button_x,y=coordinates.password_button_y)
-    ToolTip(password1,main_languge["settingtool"])
+    ToolTip(password1,main_languge["passtool"])
 
     backup = tk.Button(new_window, 
                        image=main_theme["backup_icon"],
@@ -344,7 +345,7 @@ def open_new_window():
                        highlightthickness=0,
                        bd=0,)
     backup.place(x=coordinates.backup_button_x,y=coordinates.backup_button_y)
-    ToolTip(backup,main_languge["settingtool"])
+    ToolTip(backup,main_languge["backuptool"])
 
     dollar = tk.Button(new_window, 
                        image=main_theme["dollar_icon"],
@@ -353,7 +354,7 @@ def open_new_window():
                        highlightthickness=0,
                        bd=0,)
     dollar.place(x=coordinates.dollar_button_x,y=coordinates.dollar_button_y)
-    ToolTip(dollar,main_languge["settingtool"])
+    ToolTip(dollar,main_languge["dollartool"])
 
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
@@ -421,8 +422,6 @@ def cornometerwindow():
         Yc = cornometer.winfo_screenheight()-H1
 
     global time_text
-    print(Wc,Hc,Xc,Yc)
-    print("----------------")
 
 
     time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48),bg=main_theme["window_bg"],fg=main_theme["fg"])
@@ -531,11 +530,24 @@ def DnsChange():
         cmd(f"netsh interface ip add dns \"{input_value1}\" {input_value3} index=2")
 
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
+
     def Desabling():
         input_value1 = entry1.get()
         cmd(f"netsh interface ip set dns \"{input_value1}\" dhcp")
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
+    def get_network_adapters():
+        try:
+            result = cmd("ipconfig")
+            output_lines = result.stdout.splitlines()
+            adapters = []
+            for line in output_lines:
+                if "adapter" in line:
+                    adapter_name = line.split("adapter ")[1].strip(":")
+                    adapters.append(adapter_name)
+            return adapters
+        except Exception as e:
+            return []
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -573,11 +585,13 @@ def DnsChange():
     if (Yc+H1) > dnschange.winfo_screenheight():
         Yc = dnschange.winfo_screenheight()-H1
 
-    # نمایش زمان
+    network_adapters = get_network_adapters()
+    combo_var = tk.StringVar()
+
     label1 = tk.Label(dnschange, text=main_languge["Dns_adaptor_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label1.place(x=coordinates.dns_label1_x,y=coordinates.dns_label1_y,anchor="center")
 
-    entry1 = tk.Entry(dnschange,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry1 = ttk.Combobox(dnschange, values=network_adapters, textvariable=combo_var,foreground=main_theme["window_bg"],background=main_theme["fg"])
     entry1.place(x=coordinates.dns_entry1_x,y=coordinates.dns_entry1_y,anchor="center")
 
     label2 = tk.Label(dnschange, text=main_languge["dns1_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
@@ -796,18 +810,27 @@ def settings():
     def startup_change():
         global startup
         if startup == True:
+            startup = False
+            isstartup.configure(text=main_languge["startup"])
             writesettings("startup",False,5)
         else:
+            startup = True
+            isstartup.configure(text=main_languge["startup_"])
             writesettings("startup",True,5)
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
     def passchange():
         global password
-        print(password)
-        result = simpledialog.askstring("ورودی کاربر", "لطفا یک رشته وارد کنید:")
+        result = simpledialog.askstring("",main_languge["askpass"])
         if result == password:
-            newpass = simpledialog.askstring("ورودی کاربر", "لطفا یک رشته وارد کنید:")
-            password = newpass
+            newpass = simpledialog.askstring("",main_languge["askpass2"])
+            repeat = simpledialog.askstring("",main_languge["askpass3"])
+            if newpass == repeat and newpass != "":
+                password = newpass
+                messagebox.showinfo(main_languge["Done_Massage"], main_languge["donepass"])
+            else:
+                messagebox.showinfo(main_languge["Done_Massage"], main_languge["notdonepass"])
+                return
             writesettings("password",encrypt(newpass),6)
 
     global W,H,X,Y,password
@@ -867,11 +890,8 @@ def settings():
         lang.configure(text=main_languge["english"])
     lang.place(x=coordinates.settings_button3_x,y=coordinates.settings_button3_y,anchor="center")
 
-    isstartup = tk.Button(setting, text=main_languge["startup"],command=startup_change, bg=main_theme["window_bg"],fg=main_theme["fg"],activebackground=main_theme["window_bg"],activeforeground=main_theme["activeforeground"])
-    if startup == True:
-        isstartup.configure(text=main_languge["startup_"])
-    else:
-        isstartup.configure(text=main_languge["startup"])
+    isstartup = tk.Button(setting, text=main_languge["startup_"] if startup else main_languge["startup"],command=startup_change, bg=main_theme["window_bg"],fg=main_theme["fg"],activebackground=main_theme["window_bg"],activeforeground=main_theme["activeforeground"])
+
     isstartup.place(x=coordinates.settings_button5_x,y=coordinates.settings_button5_y,anchor="center")
 
     passw = tk.Button(setting, text=main_languge["changepass"],command=passchange, bg=main_theme["window_bg"],fg=main_theme["fg"],activebackground=main_theme["window_bg"],activeforeground=main_theme["activeforeground"])
@@ -897,7 +917,6 @@ def btc_call():
         data = json.loads(response.text)
 
         if 'data' not in data or symbol not in data['data']:
-            print("Invalid cryptocurrency symbol.")
             messagebox.showinfo(main_languge["Done_Massage"],"Invalid cryptocurrency symbol.")
             return None
         else:
@@ -1133,8 +1152,7 @@ def Search():
             command = f"cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
         else:
             command = f"{searchpath[0]}: && cd {searchpath} && {application_path}\\tree2json.bat => {application_path}\\output.json"
-        print(command)
-        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result = cmd(command)
 
         with open(path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
@@ -1152,17 +1170,20 @@ def Search():
                 break
             
         finded = ""
+        finded1 = ""
         for i in poslist:
             i += len(filename)+4
             end_pos = main_string[i:i+512]
             endposition = end_pos.find(",")
             if main_string[i:i+endposition].find("path") != -1:
                 # print(main_string[i:i+endposition])
-                finded += main_string[i:i+endposition]
+                finded = main_string[i:i+endposition]
+                x = finded.rfind("\\\\")
+                finded = finded[0:x]
                 finded += "\n"
-        print(finded)
+                finded1 += finded
 
-        messagebox.showinfo(main_languge["Done_Massage"],finded)
+        messagebox.showinfo(main_languge["Done_Massage"],finded1)
 
     global W,H,X,Y,application_path,drive
     global W1,H1,X1,Y1
@@ -1246,7 +1267,8 @@ def Wether():
     wether = Toplevel(root)
     wether.configure(bg=main_theme["window_bg"])
     move_button = tk.Button(wether, 
-                        text="", 
+                        text=main_languge["wethertool"], 
+                        anchor="w",
                         height=1,
                         bd=0,
                         activebackground=main_theme["titlebar"],
@@ -1379,7 +1401,7 @@ def Todolist():
 def Password():
     
     global password
-    result = simpledialog.askstring("", main_languge["askpass"])
+    result = simpledialog.askstring(None, main_languge["askpass"])
     if result != password:
         return
 
@@ -1451,8 +1473,9 @@ def Password():
     passwords = Toplevel(root)
     passwords.configure(bg=main_theme["window_bg"])
     move_button = tk.Button(passwords, 
-                        text="", 
+                        text=main_languge["passtool"], 
                         height=1,
+                        anchor="w",
                         bd=0,
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
@@ -1517,9 +1540,7 @@ def Backup():
 
         n = directory_to_zip.split("\\")
         output_zip_file += "\\"+n[-1]+".zip"
-        print(directory_to_zip,output_zip_file)
         zip_directory(directory_to_zip, output_zip_file)
-        print(f"Directory '{directory_to_zip}' has been zipped to '{output_zip_file}'.")
 
 
     global W,H,X,Y
@@ -1527,7 +1548,8 @@ def Backup():
     backup = Toplevel(root)
     backup.configure(bg=main_theme["window_bg"])
     move_button = tk.Button(backup, 
-                        text="", 
+                        text=main_languge["backuptool"],
+                        anchor="w", 
                         height=1,
                         bd=0,
                         activebackground=main_theme["titlebar"],
@@ -1556,13 +1578,13 @@ def Backup():
     if (Yc+H1) > backup.winfo_screenheight():
         Yc = backup.winfo_screenheight()-H1
 
-    label1 = tk.Label(backup, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1 = tk.Label(backup, text=main_languge["bul1"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label1.place(x=coordinates.backup_label1_x,y=coordinates.backup_label1_y,anchor="center")
     
     entry1 = tk.Entry(backup,bg=main_theme["entrybg"],fg=main_theme["fg"])
     entry1.place(x=coordinates.backup_entry1_x,y=coordinates.backup_entry1_y,anchor="center")
     
-    label2 = tk.Label(backup, text=main_languge["ask_City_pr"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2 = tk.Label(backup, text=main_languge["bul2"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label2.place(x=coordinates.backup_label2_x,y=coordinates.backup_label2_y,anchor="center")
     
     entry2 = tk.Entry(backup,bg=main_theme["entrybg"],fg=main_theme["fg"])
@@ -1575,18 +1597,7 @@ def Backup():
 
 def Dollar():
     
-    def dollar_request():
-        URL = "https://www.tgju.org/profile/price_dollar_rl"
-
-        response = requests.get(URL)
-        txt = response.text
-        key = '<span class="price" data-col="info.last_trade.PDrCotVal">'
-        position = (txt.find(key))+len(key)
-        return(txt[position:position+7])
-
-    txt = dollar_request()
-
-    messagebox.showinfo(main_languge["Done_Massage"], f"{main_languge["dollarghymat"]}{txt}\n\n{main_languge["sorce"]}www.tgju.org")
+    messagebox.showinfo(main_languge["Done_Massage"],"این فیچر هنوز تکمیل نشده است")
 
 def readsettings():
     global W,H,X,Y,main_languge,main_theme,startup,password
