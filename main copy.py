@@ -825,10 +825,13 @@ def settings():
         if startup == True:
             startup = False
             isstartup.configure(text=main_languge["startup"])
+            result = cmd(f'REG DELETE "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v \"ToolBox.exe\" /f')
             writesettings("startup",False,5)
         else:
             startup = True
             isstartup.configure(text=main_languge["startup_"])
+            result = cmd(f'reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v \"ToolBox.exe\" /t REG_SZ /d \"{application_path}\\ToolBox.exe\"')
+            print(result.stdout)
             writesettings("startup",True,5)
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
