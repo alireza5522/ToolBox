@@ -771,9 +771,22 @@ def date_time():
     year_leapyear = data["date"]["year"]["leapyear"]
     month_name = data["date"]["month"]["name"]
     month_asterism =  data["date"]["month"]["asterism"]
-    day_event_local = data["date"]["day"]["events"]["local"]
-    day_event_holy = data["date"]["day"]["events"]["holy"]
-    day_event_global = data["date"]["day"]["events"]["global"]
+    try:
+        day_event_local = data["date"]["day"]["events"]["local"]['text']
+    except:
+        day_event_local = "-"
+    try:
+        day_event_holy = data["date"]["day"]["events"]["holy"]['text']
+    except:
+        day_event_holy = "-"
+    try:
+        day_event_global = data["date"]["day"]["events"]["global"]['text']
+    except:
+        day_event_global = "-"
+    
+    
+    
+
 
     text = f"""
     Time: {hour}:{minute}:{second}
@@ -785,9 +798,9 @@ def date_time():
     Is Leap Year: {year_leapyear}
     Month Name: {month_name}
     Month Asterism: {month_asterism}
-    Local Events: {day_event_local if day_event_local else '-'}
-    Holy Events: {day_event_holy if day_event_holy else '-'}
-    Global Events: {day_event_global if day_event_global else '-'}
+    Local Events: {day_event_local}
+    Holy Events: {day_event_holy}
+    Global Events: {day_event_global}
     """
     messagebox.showinfo("date", text)
 
