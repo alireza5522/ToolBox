@@ -1,27 +1,25 @@
-import time
-import threading
-import tkinter as tk
-from tkinter import Toplevel
-import subprocess
-from tkinter import messagebox
-import requests
-import json
-import sys
 import os
-from tkinter import simpledialog
-from zipfile import ZipFile
+import sys
+import time
+import json
+import requests
+import threading
+import subprocess
+import tkinter as tk
 from tkinter import ttk
+from zipfile import ZipFile
+from tkinter import Toplevel
+from tkinter import messagebox
+from tkinter import simpledialog
 
-try:
-    if getattr(sys, 'frozen', False):
-        application_path = os.path.dirname(sys.executable)
-    else:
-        application_path = os.path.dirname(os.path.abspath(__file__))
-except:
-    pass
-drive = application_path[0]
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+else:
+    application_path = os.path.dirname(os.path.abspath(__file__))
 
 root = tk.Tk()
+
+drive = application_path[0]
 askpass = True
 defult_title = True
 password = ""
@@ -34,10 +32,10 @@ timer = 0
 time_text = None
 startup = False
 
-from lang_theme_coords import coordinates
-from lang_theme_coords import dark,light
-main_theme = dark
 from lang_theme_coords import en,fa
+from lang_theme_coords import dark,light
+from lang_theme_coords import coordinates
+main_theme = dark
 main_languge = en
 
 def encrypt(text):
@@ -45,7 +43,6 @@ def encrypt(text):
     # for c in text:
     #     output = output +(chr(ord(c)+4))
     # return output
-
     output = ""
     for c in text:
         if int(ord(c))%2:
@@ -106,10 +103,11 @@ def start_move(event,root):
     x = event.x
     y = event.y
 
-def stop_move(event,roots):
+def stop_move(event,roots,window):
     global x, y
     global x0, y0
     global X, Y
+    global X1, Y1
     global root,openbutton
     #root.winfo_screenwidth()
     if roots.winfo_x() <= 30:
@@ -119,7 +117,10 @@ def stop_move(event,roots):
 
     if roots.winfo_y() <= 30:
         y0=0
-    X,Y = x0,y0
+    if window == "main":
+        X,Y = x0,y0
+    elif window == "list":
+        X1,Y1 = x0,y0
     roots.geometry(f"+{x0}+{y0}")
     x = None
     y = None
@@ -158,12 +159,11 @@ def open_new_window():
         else:
             lockbutton.configure(image=main_theme["unlock_icon"])
 
-
     global W,H,X,Y
     global W1,H1,X1,Y1
     new_window = Toplevel(root)
     new_window.overrideredirect(defult_title)
-    #new_window.resizable(True, True)
+    #new_window.resizable(False, False)
     new_window.wm_attributes("-toolwindow", "true")
     new_window.attributes('-topmost', True)
     W1,H1 = coordinates.Main_Window_H,coordinates.Main_Window_W
@@ -187,9 +187,9 @@ def open_new_window():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var,"list"))
+    move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=new_window.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"], height=1,width=2)
     close_button.pack(side=tk.RIGHT)
     closeall_button = tk.Button(move_button, text='close all', command=root.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"])
@@ -410,17 +410,16 @@ def cornometerwindow():
     Wc,Hc = coordinates.cornometer_H,coordinates.cornometer_W
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= cornometer.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= cornometer.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X1+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
     
     if (Yc+H1) > cornometer.winfo_screenheight():
         Yc = cornometer.winfo_screenheight()-H1
-
     global time_text
 
 
@@ -487,10 +486,10 @@ def start_up():
     Wc,Hc = coordinates.startup_W,coordinates.startup_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= startup.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= startup.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -574,10 +573,10 @@ def DnsChange():
     Wc,Hc = coordinates.dns_W,coordinates.dns_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= dnschange.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= dnschange.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -654,10 +653,10 @@ def SafeAntiVirus():
     Wc,Hc = coordinates.antivirus_W,coordinates.antivirus_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= SafeAntiVirus.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= SafeAntiVirus.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -724,10 +723,10 @@ def Religius_times():
     Wc,Hc = coordinates.religius_W,coordinates.religius_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= Religiustimes.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= Religiustimes.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -831,7 +830,6 @@ def settings():
             startup = True
             isstartup.configure(text=main_languge["startup_"])
             result = cmd(f'reg add HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v \"ToolBox.exe\" /t REG_SZ /d \"{application_path}\\ToolBox.exe\"')
-            print(result.stdout)
             writesettings("startup",True,5)
         messagebox.showinfo(main_languge["Done_Massage"], main_languge["Box_Massage"])
 
@@ -872,10 +870,10 @@ def settings():
     Wc,Hc = coordinates.setting_W,coordinates.setting_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= setting.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= setting.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -992,10 +990,10 @@ def btc_call():
     Wc,Hc = coordinates.btc_W,coordinates.btc_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= btc.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= btc.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1061,10 +1059,10 @@ def Translate():
     Wc,Hc = coordinates.translate_W,coordinates.translate_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= translate.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= translate.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1136,10 +1134,10 @@ def QRcode():
     Wc,Hc = coordinates.qrcode_W,coordinates.qrcode_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= qrcode.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= qrcode.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1192,7 +1190,6 @@ def Search():
             end_pos = main_string[i:i+512]
             endposition = end_pos.find(",")
             if main_string[i:i+endposition].find("path") != -1:
-                # print(main_string[i:i+endposition])
                 finded = main_string[i:i+endposition]
                 x = finded.rfind("\\\\")
                 finded = finded[0:x]
@@ -1225,10 +1222,10 @@ def Search():
     Wc,Hc = coordinates.search_W,coordinates.search_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= search.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= search.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1302,10 +1299,10 @@ def Wether():
     Wc,Hc = coordinates.wether_W,coordinates.wether_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= wether.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= wether.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1387,10 +1384,10 @@ def Todolist():
     Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= todolist.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= todolist.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1508,10 +1505,10 @@ def Password():
     Wc,Hc = coordinates.pass_W,coordinates.pass_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= passwords.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= passwords.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1583,10 +1580,10 @@ def Backup():
     Wc,Hc = coordinates.backup_W,coordinates.backup_H
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
-    if X >= backup.winfo_screenwidth()//2:
-        Xc,Yc= (X-W1-Wc),Y+(H//2)-(Hc//2)
+    if X1 >= backup.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
     else:
-        Xc,Yc= X+W+W1,Y+(H//2)-(Hc//2)
+        Xc,Yc= X1+W1,Y1
 
     if Yc < 0:
         Yc = 0
@@ -1688,6 +1685,6 @@ move_button = tk.Button(root,
                         bg=main_theme["titlebar"])
 move_button.pack(side=tk.BOTTOM, fill=tk.X)
 move_button.bind('<ButtonPress-1>', lambda event,var=root: start_move(event,var))
-move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(event,var))
+move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(event,var,"main"))
 move_button.bind('<B1-Motion>',lambda event,var=root: on_move(event,var))
 root.mainloop()
