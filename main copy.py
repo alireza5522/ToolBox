@@ -398,9 +398,9 @@ def cornometerwindow():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var,"None"))
+    move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=cornometer.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     cornometer.overrideredirect(defult_title)
@@ -474,9 +474,9 @@ def start_up():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=startup.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     startup.overrideredirect(defult_title)
@@ -561,9 +561,9 @@ def DnsChange():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=dnschange.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     dnschange.overrideredirect(defult_title)
@@ -590,7 +590,7 @@ def DnsChange():
     label1 = tk.Label(dnschange, text=main_languge["Dns_adaptor_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label1.place(x=coordinates.dns_label1_x,y=coordinates.dns_label1_y,anchor="center")
 
-    entry1 = ttk.Combobox(dnschange, values=network_adapters, textvariable=combo_var,foreground=main_theme["window_bg"],background=main_theme["fg"])
+    entry1 = ttk.Combobox(dnschange, values=network_adapters, textvariable=combo_var,background=main_theme["window_bg"],foreground=main_theme["fg"])
     entry1.place(x=coordinates.dns_entry1_x,y=coordinates.dns_entry1_y,anchor="center")
 
     label2 = tk.Label(dnschange, text=main_languge["dns1_ask"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
@@ -641,9 +641,9 @@ def SafeAntiVirus():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=SafeAntiVirus.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     SafeAntiVirus.overrideredirect(defult_title)
@@ -711,9 +711,9 @@ def Religius_times():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=Religiustimes.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     Religiustimes.overrideredirect(defult_title)
@@ -858,9 +858,9 @@ def settings():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=setting.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     setting.overrideredirect(defult_title)
@@ -978,9 +978,9 @@ def btc_call():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=btc.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     btc.overrideredirect(defult_title)
@@ -991,9 +991,9 @@ def btc_call():
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X1 >= btc.winfo_screenwidth()//2:
-        Xc,Yc= (X1-Wc),Y1
+        Xc,Yc= (X1-Wc),(Y1+(H1//2))-(Hc//2)
     else:
-        Xc,Yc= X1+W1,Y1
+        Xc,Yc= X1+W1,(Y1+(H1//2))-(Hc//2)
 
     if Yc < 0:
         Yc = 0
@@ -1047,9 +1047,9 @@ def Translate():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=translate.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     translate.overrideredirect(defult_title)
@@ -1122,9 +1122,9 @@ def QRcode():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=qrcode.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     qrcode.overrideredirect(defult_title)
@@ -1210,9 +1210,9 @@ def Search():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=search.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     search.overrideredirect(defult_title)
@@ -1287,9 +1287,9 @@ def Wether():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=wether.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     wether.overrideredirect(defult_title)
@@ -1300,9 +1300,9 @@ def Wether():
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X1 >= wether.winfo_screenwidth()//2:
-        Xc,Yc= (X1-Wc),Y1
+        Xc,Yc= (X1-Wc),(Y1+(H1//2))-(Hc//2)
     else:
-        Xc,Yc= X1+W1,Y1
+        Xc,Yc= X1+W1,(Y1+(H1//2))-(Hc//2)
 
     if Yc < 0:
         Yc = 0
@@ -1372,9 +1372,9 @@ def Todolist():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=todolist.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     todolist.overrideredirect(defult_title)
@@ -1385,9 +1385,9 @@ def Todolist():
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X1 >= todolist.winfo_screenwidth()//2:
-        Xc,Yc= (X1-Wc),Y1
+        Xc,Yc= (X1-Wc),(Y1+(H1//2))-(Hc//2)
     else:
-        Xc,Yc= X1+W1,Y1
+        Xc,Yc= X1+W1,(Y1+(H1//2))-(Hc//2)
 
     if Yc < 0:
         Yc = 0
@@ -1493,9 +1493,9 @@ def Password():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=passwords: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=passwords: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=passwords: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=passwords: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=passwords: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=passwords: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=passwords.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     passwords.overrideredirect(defult_title)
@@ -1506,9 +1506,9 @@ def Password():
     Xc,Yc= X+W,Y+(H//2)-(H1//2)
 
     if X1 >= passwords.winfo_screenwidth()//2:
-        Xc,Yc= (X1-Wc),Y1
+        Xc,Yc= (X1-Wc),(Y1+(H1//2))-(Hc//2)
     else:
-        Xc,Yc= X1+W1,Y1
+        Xc,Yc= X1+W1,(Y1+(H1//2))-(Hc//2)
 
     if Yc < 0:
         Yc = 0
@@ -1568,9 +1568,9 @@ def Backup():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    # move_button.bind('<ButtonPress-1>', lambda event,var=backup: start_move(event,var))
-    # move_button.bind('<ButtonRelease-1>',lambda event,var=backup: stop_move(event,var))
-    # move_button.bind('<B1-Motion>',lambda event,var=backup: on_move(event,var))
+    move_button.bind('<ButtonPress-1>', lambda event,var=backup: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=backup: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=backup: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=backup.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     backup.overrideredirect(defult_title)

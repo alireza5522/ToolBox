@@ -112,7 +112,7 @@ class AS:
     wether_submit_x,wether_submit_y = (125,105)
     wether_label2_x,wether_label2_y = (125,210)
     
-    backup_W,backup_H = (250,320)
+    backup_W,backup_H = (250,255)
     backup_label1_x,backup_label1_y = (125,45)
     backup_entry1_x,backup_entry1_y = (125,70)
     backup_label2_x,backup_label2_y = (125,100)
