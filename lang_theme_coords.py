@@ -119,6 +119,16 @@ class AS:
     backup_entry2_x,backup_entry2_y = (125,130)
     backup_submit_x,backup_submit_y = (125,200)
 
+    meter_W,meter_H = (250,255)
+    meter_label1_x,meter_label1_y = (125,45)
+    meter_entry1_x,meter_entry1_y = (125,70)
+    meter_label2_x,meter_label2_y = (125,100)
+    meter_entry2_x,meter_entry2_y = (125,125)
+    meter_label3_x,meter_label3_y = (125,155)
+    meter_entry3_x,meter_entry3_y = (125,180)
+    meter_submit_x,meter_submit_y = (125,215)
+
+
 coordinates = AS()
 
 dark = {
@@ -247,13 +257,16 @@ en = {
     "wethertool": "weather condition",
     "passtool": "Password Manager",
     "backuptool": "Backup tool",
-    "dollartool": "currency prices",
+    "metertool": "Distance converter",
     "bul1": "add the path of the folder for backup",
     "bul2": "output goes to:",
     "askpass2": "add your new password",
     "askpass3": "repeat your new password",
     "donepass": "your password has been changed",
     "notdonepass": "failed to change the password",
+    "from": "from",
+    "to": "to",
+    "asknum": "add the number you want to convert",
 }
 fa = {
     "Cornometer": "کرنومتر",
@@ -323,11 +336,14 @@ fa = {
     "wethertool": "وضعیت آب و هوا",
     "passtool": "مدیریت پسوردها",
     "backuptool": "بک اپ گیری از فایل ها",
-    "dollartool": "قیمت ارزها",
+    "metertool": "تبدیل مسافت",
     "bul1": "مسیر پوشه‌ی بک آپ گیری را اضافه کنید",
     "bul2": ":فایل بک آپ ساخته میشود در",
     "askpass2": "رمز جدید خود را وارد کنید",
     "askpass3": "رمز خود را دوباره وارد کنید",
     "donepass": "رمز با موفقیت تغییر کرد",
     "notdonepass": "عملیات تغییر رمز با خطا مواجه شد",
+    "from": "از",
+    "to": "به",
+    "asknum": "مقدار مورد نظر را وارد کنید",
 }

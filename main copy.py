@@ -3,7 +3,6 @@ import sys
 import time
 import json
 import requests
-import threading
 import subprocess
 import tkinter as tk
 from tkinter import ttk
@@ -347,14 +346,14 @@ def open_new_window():
     backup.place(x=coordinates.backup_button_x,y=coordinates.backup_button_y)
     ToolTip(backup,main_languge["backuptool"])
 
-    dollar = tk.Button(new_window, 
+    meterr = tk.Button(new_window, 
                        image=main_theme["dollar_icon"],
-                       command=Dollar,
+                       command=METEr,
                        relief='flat', 
                        highlightthickness=0,
                        bd=0,)
-    dollar.place(x=coordinates.dollar_button_x,y=coordinates.dollar_button_y)
-    ToolTip(dollar,main_languge["dollartool"])
+    meterr.place(x=coordinates.dollar_button_x,y=coordinates.dollar_button_y)
+    ToolTip(meterr,main_languge["metertool"])
 
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
@@ -1608,9 +1607,215 @@ def Backup():
 
     backup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
-def Dollar():
+def METEr():
+
+    def convert():
+        metraj1=entry1.get()
+        try:
+            metraj2=int(entry3.get())
+        except:
+            return
+        metraj3=entry2.get()
+
+        if metraj1=="mm":
+            if  metraj3=="mm":
+                resign=metraj2
+            elif metraj3=="cm":
+                resign=metraj2/10
+            elif  metraj3=="m":
+                resign=metraj2/1000
+            elif metraj3=="km":
+                resign=metraj2/1000000
+            elif metraj3=="inch":
+                resign=metraj2/25.4
+            elif metraj3=="foot":
+                resign=metraj2/304.8
+            elif metraj3=="yard":
+                resign=metraj2/914.4
+            elif metraj3=="mile":
+                resign=metraj2/1609343.9
+        if metraj1=="cm":   
+            if metraj3=="cm":
+                resign=metraj2
+            elif metraj3=="mm":
+                resign=metraj2*10
+            elif metraj3=="m":
+                resign=metraj2/100
+            elif metraj3=="inch":
+                resign=metraj2/2.54
+            elif metraj3=="foot":
+                resign=metraj2/30.48
+            elif metraj3=="yard":
+                resign=metraj2/91.44
+            elif metraj3=="km":
+                resign=metraj2/100000
+            elif metraj3=="mile":
+                resign=metraj2/160934.39
+        if metraj1=="m":
+            if  metraj3=="mm":
+                resign=metraj2*1000
+            elif metraj3=="cm":
+                resign=metraj2*100
+            elif  metraj3=="m":
+                resign=metraj2
+            elif metraj3=="km":
+                resign=metraj2/1000
+            elif metraj3=="inch":
+                resign=metraj2/0.0254
+            elif metraj3=="foot":
+                resign=metraj2/0.3048
+            elif metraj3=="yard":
+                resign=metraj2/0.9144
+            elif metraj3=="mile":
+                resign=metraj2/1609.3439
+        if metraj1=="km":
+            if  metraj3=="mm":
+                resign=metraj2*1000000
+            elif metraj3=="cm":
+                resign=metraj2*100000
+            elif  metraj3=="m":
+                resign=metraj2*1000
+            elif metraj3=="km":
+                resign=metraj2
+            elif metraj3=="inch":
+                resign=metraj2/0.0000254
+            elif metraj3=="foot":
+                resign=metraj2/0.0003048
+            elif metraj3=="yard":
+                resign=metraj2/0.0009144
+            elif metraj3=="mile":
+                resign=metraj2/1.6093439
+        if metraj1=="inch":
+            if  metraj3=="mm":
+                resign=metraj2/0.03937008
+            elif metraj3=="cm":
+                resign=metraj2/0.39370079
+            elif  metraj3=="m":
+                resign=metraj2/39.37007874
+            elif metraj3=="km":
+                resign=metraj2/39370.07874016
+            elif metraj3=="inch":
+                resign=metraj2
+            elif metraj3=="foot":
+                resign=metraj2/12
+            elif metraj3=="yard":
+                resign=metraj2/36
+            elif metraj3=="mile":
+                resign=metraj2/63360
+        if metraj1=="foot":
+            if  metraj3=="mm":
+                resign=metraj2/0.00328084
+            elif metraj3=="cm":
+                resign=metraj2/0.0328084
+            elif  metraj3=="m":
+                resign=metraj2/3.2808399
+            elif metraj3=="km":
+                resign=metraj2/3280.83989501
+            elif metraj3=="inch":
+                resign=metraj2/0.08333333
+            elif metraj3=="foot":
+                resign=metraj2
+            elif metraj3=="yard":
+                resign=metraj2/3
+            elif metraj3=="mile":
+                resign=metraj2/5280
+        if metraj1=="yard":
+            if  metraj3=="mm":
+                resign=metraj2/0.00109361
+            elif metraj3=="cm":
+                resign=metraj2/0.01093613
+            elif  metraj3=="m":
+                resign=metraj2/1.0936133
+            elif metraj3=="km":
+                resign=metraj2/1093.61329834
+            elif metraj3=="inch":
+                resign=metraj2/0.02777778
+            elif metraj3=="foot":
+                resign=metraj2/0.33333333
+            elif metraj3=="yard":
+                resign=metraj2
+            elif metraj3=="mile":
+                resign=metraj2/1760
+        if metraj1=="mile":
+            if  metraj3=="mm":
+                resign=metraj2/0.000000621
+            elif metraj3=="cm":
+                resign=metraj2/0.000006217
+            elif  metraj3=="m":
+                resign=metraj2/0.00062137
+            elif metraj3=="km":
+                resign=metraj2/0.62137119
+            elif metraj3=="inch":
+                resign=metraj2/0.00001578
+            elif metraj3=="foot":
+                resign=metraj2/0.00018939
+            elif metraj3=="yard":
+                resign=metraj2/0.00056818
+            elif metraj3=="mile":
+                resign=metraj2
+        messagebox.showinfo(main_languge["Done_Massage"], f"{str(resign).replace(".","/")} {metraj3}")
+
+    global W,H,X,Y
+    global W1,H1,X1,Y1
+    meter = Toplevel(root)
+    meter.configure(bg=main_theme["window_bg"])
+    move_button = tk.Button(meter, 
+                        text=main_languge["metertool"],
+                        anchor="w", 
+                        height=1,
+                        bd=0,
+                        activebackground=main_theme["titlebar"],
+                        bg=main_theme["titlebar"])
+    move_button.place(x=0,y=0,relwidth=1)
+    move_button.bind('<ButtonPress-1>', lambda event,var=meter: start_move(event,var))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=meter: stop_move(event,var,""))
+    move_button.bind('<B1-Motion>',lambda event,var=meter: on_move(event,var))
+    close_button = tk.Button(move_button, text='X', command=meter.destroy,bg="#D1698B")
+    close_button.pack(side=tk.RIGHT)
+    meter.overrideredirect(defult_title)
+    #cornometer.resizable(True, True)
+    meter.wm_attributes("-toolwindow", "true")
+    meter.attributes('-topmost', True)
+    Wc,Hc = coordinates.meter_W,coordinates.meter_H
+    Xc,Yc= X+W,Y+(H//2)-(H1//2)
+
+    if X1 >= meter.winfo_screenwidth()//2:
+        Xc,Yc= (X1-Wc),Y1
+    else:
+        Xc,Yc= X1+W1,Y1
+
+    if Yc < 0:
+        Yc = 0
+
+    if (Yc+H1) > meter.winfo_screenheight():
+        Yc = meter.winfo_screenheight()-H1
+
+    meters = ["cm","mm","m","inch","foot","yard","km","mile"]
+
+    label1 = tk.Label(meter, text=main_languge["from"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label1.place(x=coordinates.meter_label1_x,y=coordinates.meter_label1_y,anchor="center")
+
+    combo_var1 = tk.StringVar()
+    entry1 = ttk.Combobox(meter, values=meters, textvariable=combo_var1,background=main_theme["window_bg"],foreground=main_theme["fg"],width=5)
+    entry1.place(x=coordinates.meter_entry1_x,y=coordinates.meter_entry1_y,anchor="center")
     
-    messagebox.showinfo(main_languge["Done_Massage"],"این فیچر هنوز تکمیل نشده است")
+    label2 = tk.Label(meter, text=main_languge["to"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label2.place(x=coordinates.meter_label2_x,y=coordinates.meter_label2_y,anchor="center")
+
+    combo_var2 = tk.StringVar()
+    entry2 = ttk.Combobox(meter, values=meters, textvariable=combo_var2,background=main_theme["window_bg"],foreground=main_theme["fg"],width=5)
+    entry2.place(x=coordinates.meter_entry2_x,y=coordinates.meter_entry2_y,anchor="center")
+    
+    label3 = tk.Label(meter, text=main_languge["asknum"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
+    label3.place(x=coordinates.meter_label3_x,y=coordinates.meter_label3_y,anchor="center")
+
+    entry3 = tk.Entry(meter,bg=main_theme["entrybg"],fg=main_theme["fg"])
+    entry3.place(x=coordinates.meter_entry3_x,y=coordinates.meter_entry3_y,anchor="center")
+    
+    submit_button1 = tk.Button(meter, text=main_languge["submit_dns"], command=convert,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
+    submit_button1.place(x=coordinates.meter_submit_x,y=coordinates.meter_submit_y,anchor="center")
+
+    meter.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def readsettings():
     global W,H,X,Y,main_languge,main_theme,startup,password
@@ -1635,7 +1840,7 @@ def readsettings():
         startup = False
 
     password = decrypt(data["settings"]["password"])
-
+    
 def writesettings(key,val,index):
     file_path = 'settings.json'
 
