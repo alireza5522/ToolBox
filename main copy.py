@@ -80,7 +80,7 @@ class ToolTip(object):
         x, y, cx, cy = self.widget.bbox("insert")
         x += self.widget.winfo_rootx() + 55
         y += self.widget.winfo_rooty() + (15/2)
-        # ایجاد پنجره تولتیپ
+
         self.tw = tk.Toplevel(self.widget)
         self.tw.attributes('-topmost', True)
         self.tw.wm_overrideredirect(True)
@@ -109,7 +109,7 @@ def stop_move(event,roots,window):
     global X, Y
     global X1, Y1
     global root,openbutton
-    #root.winfo_screenwidth()
+
     if roots.winfo_x() <= 30:
         x0=0
     elif roots.winfo_x() >= roots.winfo_screenwidth()-30-W:
@@ -151,12 +151,13 @@ def open_new_window():
     def close_window():
         is_window_open["Mainwindow"] = False
         new_window.destroy()
-    
+
     global password,askpass
 
     if askpass == True:
         result = simpledialog.askstring("", main_languge["askpass"])
         if result != password:
+            is_window_open["Mainwindow"] = False
             return
         askpass = False
 
@@ -173,7 +174,7 @@ def open_new_window():
     global W1,H1,X1,Y1
     new_window = Toplevel(root)
     new_window.overrideredirect(defult_title)
-    #new_window.resizable(False, False)
+
     new_window.wm_attributes("-toolwindow", "true")
     new_window.attributes('-topmost', True)
     W1,H1 = coordinates.Main_Window_H,coordinates.Main_Window_W
@@ -424,7 +425,6 @@ def cornometerwindow():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     cornometer.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     cornometer.wm_attributes("-toolwindow", "true")
     cornometer.attributes('-topmost', True)
     Wc,Hc = coordinates.cornometer_H,coordinates.cornometer_W
@@ -509,7 +509,6 @@ def start_up():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     startup.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     startup.wm_attributes("-toolwindow", "true")
     startup.attributes('-topmost', True)
     Wc,Hc = coordinates.startup_W,coordinates.startup_H
@@ -605,7 +604,6 @@ def DnsChange():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     dnschange.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     dnschange.wm_attributes("-toolwindow", "true")
     dnschange.attributes('-topmost', True)
     Wc,Hc = coordinates.dns_W,coordinates.dns_H
@@ -694,7 +692,6 @@ def SafeAntiVirus():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     SafeAntiVirus.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     SafeAntiVirus.wm_attributes("-toolwindow", "true")
     SafeAntiVirus.attributes('-topmost', True)
     Wc,Hc = coordinates.antivirus_W,coordinates.antivirus_H
@@ -773,7 +770,6 @@ def Religius_times():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     Religiustimes.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     Religiustimes.wm_attributes("-toolwindow", "true")
     Religiustimes.attributes('-topmost', True)
     Wc,Hc = coordinates.religius_W,coordinates.religius_H
@@ -905,13 +901,23 @@ def settings():
         if result == password:
             newpass = simpledialog.askstring("",main_languge["askpass2"])
             repeat = simpledialog.askstring("",main_languge["askpass3"])
-            if newpass == repeat and newpass != "":
-                password = newpass
-                messagebox.showinfo(main_languge["Done_Massage"], main_languge["donepass"])
+            if newpass == repeat:
+                if newpass != "":
+                    if repeat != "":
+                        password = newpass
+                        messagebox.showinfo(main_languge["Done_Massage"], main_languge["donepass"])
+                    else:
+                        messagebox.showinfo(main_languge["Done_Massage"], main_languge["notdonepass"])
+                        return
+                else:
+                    messagebox.showinfo(main_languge["Done_Massage"], main_languge["notdonepass"])
+                    return
             else:
                 messagebox.showinfo(main_languge["Done_Massage"], main_languge["notdonepass"])
                 return
             writesettings("password",encrypt(newpass),6)
+        else:
+            return
 
     global W,H,X,Y,password
     global W1,H1,X1,Y1
@@ -930,7 +936,6 @@ def settings():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     setting.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     setting.wm_attributes("-toolwindow", "true")
     setting.attributes('-topmost', True)
     Wc,Hc = coordinates.setting_W,coordinates.setting_H
@@ -1059,7 +1064,6 @@ def btc_call():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     btc.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     btc.wm_attributes("-toolwindow", "true")
     btc.attributes('-topmost', True)
     Wc,Hc = coordinates.btc_W,coordinates.btc_H
@@ -1134,7 +1138,6 @@ def Translate():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     translate.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     translate.wm_attributes("-toolwindow", "true")
     translate.attributes('-topmost', True)
     Wc,Hc = coordinates.translate_W,coordinates.translate_H
@@ -1218,7 +1221,6 @@ def QRcode():
     close_button = tk.Button(move_button, text='X', command=qrcode.destroy,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     qrcode.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     qrcode.wm_attributes("-toolwindow", "true")
     qrcode.attributes('-topmost', True)
     Wc,Hc = coordinates.qrcode_W,coordinates.qrcode_H
@@ -1316,7 +1318,6 @@ def Search():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     search.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     search.wm_attributes("-toolwindow", "true")
     search.attributes('-topmost', True)
     Wc,Hc = coordinates.search_W,coordinates.search_H
@@ -1403,7 +1404,6 @@ def Wether():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     wether.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     wether.wm_attributes("-toolwindow", "true")
     wether.attributes('-topmost', True)
     Wc,Hc = coordinates.wether_W,coordinates.wether_H
@@ -1462,12 +1462,11 @@ def Todolist():
             entry1.delete(0, tk.END)
     
     def remove_line_by_number(filename, line_number):
-        # خواندن تمام خط‌ها و ذخیره آن‌ها به جز خطی که می‌خواهیم حذف کنیم
         with open(filename, 'r', encoding='utf-8') as file:
             lines = file.readlines()
         with open(filename, 'w', encoding='utf-8') as file:
             for i, line in enumerate(lines):
-                if i != line_number - 1:  # شماره خط‌ها از 0 شروع می‌شود
+                if i != line_number - 1:
                     file.write(line)
 
 
@@ -1497,7 +1496,6 @@ def Todolist():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     todolist.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     todolist.wm_attributes("-toolwindow", "true")
     todolist.attributes('-topmost', True)
     Wc,Hc = coordinates.todolist_W,coordinates.todolist_H
@@ -1544,6 +1542,7 @@ def Password():
     global password
     result = simpledialog.askstring(None, main_languge["askpass"])
     if result != password:
+        is_window_open["PasswordManager"] = False
         return
 
     def readfile():
@@ -1584,12 +1583,11 @@ def Password():
             entry1.delete(0, tk.END)
     
     def remove_line_by_number(filename, line_number):
-        # خواندن تمام خط‌ها و ذخیره آن‌ها به جز خطی که می‌خواهیم حذف کنیم
         with open(filename, 'r', encoding='utf-8') as file:
             lines = file.readlines()
         with open(filename, 'w', encoding='utf-8') as file:
             for i, line in enumerate(lines):
-                if i != line_number - 1:  # شماره خط‌ها از 0 شروع می‌شود
+                if i != line_number - 1:
                     file.write(line)
 
 
@@ -1627,7 +1625,6 @@ def Password():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     passwords.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     passwords.wm_attributes("-toolwindow", "true")
     passwords.attributes('-topmost', True)
     Wc,Hc = coordinates.pass_W,coordinates.pass_H
@@ -1711,7 +1708,6 @@ def Backup():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     backup.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     backup.wm_attributes("-toolwindow", "true")
     backup.attributes('-topmost', True)
     Wc,Hc = coordinates.backup_W,coordinates.backup_H
@@ -1920,7 +1916,6 @@ def METEr():
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     meter.overrideredirect(defult_title)
-    #cornometer.resizable(True, True)
     meter.wm_attributes("-toolwindow", "true")
     meter.attributes('-topmost', True)
     Wc,Hc = coordinates.meter_W,coordinates.meter_H
@@ -1999,14 +1994,12 @@ def writesettings(key,val,index):
     with open(file_path, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=index, ensure_ascii=False)
 
-
 W,H,X,Y=20,78,100,100
 
 readsettings()
 
 root.geometry(f"{W}x{H}+{X}+{Y}") #20x78
 root.overrideredirect(defult_title)
-#root.resizable(True, True)
 
 root.title("^^")
 root.wm_attributes("-toolwindow", "true")
@@ -2040,3 +2033,4 @@ move_button.bind('<ButtonPress-1>', lambda event,var=root: start_move(event,var)
 move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(event,var,"main"))
 move_button.bind('<B1-Motion>',lambda event,var=root: on_move(event,var))
 root.mainloop()
+

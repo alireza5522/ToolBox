@@ -128,6 +128,13 @@ class AS:
     meter_entry3_x,meter_entry3_y = (125,180)
     meter_submit_x,meter_submit_y = (125,215)
 
+    asks_W,asks_H = (174,125)
+    asks_label1_x,asks_label1_y = (84,45)
+    asks_entry1_x,asks_entry1_y = (84,75)
+    asks_submit_x,asks_submit_y = (43,100)
+    asks_cancel_x,asks_cancel_y = (88,100)
+
+
 
 coordinates = AS()
 
@@ -267,6 +274,7 @@ en = {
     "from": "from",
     "to": "to",
     "asknum": "add the number you want to convert",
+    "cancel": "cancel",
 }
 fa = {
     "Cornometer": "کرنومتر",
@@ -346,6 +354,7 @@ fa = {
     "from": "از",
     "to": "به",
     "asknum": "مقدار مورد نظر را وارد کنید",
+    "cancel": "لغو",
 }
 
 is_window_open = {
@@ -365,4 +374,5 @@ is_window_open = {
     "Distance": False,
     "Settings": False,
     "Mainwindow": False,
+    "AskString": False,
 }
