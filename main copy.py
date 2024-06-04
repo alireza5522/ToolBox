@@ -34,6 +34,7 @@ startup = False
 from lang_theme_coords import en,fa
 from lang_theme_coords import dark,light
 from lang_theme_coords import coordinates
+from lang_theme_coords import is_window_open
 main_theme = dark
 main_languge = en
 
@@ -142,8 +143,17 @@ def on_move(event,root):
 
 def open_new_window():
 
+    if is_window_open["Mainwindow"]:
+        return
+    else:
+        is_window_open["Mainwindow"] = True
 
+    def close_window():
+        is_window_open["Mainwindow"] = False
+        new_window.destroy()
+    
     global password,askpass
+
     if askpass == True:
         result = simpledialog.askstring("", main_languge["askpass"])
         if result != password:
@@ -157,6 +167,7 @@ def open_new_window():
             lockbutton.configure(image=main_theme["lock_icon"])
         else:
             lockbutton.configure(image=main_theme["unlock_icon"])
+    
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -189,7 +200,7 @@ def open_new_window():
     move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var,"list"))
     move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=new_window.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"], height=1,width=2)
+    close_button = tk.Button(move_button, text='X', command=close_window,bg=main_theme["closebg"], fg=main_theme["closefg"], height=1,width=2)
     close_button.pack(side=tk.RIGHT)
     closeall_button = tk.Button(move_button, text='close all', command=root.destroy,bg=main_theme["closebg"], fg=main_theme["closefg"])
     closeall_button.pack(side=tk.LEFT)
@@ -358,6 +369,16 @@ def open_new_window():
     new_window.geometry(f"{W1}x{H1}+{X1}+{Y1}")
 
 def cornometerwindow():
+    
+    if is_window_open["Cornometer"]:
+        return
+    else:
+        is_window_open["Cornometer"] = True
+
+    def close_window():
+        is_window_open["Cornometer"] = False
+        cornometer.destroy()
+
     global running,start_time,timer
     def update_time():
         if running:
@@ -400,7 +421,7 @@ def cornometerwindow():
     move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var,"None"))
     move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=cornometer.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     cornometer.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -437,6 +458,15 @@ def cornometerwindow():
     cornometer.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def start_up():
+
+    if is_window_open["Startup"]:
+        return
+    else:
+        is_window_open["Startup"] = True
+
+    def close_window():
+        is_window_open["Startup"] = False
+        startup.destroy()
 
     def retrieve_input():
         spliit = []
@@ -476,7 +506,7 @@ def start_up():
     move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=startup.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     startup.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -518,6 +548,15 @@ def start_up():
     startup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def DnsChange():
+
+    if is_window_open["DNS"]:
+        return
+    else:
+        is_window_open["DNS"] = True
+
+    def close_window():
+        is_window_open["DNS"] = False
+        dnschange.destroy()
 
     def retrieve_input():
         input_value1 = entry1.get()
@@ -563,7 +602,7 @@ def DnsChange():
     move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=dnschange.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     dnschange.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -613,6 +652,15 @@ def DnsChange():
 
 def SafeAntiVirus():
 
+    if is_window_open["Antivirus"]:
+        return
+    else:
+        is_window_open["Antivirus"] = True
+
+    def close_window():
+        is_window_open["Antivirus"] = False
+        SafeAntiVirus.destroy()
+
     def retrieve_input():
         spliit = []
         input_value1 = entry1.get()
@@ -643,7 +691,7 @@ def SafeAntiVirus():
     move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=SafeAntiVirus.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     SafeAntiVirus.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -675,6 +723,15 @@ def SafeAntiVirus():
     SafeAntiVirus.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Religius_times():
+
+    if is_window_open["Oghat"]:
+        return
+    else:
+        is_window_open["Oghat"] = True
+
+    def close_window():
+        is_window_open["Oghat"] = False
+        Religiustimes.destroy()
 
     def giveinfo():
         city = entry1.get()
@@ -713,7 +770,7 @@ def Religius_times():
     move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=Religiustimes.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     Religiustimes.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -803,6 +860,16 @@ def date_time():
     messagebox.showinfo("date", text)
 
 def settings():
+
+    if is_window_open["Settings"]:
+        return
+    else:
+        is_window_open["Settings"] = True
+
+    def close_window():
+        is_window_open["Settings"] = False
+        setting.destroy()
+
     global startup
     def theme_change():
         if main_theme == dark:
@@ -860,7 +927,7 @@ def settings():
     move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=setting.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     setting.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -913,6 +980,15 @@ def settings():
     setting.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
  
 def btc_call():
+
+    if is_window_open["BTC"]:
+        return
+    else:
+        is_window_open["BTC"] = True
+
+    def close_window():
+        is_window_open["BTC"] = False
+        btc.destroy()
 
     def get_symbol_data():
         url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
@@ -980,7 +1056,7 @@ def btc_call():
     move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=btc.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     btc.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1016,6 +1092,15 @@ def btc_call():
    
 def Translate():
 
+    if is_window_open["Translate"]:
+        return
+    else:
+        is_window_open["Translate"] = True
+
+    def close_window():
+        is_window_open["Translate"] = False
+        translate.destroy()
+
     def EnglishToPersian():
 
         def copy():
@@ -1030,9 +1115,6 @@ def Translate():
         label2.configure(text=response.text)
         copy_button1 = tk.Button(translate, text=main_languge["copy"], command=copy,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
         copy_button1.place(x=coordinates.translate_submit2_x,y=coordinates.translate_submit2_y,anchor="center")
-
-    
-        
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -1049,7 +1131,7 @@ def Translate():
     move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=translate.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     translate.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1087,6 +1169,15 @@ def Translate():
 
 def QRcode():
     
+    if is_window_open["QRcode"]:
+        return
+    else:
+        is_window_open["QRcode"] = True
+
+    def close_window():
+        is_window_open["QRcode"] = False
+        qrcode.destroy()
+
     def download_image(image_url, save_path):
         response = requests.get(image_url)
         if response.status_code == 200:
@@ -1156,6 +1247,16 @@ def QRcode():
     qrcode.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Search():
+
+    if is_window_open["Search"]:
+        return
+    else:
+        is_window_open["Search"] = True
+
+    def close_window():
+        is_window_open["Search"] = False
+        search.destroy()
+
     def Serch():
         filename = entry1.get()
         searchpath = entry2.get()
@@ -1212,7 +1313,7 @@ def Search():
     move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=search.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     search.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1250,6 +1351,16 @@ def Search():
     search.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Wether():
+
+    if is_window_open["Weather"]:
+        return
+    else:
+        is_window_open["Weather"] = True
+
+    def close_window():
+        is_window_open["Weather"] = False
+        wether.destroy()
+
     def getwether():
         city = entry1.get()
 
@@ -1289,7 +1400,7 @@ def Wether():
     move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=wether.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     wether.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1324,6 +1435,15 @@ def Wether():
     wether.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def Todolist():
+
+    if is_window_open["Todolist"]:
+        return
+    else:
+        is_window_open["Todolist"] = True
+
+    def close_window():
+        is_window_open["Todolist"] = False
+        todolist.destroy()
 
     def readfile():
         lines = []
@@ -1374,7 +1494,7 @@ def Todolist():
     move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=todolist.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     todolist.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1412,6 +1532,15 @@ def Todolist():
 
 def Password():
     
+    if is_window_open["PasswordManager"]:
+        return
+    else:
+        is_window_open["PasswordManager"] = True
+
+    def close_window():
+        is_window_open["PasswordManager"] = False
+        passwords.destroy()
+
     global password
     result = simpledialog.askstring(None, main_languge["askpass"])
     if result != password:
@@ -1495,7 +1624,7 @@ def Password():
     move_button.bind('<ButtonPress-1>', lambda event,var=passwords: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=passwords: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=passwords: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=passwords.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     passwords.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1538,6 +1667,15 @@ def Password():
 
 def Backup():
     
+    if is_window_open["Backup"]:
+        return
+    else:
+        is_window_open["Backup"] = True
+
+    def close_window():
+        is_window_open["Backup"] = False
+        backup.destroy()
+
     def bu():
         directory_to_zip = entry1.get()
         output_zip_file = entry2.get()
@@ -1570,7 +1708,7 @@ def Backup():
     move_button.bind('<ButtonPress-1>', lambda event,var=backup: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=backup: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=backup: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=backup.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     backup.overrideredirect(defult_title)
     #cornometer.resizable(True, True)
@@ -1608,6 +1746,15 @@ def Backup():
     backup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def METEr():
+
+    if is_window_open["Distance"]:
+        return
+    else:
+        is_window_open["Distance"] = True
+
+    def close_window():
+        is_window_open["Distance"] = False
+        meter.destroy()
 
     def convert():
         metraj1=entry1.get()
@@ -1770,7 +1917,7 @@ def METEr():
     move_button.bind('<ButtonPress-1>', lambda event,var=meter: start_move(event,var))
     move_button.bind('<ButtonRelease-1>',lambda event,var=meter: stop_move(event,var,""))
     move_button.bind('<B1-Motion>',lambda event,var=meter: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=meter.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     meter.overrideredirect(defult_title)
     #cornometer.resizable(True, True)

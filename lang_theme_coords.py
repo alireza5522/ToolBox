@@ -347,3 +347,22 @@ fa = {
     "to": "به",
     "asknum": "مقدار مورد نظر را وارد کنید",
 }
+
+is_window_open = {
+    "Cornometer": False,
+    "Startup": False,
+    "DNS": False,
+    "Antivirus": False,
+    "Todolist": False,
+    "Oghat": False,
+    "BTC": False,
+    "Translate": False,
+    "QRcode": False,
+    "Search": False,
+    "Weather": False,
+    "PasswordManager": False,
+    "Backup": False,
+    "Distance": False,
+    "Settings": False,
+    "Mainwindow": False,
+}
