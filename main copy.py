@@ -22,7 +22,7 @@ drive = application_path[0]
 askpass = True
 defult_title = True
 password = ""
-X_for_movement,Y_for_movement = 10,10
+x0,y0 = 10,10
 W1,H1 = 50,200
 X1,Y1= 10,10
 running = False
@@ -104,25 +104,25 @@ def start_move(event):
 
 def stop_move(roots,window,Window_Width):
     global x, y
-    global X_for_movement, Y_for_movement
+    global x0, y0
     global X, Y
     global X1, Y1
     global root,openbutton
 
     if roots.winfo_x() <= 30:
-        X_for_movement=0
+        x0=0
     elif roots.winfo_x() >= roots.winfo_screenwidth()-30-Window_Width:
-        X_for_movement=roots.winfo_screenwidth()-Window_Width
+        x0=roots.winfo_screenwidth()-Window_Width
 
     if roots.winfo_y() <= 30:
-        Y_for_movement=0
+        y0=0
 
     if window == "main":
-        X,Y = X_for_movement,Y_for_movement
+        X,Y = x0,y0
     elif window == "list":
-        X1,Y1 = X_for_movement,Y_for_movement
+        X1,Y1 = x0,y0
 
-    roots.geometry(f"+{X_for_movement}+{Y_for_movement}")
+    roots.geometry(f"+{x0}+{y0}")
     x = None
     y = None
     if roots == root:
@@ -135,12 +135,12 @@ def stop_move(roots,window,Window_Width):
         
 def on_move(event,root):
     global x, y
-    global X_for_movement, Y_for_movement
+    global x0, y0
     deltax = event.x - x
     deltay = event.y - y
-    X_for_movement = root.winfo_x() + deltax
-    Y_for_movement = root.winfo_y() + deltay
-    root.geometry(f"+{X_for_movement}+{Y_for_movement}")
+    x0 = root.winfo_x() + deltax
+    y0 = root.winfo_y() + deltay
+    root.geometry(f"+{x0}+{y0}")
 
 def open_new_window():
 
@@ -1735,7 +1735,7 @@ def METEr():
     def convert():
         metraj1=entry1.get()
         try:
-            metraj2=int(entry3.get())
+            metraj2=float(entry3.get())
         except:
             return
         metraj3=entry2.get()
