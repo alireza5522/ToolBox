@@ -22,7 +22,7 @@ drive = application_path[0]
 askpass = True
 defult_title = True
 password = ""
-x0,y0 = 10,10
+X_for_movement,Y_for_movement = 10,10
 W1,H1 = 50,200
 X1,Y1= 10,10
 running = False
@@ -58,7 +58,6 @@ def decrypt(text):
     # for c in text:
     #     output = output +(chr(ord(c)-4))
     # return output
-
     output = ""
     for c in text:
         if int(ord(c))%2:
@@ -98,30 +97,32 @@ def cmd(command):
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     return result
 
-def start_move(event,root):
+def start_move(event):
     global x, y
     x = event.x
     y = event.y
 
-def stop_move(event,roots,window):
+def stop_move(roots,window,Window_Width):
     global x, y
-    global x0, y0
+    global X_for_movement, Y_for_movement
     global X, Y
     global X1, Y1
     global root,openbutton
 
     if roots.winfo_x() <= 30:
-        x0=0
-    elif roots.winfo_x() >= roots.winfo_screenwidth()-30-W:
-        x0=roots.winfo_screenwidth()-W
+        X_for_movement=0
+    elif roots.winfo_x() >= roots.winfo_screenwidth()-30-Window_Width:
+        X_for_movement=roots.winfo_screenwidth()-Window_Width
 
     if roots.winfo_y() <= 30:
-        y0=0
+        Y_for_movement=0
+
     if window == "main":
-        X,Y = x0,y0
+        X,Y = X_for_movement,Y_for_movement
     elif window == "list":
-        X1,Y1 = x0,y0
-    roots.geometry(f"+{x0}+{y0}")
+        X1,Y1 = X_for_movement,Y_for_movement
+
+    roots.geometry(f"+{X_for_movement}+{Y_for_movement}")
     x = None
     y = None
     if roots == root:
@@ -134,12 +135,12 @@ def stop_move(event,roots,window):
         
 def on_move(event,root):
     global x, y
-    global x0, y0
+    global X_for_movement, Y_for_movement
     deltax = event.x - x
     deltay = event.y - y
-    x0 = root.winfo_x() + deltax
-    y0 = root.winfo_y() + deltay
-    root.geometry(f"+{x0}+{y0}")
+    X_for_movement = root.winfo_x() + deltax
+    Y_for_movement = root.winfo_y() + deltay
+    root.geometry(f"+{X_for_movement}+{Y_for_movement}")
 
 def open_new_window():
 
@@ -168,7 +169,6 @@ def open_new_window():
             lockbutton.configure(image=main_theme["lock_icon"])
         else:
             lockbutton.configure(image=main_theme["unlock_icon"])
-    
 
     global W,H,X,Y
     global W1,H1,X1,Y1
@@ -178,7 +178,7 @@ def open_new_window():
     new_window.wm_attributes("-toolwindow", "true")
     new_window.attributes('-topmost', True)
     W1,H1 = coordinates.Main_Window_H,coordinates.Main_Window_W
-    X1,Y1= X+W,Y+(H//2)-(H1//2)
+    X1,Y1= 0,0
 
     if X >= new_window.winfo_screenwidth()//2:
         X1,Y1= (X-W1),Y+(H//2)-(H1//2)
@@ -198,8 +198,8 @@ def open_new_window():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(event,var,"list"))
+    move_button.bind('<ButtonPress-1>', lambda event,var=new_window: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=new_window: stop_move(var,"list",W1))
     move_button.bind('<B1-Motion>',lambda event,var=new_window: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg=main_theme["closebg"], fg=main_theme["closefg"], height=1,width=2)
     close_button.pack(side=tk.RIGHT)
@@ -419,8 +419,8 @@ def cornometerwindow():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(event,var,"None"))
+    move_button.bind('<ButtonPress-1>', lambda event,var=cornometer: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=cornometer: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=cornometer: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -441,7 +441,6 @@ def cornometerwindow():
     if (Yc+H1) > cornometer.winfo_screenheight():
         Yc = cornometer.winfo_screenheight()-H1
     global time_text
-
 
     time_text = tk.Label(cornometer, text='0.00', font=('Helvetica', 48),bg=main_theme["window_bg"],fg=main_theme["fg"])
     time_text.place(x=coordinates.time_text_x,y=coordinates.time_text_y,anchor="center")
@@ -503,8 +502,8 @@ def start_up():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=startup: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=startup: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=startup: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -542,7 +541,6 @@ def start_up():
     
     delete_button = tk.Button(startup, text=main_languge["delete_text"], command=delete_inp,bg=main_theme["bg"],fg=main_theme["fg"],activebackground=main_theme["activebackground"],activeforeground=main_theme["activeforeground"])
     delete_button.place(x=coordinates.startup_delete_x,y=coordinates.startup_delete_y,anchor="center")
-
 
     startup.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
@@ -598,8 +596,8 @@ def DnsChange():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=dnschange: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=dnschange: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=dnschange: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -686,8 +684,8 @@ def SafeAntiVirus():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=SafeAntiVirus: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=SafeAntiVirus: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=SafeAntiVirus: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -750,8 +748,6 @@ def Religius_times():
 
         label2.configure(text=f"اذان صبح: {morning_call_to_prayer}\nطلوع آفتاب: {sunrise}\nاذان ظهر: {noon_call_to_prayer}\nغروب آفتاب: {sunset}\nاذان مغرب: {evening_call_to_prayer}\nنیمه شب: {midnight}\nتاریخ: {date}")
 
-
-
     global W,H,X,Y
     global W1,H1,X1,Y1
     Religiustimes = Toplevel(root)
@@ -764,8 +760,8 @@ def Religius_times():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=Religiustimes: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=Religiustimes: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=Religiustimes: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -798,18 +794,14 @@ def Religius_times():
     label2 = tk.Label(Religiustimes, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label2.place(x=coordinates.Religiustimes_label2_x,y=coordinates.Religiustimes_label2_y,anchor="center")
 
-
-    
     Religiustimes.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def date_time():
-
 
     URL = "https://api.keybit.ir/time"
 
     response = requests.get(URL)
     data = json.loads(response.text)
-
 
     time = data["time24"]["full"]["en"]
     hour, minute, second = map(int, time.split(':'))
@@ -835,10 +827,6 @@ def date_time():
     except:
         day_event_global = "-"
     
-    
-    
-
-
     text = f"""
     Time: {hour}:{minute}:{second}
     Date (Farsi): {date_fa}
@@ -930,8 +918,8 @@ def settings():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=setting: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=setting: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=setting: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -952,8 +940,6 @@ def settings():
     if (Yc+H1) > setting.winfo_screenheight():
         Yc = setting.winfo_screenheight()-H1
     
-    
-
     label1 = tk.Label(setting, text=main_languge["themelabel"], font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label1.place(x=coordinates.settings_label1_x,y=coordinates.settings_label1_y,anchor="center")
 
@@ -1058,8 +1044,8 @@ def btc_call():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=btc: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=btc: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=btc: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1132,8 +1118,8 @@ def Translate():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=translate: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=translate: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=translate: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1165,9 +1151,7 @@ def Translate():
 
     label2 = tk.Label(translate, text="", font=('Helvetica', 10),bg=main_theme["window_bg"],fg=main_theme["fg"])
     label2.place(x=coordinates.translate_label2_x,y=coordinates.translate_label2_y,anchor="center")
-    
-    
-    
+
     translate.geometry(f"{Wc}x{Hc}+{Xc}+{Yc}")
 
 def QRcode():
@@ -1215,10 +1199,10 @@ def QRcode():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=qrcode: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=qrcode: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=qrcode: on_move(event,var))
-    close_button = tk.Button(move_button, text='X', command=qrcode.destroy,bg="#D1698B")
+    close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
     qrcode.overrideredirect(defult_title)
     qrcode.wm_attributes("-toolwindow", "true")
@@ -1312,8 +1296,8 @@ def Search():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=search: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=search: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=search: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1385,7 +1369,6 @@ def Wether():
 
         label2.configure(text=f'Temperature: {temp}\nMin Temperature: {temp_min}\nMax Temperature: {temp_max}\nPressure: {pressure}\nHumidity: {humidity}%\nWind Speed: {wind_speed}\nWind Direction: {wind_direction}\nClouds: {clouds}\nPop: {pop}\nWeather Description: {weather_description}')
 
-
     global W,H,X,Y
     global W1,H1,X1,Y1
     wether = Toplevel(root)
@@ -1398,8 +1381,8 @@ def Wether():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=wether: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=wether: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=wether: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1469,7 +1452,6 @@ def Todolist():
                 if i != line_number - 1:
                     file.write(line)
 
-
     def delete_task():
         try:
             selected_task_index = tasks_listbox.curselection()[0]
@@ -1490,8 +1472,8 @@ def Todolist():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=todolist: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=todolist: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=todolist: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1590,7 +1572,6 @@ def Password():
                 if i != line_number - 1:
                     file.write(line)
 
-
     def delete_task():
         if len(tasks_listbox.curselection()) != 0:
             selected_task_index = tasks_listbox.curselection()[0]
@@ -1606,7 +1587,6 @@ def Password():
         tasks_listbox.delete(selected_task_index+selected_task_index1)
         tasks_listbox1.delete(selected_task_index+selected_task_index1)
 
-
     global W,H,X,Y
     global W1,H1,X1,Y1
     passwords = Toplevel(root)
@@ -1619,8 +1599,8 @@ def Password():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=passwords: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=passwords: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=passwords: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=passwords: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=passwords: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1702,8 +1682,8 @@ def Backup():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=backup: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=backup: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=backup: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=backup: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=backup: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -1910,8 +1890,8 @@ def METEr():
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
     move_button.place(x=0,y=0,relwidth=1)
-    move_button.bind('<ButtonPress-1>', lambda event,var=meter: start_move(event,var))
-    move_button.bind('<ButtonRelease-1>',lambda event,var=meter: stop_move(event,var,""))
+    move_button.bind('<ButtonPress-1>', lambda event,var=meter: start_move(event))
+    move_button.bind('<ButtonRelease-1>',lambda event,var=meter: stop_move(var,"",Wc))
     move_button.bind('<B1-Motion>',lambda event,var=meter: on_move(event,var))
     close_button = tk.Button(move_button, text='X', command=close_window,bg="#D1698B")
     close_button.pack(side=tk.RIGHT)
@@ -2029,8 +2009,7 @@ move_button = tk.Button(root,
                         activebackground=main_theme["titlebar"],
                         bg=main_theme["titlebar"])
 move_button.pack(side=tk.BOTTOM, fill=tk.X)
-move_button.bind('<ButtonPress-1>', lambda event,var=root: start_move(event,var))
-move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(event,var,"main"))
+move_button.bind('<ButtonPress-1>', lambda event,var=root: start_move(event))
+move_button.bind('<ButtonRelease-1>',lambda event,var=root: stop_move(var,"main",W))
 move_button.bind('<B1-Motion>',lambda event,var=root: on_move(event,var))
 root.mainloop()
-
