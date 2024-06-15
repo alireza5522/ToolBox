@@ -35,6 +35,7 @@ from lang_theme_coords import en,fa
 from lang_theme_coords import dark,light
 from lang_theme_coords import coordinates
 from lang_theme_coords import is_window_open
+
 main_theme = dark
 main_languge = en
 
@@ -78,12 +79,12 @@ class ToolTip(object):
     def enter(self, event=None):
         x, y, cx, cy = self.widget.bbox("insert")
         x += self.widget.winfo_rootx() + 55
-        y += self.widget.winfo_rooty() + (15/2)
+        y += self.widget.winfo_rooty() + (15//2)
 
         self.tw = tk.Toplevel(self.widget)
         self.tw.attributes('-topmost', True)
         self.tw.wm_overrideredirect(True)
-        self.tw.wm_geometry("+%d+%d" % (x, y))
+        self.tw.wm_geometry(f"+{x}+{y}")
         label = tk.Label(self.tw, text=self.text, background='grey', relief='solid', borderwidth=1,
                          font=("arial", "8", "normal"))
         label.pack(ipadx=1)
@@ -1014,10 +1015,10 @@ def btc_call():
                 volume = data['data'][symbol]['quote']['USD']['volume_24h']
                 market_cap = data['data'][symbol]['quote']['USD']['market_cap']
                 total_supply = data['data'][symbol]['total_supply']
-                max_supply = data['data'][symbol]['max_supply']
-
-                if max_supply is None:
-                    max_supply = "Ulimited"
+                try:
+                    max_supply = data['data'][symbol]['max_supply']
+                except:
+                    max_supply = "Unlimited"
 
                 txt = f"""
                 {name} ({symbol_name})
@@ -1981,9 +1982,8 @@ readsettings()
 root.geometry(f"{W}x{H}+{X}+{Y}") #20x78
 root.overrideredirect(defult_title)
 
-root.title("^^")
-root.wm_attributes("-toolwindow", "true")
 root.attributes('-topmost', True)
+
 if X >= (root.winfo_screenwidth()//2):
     txt = "<<"
 else:

@@ -1,4 +1,5 @@
 from tkinter import PhotoImage
+
 class AS:
     Main_Window_H,Main_Window_W = (210,255) #40#55+10
     cornometer_button_x,cornometer_button_y = (15,45)
@@ -134,8 +135,6 @@ class AS:
     asks_submit_x,asks_submit_y = (43,100)
     asks_cancel_x,asks_cancel_y = (88,100)
 
-
-
 coordinates = AS()
 
 dark = {
@@ -196,6 +195,7 @@ light={
     "lock_icon": PhotoImage(file='.\\icons\\lock.png'),
     "unlock_icon": PhotoImage(file='.\\icons\\unlock.png'),
 }
+
 en = {
     "Cornometer": "Cronometer",
     "Startup": "Startup",
