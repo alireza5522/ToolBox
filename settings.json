@@ -1,10 +1,10 @@
 {
      "settings": {
-          "X": 0,
-          "Y": 187,
+          "X": 250,
+          "Y": 250,
           "dark_mode": false,
           "language": "en",
-          "startup": true,
+          "startup": false,
           "password": "6464"
      }
 }
